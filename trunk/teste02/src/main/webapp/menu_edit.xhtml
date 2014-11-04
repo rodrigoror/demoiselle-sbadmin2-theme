@@ -1,0 +1,64 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<h:form prependId="false">
+
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton value="#{messages['button.save']}" action="#{menuEditMB.insert}"
+						rendered="#{!menuEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.save']}" action="#{menuEditMB.update}"
+						rendered="#{menuEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.delete']}" onclick="confirmation.show()"
+						rendered="#{menuEditMB.updateMode}" type="button" immediate="true" ajax="false" />
+					<p:confirmDialog message="#{messages['label.confirm.delete']}" showEffect="bounce" hideEffect="explode"
+						header="#{messages['label.dialog.delete']}" severity="alert" widgetVar="confirmation">
+						<h:commandButton value="#{messages['button.dialog.yes']}" action="#{menuEditMB.delete}" immediate="true"
+							ajax="false" />
+						<h:commandButton value="#{messages['button.dialog.no']}" onclick="confirmation.hide()" type="button" />
+					</p:confirmDialog>
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<br />
+
+			<p:fieldset legend="#{messages['menu.label']}" toggleable="true" toggleSpeed="500">
+				<h:panelGrid id="fields" columns="3">
+					
+					<h:outputLabel value="#{messages['menu.label.menu_id']}: " for="menu_id" styleClass="text-input" />
+					<h:outputText id="menu_id" value="#{menuEditMB.bean.menu_id}" />
+					<p:message for="menu_id" />
+					
+					<h:outputLabel value="#{messages['menu.label.menu_classe']}: " for="menu_classe" styleClass="text-input" />
+					<h:inputText id="menu_classe" value="#{menuEditMB.bean.menu_classe}"
+						title="#{messages['menu.alt.menu_classe']}" />
+					<p:message for="menu_classe" />
+					
+					<h:outputLabel value="#{messages['menu.label.menu_link']}: " for="menu_link" styleClass="text-input" />
+					<h:inputText id="menu_link" value="#{menuEditMB.bean.menu_link}"
+						title="#{messages['menu.alt.menu_link']}" />
+					<p:message for="menu_link" />
+					
+					<h:outputLabel value="#{messages['menu.label.menu_permissao']}: " for="menu_permissao" styleClass="text-input" />
+					<h:inputText id="menu_permissao" value="#{menuEditMB.bean.menu_permissao}"
+						title="#{messages['menu.alt.menu_permissao']}" />
+					<p:message for="menu_permissao" />
+					
+					<h:outputLabel value="#{messages['menu.label.menu_nome']}: " for="menu_nome" styleClass="text-input" />
+					<h:inputText id="menu_nome" value="#{menuEditMB.bean.menu_nome}"
+						title="#{messages['menu.alt.menu_nome']}" />
+					<p:message for="menu_nome" />
+					
+					<h:outputLabel value="#{messages['menu.label.menu_parent']}: " for="menu_parent" styleClass="text-input" />
+					<h:inputText id="menu_parent" value="#{menuEditMB.bean.menu_parent}"
+						title="#{messages['menu.alt.menu_parent']}" />
+					<p:message for="menu_parent" />
+					
+				</h:panelGrid>
+			</p:fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>

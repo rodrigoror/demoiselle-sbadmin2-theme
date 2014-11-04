@@ -1,0 +1,80 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<h:form>
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton title="#{messages['button.new']}" icon="ui-icon-document" action="#{menuListMB.getNextView}"
+						actionListener="#{menuListMB.clear}" ajax="false" />
+
+					<p:commandButton title="#{messages['button.delete']}" icon="ui-icon-trash" onclick="confirmation.show()"
+						type="button" immediate="true" ajax="false" />
+
+					<p:confirmDialog message="#{messages['label.confirm.delete']}" showEffect="bounce" hideEffect="explode"
+						header="#{messages['label.dialog.alert']}!" severity="alert" widgetVar="confirmation">
+
+						<h:commandButton value="#{messages['button.dialog.yes']}" action="#{menuListMB.deleteSelection}"
+							actionListener="#{menuListMB.clear}" />
+						<h:commandButton value="#{messages['button.dialog.no']}" onclick="confirmation.hide()" type="button" />
+					</p:confirmDialog>
+				</p:toolbarGroup>
+			</p:toolbar>
+			<p:dataTable id="list" var="bean" value="#{menuListMB.resultList}">
+				<f:facet name="header">#{messages['menu.list.table.title']}</f:facet>
+				<p:column style="width:1%;">
+					<h:selectBooleanCheckbox value="#{menuListMB.selection[bean.menu_id]}"></h:selectBooleanCheckbox>
+				</p:column>
+				
+				<p:column style="width:5%;" sortBy="#{bean.menu_id}">
+					<f:facet name="header">#{messages['menu.label.menu_id']}</f:facet>
+					<h:outputText value="#{bean.menu_id}" />
+				</p:column>
+						
+				<p:column sortBy="#{bean.menu_classe}">
+					<f:facet name="header">#{messages['menu.label.menu_classe']}</f:facet>
+					<h:commandLink action="#{menuListMB.getNextView}" actionListener="#{menuListMB.clear}">
+						<h:outputText value="#{bean.menu_classe}" />
+						<f:param name="id" value="#{bean.menu_id}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.menu_link}">
+					<f:facet name="header">#{messages['menu.label.menu_link']}</f:facet>
+					<h:commandLink action="#{menuListMB.getNextView}" actionListener="#{menuListMB.clear}">
+						<h:outputText value="#{bean.menu_link}" />
+						<f:param name="id" value="#{bean.menu_id}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.menu_permissao}">
+					<f:facet name="header">#{messages['menu.label.menu_permissao']}</f:facet>
+					<h:commandLink action="#{menuListMB.getNextView}" actionListener="#{menuListMB.clear}">
+						<h:outputText value="#{bean.menu_permissao}" />
+						<f:param name="id" value="#{bean.menu_id}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.menu_nome}">
+					<f:facet name="header">#{messages['menu.label.menu_nome']}</f:facet>
+					<h:commandLink action="#{menuListMB.getNextView}" actionListener="#{menuListMB.clear}">
+						<h:outputText value="#{bean.menu_nome}" />
+						<f:param name="id" value="#{bean.menu_id}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.menu_parent}">
+					<f:facet name="header">#{messages['menu.label.menu_parent']}</f:facet>
+					<h:commandLink action="#{menuListMB.getNextView}" actionListener="#{menuListMB.clear}">
+						<h:outputText value="#{bean.menu_parent}" />
+						<f:param name="id" value="#{bean.menu_id}" />
+					</h:commandLink>
+				</p:column>
+						
+			</p:dataTable>
+		</h:form>
+
+	</ui:define>
+</ui:composition>
