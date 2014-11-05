@@ -1,0 +1,78 @@
+<html xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<f:view contentType="text/html" locale="#{locales.currentLocale}" />
+
+<h:head>
+
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    <meta name="description" content="#{messages['main.app.description']}"></meta>
+    <meta name="author" content="#{messages['main.app.author']}"></meta>
+	<title>#{messages['main.app.title']}</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- MetisMenu CSS -->
+    <link href="css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link href="css/sb-admin-2.css" rel="stylesheet"/>
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+
+</h:head>
+
+<h:body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">#{messages['main.app.title']}</h3>
+                    </div>
+                    <div class="panel-body">
+                        <h:form role="form">
+                            <fieldset>
+                                <div class="form-group">
+                                	<h:outputLabel value="E-mail: " for="email" styleClass="text-input"  />
+                                	<h:inputText for="email" id="email" styleClass="form-control" value="#{credentials.username}" 
+                                  	  title="E-mail" placeholder="E-mail" />
+                               	 	<p:message for="email" />
+                                </div>
+                                <div class="form-group">
+                                  	<h:outputLabel value="Senha: " for="password" styleClass="text-input"  />
+                                	<h:inputText id="password" styleClass="form-control" value="#{credentials.password}" title="Senha" />
+                                	<p:message for="password" />
+                                </div>
+                                <!-- Change this to a button or input when using this as a form -->
+                                <p:commandButton styleClass="btn btn-lg btn-success btn-block" 
+                                value="Login" action="#{loginMB.login()}" ajax="false" />  
+                            </fieldset>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="js/plugins/metisMenu/metisMenu.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/sb-admin-2.js"></script>
+
+</h:body>
+
+</html>
