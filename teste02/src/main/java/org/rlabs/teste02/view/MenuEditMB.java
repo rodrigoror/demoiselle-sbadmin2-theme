@@ -1,5 +1,8 @@
 package org.rlabs.teste02.view;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 import br.gov.frameworkdemoiselle.annotation.PreviousView;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
@@ -42,6 +45,20 @@ public class MenuEditMB extends AbstractEditPageBean<Menu, Long> {
 	@Override
 	protected Menu handleLoad(Long id) {
 		return this.menuBC.load(id);
+	}
+	
+	public List<String> getClasses(){
+		List<String> retorno = new ArrayList<String>();
+		
+		retorno.add("fa fa-dashboard fa-fw");
+		retorno.add("fa fa-bar-chart-o fa-fw");
+		retorno.add("fa fa-table fa-fw");
+		retorno.add("fa fa-edit fa-fw");
+		retorno.add("fa fa-wrench fa-fw");
+		retorno.add("fa fa-sitemap fa-fw");
+		retorno.add("fa fa-files-o fa-fw");
+		
+		return retorno;
 	}
 
 }
