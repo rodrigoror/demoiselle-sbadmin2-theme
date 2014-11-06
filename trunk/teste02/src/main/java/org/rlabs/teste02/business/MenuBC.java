@@ -18,13 +18,13 @@ public class MenuBC extends DelegateCrud<Menu, Long, MenuDAO> {
 		if (findAll().isEmpty()) {
 			//insert(new Menu("Classe", "Link","Permissao","Nome","Parent"));
 			insert(new Menu("fa fa-dashboard fa-fw", "index.jsf","ALL","Dashboard","_parent"));
-			insert(new Menu("fa fa-bar-chart-o fa-fw", "index.jsf","ALL","Charts","_parent"));
-			insert(new Menu("fa fa-table fa-fw", "index.jsf","ALL","Tables","_parent"));
-			insert(new Menu("fa fa-edit fa-fw", "index.jsf","ALL","Forms","_parent"));
-			insert(new Menu("fa fa-wrench fa-fw", "index.jsf","ALL","UI Elements","_parent"));
-			insert(new Menu("fa fa-sitemap fa-fw", "index.jsf","ALL","Multi-Level","_parent"));
-			insert(new Menu("fa fa-files-o fa-fw", "index.jsf","ALL"," Sample Pages","_parent"));
-			insert(new Menu("fa fa-table fa-fw", "bookmark_list.jsf","ALL","Bookmarks","_parent"));
+			insert(new Menu("fa fa-bar-chart-o fa-fw", "index.jsf","ALL","Criar Cotação","_parent"));
+			insert(new Menu("fa fa-table fa-fw", "index.jsf","ALL","Importar Propostas","_parent"));
+			insert(new Menu("fa fa-edit fa-fw", "index.jsf","ALL","Timeline","_parent"));
+			insert(new Menu("fa fa-wrench fa-fw", "index.jsf","ALL","Finanças","_parent"));
+			insert(new Menu("fa fa-sitemap fa-fw", "index.jsf","ALL","Cadastros","_parent"));
+			insert(new Menu("fa fa-files-o fa-fw", "index.jsf","ALL","E-mail","_parent"));
+			insert(new Menu("fa fa-table fa-fw", "bookmark_list.jsf","ALL","Bookmark","_parent"));
 			insert(new Menu("fa fa-table fa-fw", "menu_list.jsf","ALL","Menus","_parent"));
 
 		}
