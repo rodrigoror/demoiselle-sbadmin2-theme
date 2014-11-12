@@ -6,11 +6,13 @@ package org.rlabs.teste02.domain;
 import static javax.persistence.GenerationType.SEQUENCE;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -31,7 +33,7 @@ public class Menu implements Serializable{
 	 */
 	@Id
 	@GeneratedValue(strategy = SEQUENCE)
-	@Column(name="menu_id")
+	@Column(name="menu_id", nullable=false)
 	private Long menu_id;
 	
 	@Column(name="menu_classe")
@@ -56,6 +58,9 @@ public class Menu implements Serializable{
 	@Column(name="menu_parent")
 	@Length(max=10)
 	private String menu_parent;
+		
+	@OneToMany(mappedBy="smen_menu")
+    private Set<SubMenu> subMenus;
 	
 	/* @NotNull
 	 * @Column(name="menu_parent")
@@ -152,6 +157,25 @@ public class Menu implements Serializable{
 		this.menu_parent = menu_parent;
 	}
 
+
+	/**
+	 * @return the subMenus
+	 */
+	public Set<SubMenu> getSubMenus() {
+		return subMenus;
+	}
+
+	/**
+	 * @param subMenus the subMenus to set
+	 */
+	public void setSubMenus(Set<SubMenu> subMenus) {
+		this.subMenus = subMenus;
+	}
+	
+	public Menu() {
+		super();
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -180,10 +204,24 @@ public class Menu implements Serializable{
 		this.menu_parent = menu_parent;
 	}
 
-	public Menu() {
+	/**
+	 * @param menu_classe
+	 * @param menu_link
+	 * @param menu_permissao
+	 * @param menu_nome
+	 * @param menu_parent
+	 * @param subMenus
+	 */
+	public Menu(String menu_classe, String menu_link, String menu_permissao,
+			String menu_nome, String menu_parent, Set<SubMenu> subMenus) {
 		super();
+		this.menu_classe = menu_classe;
+		this.menu_link = menu_link;
+		this.menu_permissao = menu_permissao;
+		this.menu_nome = menu_nome;
+		this.menu_parent = menu_parent;
+		this.subMenus = subMenus;
 	}
-	
 	
 
 }
