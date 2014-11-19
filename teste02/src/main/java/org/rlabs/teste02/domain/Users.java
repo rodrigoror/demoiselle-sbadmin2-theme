@@ -94,9 +94,9 @@ public class Users implements Serializable{
 	@Temporal(value = TemporalType.TIMESTAMP)
 	private Date user_dtUpdate;
 	
-	@Column(name="user_perfil", nullable=false)
-	@NotNull
-	private String user_perfil;
+	@ManyToOne
+	@JoinColumn(name="perf_id", nullable=false)
+	private Perfil user_perfil;
 	
 	@ManyToOne
     @JoinColumn(name="comp_id", nullable=false)	
@@ -124,7 +124,7 @@ public class Users implements Serializable{
 	public Users(String user_login, String user_cpf, String user_senha,
 			String user_susep, String user_nome, String user_telefone,
 			Boolean user_ativo, Boolean user_excluido, String user_ipUpdate,
-			String user_loginUpdate, Date user_dtUpdate, String user_perfil,
+			String user_loginUpdate, Date user_dtUpdate, Perfil user_perfil,
 			Company user_company) {
 		super();
 		this.user_login = user_login;
@@ -313,14 +313,14 @@ public class Users implements Serializable{
 	/**
 	 * @return the user_perfil
 	 */
-	public String getUser_perfil() {
+	public Perfil getUser_perfil() {
 		return user_perfil;
 	}
 
 	/**
 	 * @param user_perfil the user_perfil to set
 	 */
-	public void setUser_perfil(String user_perfil) {
+	public void setUser_perfil(Perfil user_perfil) {
 		this.user_perfil = user_perfil;
 	}
 
