@@ -24,8 +24,8 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
+ * Classe de usuários do sistema
  * @author rodrigo.ramos
- *
  */
 @Entity
 @Table(name="USERS"/*, schema="SCHEMA"*/)
@@ -337,7 +337,5 @@ public class Users implements Serializable{
 	public void setUser_company(Company user_company) {
 		this.user_company = user_company;
 	}
-	
-	//TODO: INSERIR O PERFIL
 	
 }
