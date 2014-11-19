@@ -5,6 +5,8 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import org.rlabs.teste02.business.LogBC;
+import org.rlabs.teste02.business.UsersBC;
 import org.rlabs.teste02.domain.Users;
 import org.rlabs.teste02.util.AcaoEnum;
 import org.rlabs.teste02.util.EntidadeEnum;
@@ -56,7 +58,7 @@ public class Autenticador implements Authenticator{
 
 		boolean autenticado = false;
 
-		Users usuario = userBC.getByLogin(credenciais.getLogin(), credenciais.getSenha());
+		Users usuario = usuarioBC.getByLogin(credenciais.getLogin(), credenciais.getSenha());
 		if (usuario != null) {
 			autenticado = true;
 			credenciais.setId(usuario.getUser_id());

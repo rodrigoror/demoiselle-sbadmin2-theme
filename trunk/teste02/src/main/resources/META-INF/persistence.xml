@@ -108,6 +108,10 @@
 		
 			<class>org.rlabs.teste02.domain.Menu</class>
 		
+			<class>org.rlabs.teste02.domain.Log</class>
+		
+			<class>org.rlabs.teste02.domain.Users</class>
+		
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver" />
 			<property name="javax.persistence.jdbc.user" value="sa" />

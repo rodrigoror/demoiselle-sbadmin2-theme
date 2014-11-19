@@ -1,0 +1,65 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<h:form prependId="false">
+
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton value="#{messages['button.save']}" action="#{logEditMB.insert}"
+						rendered="#{!logEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.save']}" action="#{logEditMB.update}"
+						rendered="#{logEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.delete']}" onclick="confirmation.show()"
+						rendered="#{logEditMB.updateMode}" type="button" immediate="true" ajax="false" />
+					<p:confirmDialog message="#{messages['label.confirm.delete']}" showEffect="bounce" hideEffect="explode"
+						header="#{messages['label.dialog.delete']}" severity="alert" widgetVar="confirmation">
+						<h:commandButton value="#{messages['button.dialog.yes']}" action="#{logEditMB.delete}" immediate="true"
+							ajax="false" />
+						<h:commandButton value="#{messages['button.dialog.no']}" onclick="confirmation.hide()" type="button" />
+					</p:confirmDialog>
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<br />
+
+			<p:fieldset legend="#{messages['log.label']}" toggleable="true" toggleSpeed="500">
+				<h:panelGrid id="fields" columns="3">
+					
+					<h:outputLabel value="#{messages['log.label.log_id']}: " for="log_id" styleClass="text-input" />
+					<h:outputText id="log_id" value="#{logEditMB.bean.log_id}" />
+					<p:message for="log_id" />
+					
+					<h:outputLabel value="#{messages['log.label.log_acao']}: " for="log_acao" styleClass="text-input" />
+					<h:inputText id="log_acao" value="#{logEditMB.bean.log_acao}"
+						title="#{messages['log.alt.log_acao']}" />
+					<p:message for="log_acao" />
+					
+					<h:outputLabel value="#{messages['log.label.log_entidade']}: " for="log_entidade" styleClass="text-input" />
+					<h:inputText id="log_entidade" value="#{logEditMB.bean.log_entidade}"
+						title="#{messages['log.alt.log_entidade']}" />
+					<p:message for="log_entidade" />
+					
+					<h:outputLabel value="#{messages['log.label.log_data']}: " for="log_data" styleClass="text-input" />
+					<p:calendar id="log_data" value="#{logEditMB.bean.log_data}"
+					   pattern="#{messages['label.date.pattern']}" navigator="true" showButtonPanel="true"
+					   locale="#{currentLocale}" title="#{messages['log.alt.log_data']}" />
+					   <p:message for="log_data" />
+								
+					<h:outputLabel value="#{messages['log.label.log_usuario']}: " for="log_usuario" styleClass="text-input" />
+					<h:inputText id="log_usuario" value="#{logEditMB.bean.log_usuario}"
+						title="#{messages['log.alt.log_usuario']}" />
+					<p:message for="log_usuario" />
+					
+					<h:outputLabel value="#{messages['log.label.log_dados']}: " for="log_dados" styleClass="text-input" />
+					<h:inputText id="log_dados" value="#{logEditMB.bean.log_dados}"
+						title="#{messages['log.alt.log_dados']}" />
+					<p:message for="log_dados" />
+					
+				</h:panelGrid>
+			</p:fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>

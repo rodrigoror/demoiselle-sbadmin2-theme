@@ -1,0 +1,105 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<h:form prependId="false">
+
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton value="#{messages['button.save']}" action="#{usersEditMB.insert}"
+						rendered="#{!usersEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.save']}" action="#{usersEditMB.update}"
+						rendered="#{usersEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.delete']}" onclick="confirmation.show()"
+						rendered="#{usersEditMB.updateMode}" type="button" immediate="true" ajax="false" />
+					<p:confirmDialog message="#{messages['label.confirm.delete']}" showEffect="bounce" hideEffect="explode"
+						header="#{messages['label.dialog.delete']}" severity="alert" widgetVar="confirmation">
+						<h:commandButton value="#{messages['button.dialog.yes']}" action="#{usersEditMB.delete}" immediate="true"
+							ajax="false" />
+						<h:commandButton value="#{messages['button.dialog.no']}" onclick="confirmation.hide()" type="button" />
+					</p:confirmDialog>
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<br />
+
+			<p:fieldset legend="#{messages['users.label']}" toggleable="true" toggleSpeed="500">
+				<h:panelGrid id="fields" columns="3">
+					
+					<h:outputLabel value="#{messages['users.label.user_id']}: " for="user_id" styleClass="text-input" />
+					<h:outputText id="user_id" value="#{usersEditMB.bean.user_id}" />
+					<p:message for="user_id" />
+					
+					<h:outputLabel value="#{messages['users.label.user_login']}: " for="user_login" styleClass="text-input" />
+					<h:inputText id="user_login" value="#{usersEditMB.bean.user_login}"
+						title="#{messages['users.alt.user_login']}" />
+					<p:message for="user_login" />
+					
+					<h:outputLabel value="#{messages['users.label.user_cpf']}: " for="user_cpf" styleClass="text-input" />
+					<h:inputText id="user_cpf" value="#{usersEditMB.bean.user_cpf}"
+						title="#{messages['users.alt.user_cpf']}" />
+					<p:message for="user_cpf" />
+					
+					<h:outputLabel value="#{messages['users.label.user_senha']}: " for="user_senha" styleClass="text-input" />
+					<h:inputText id="user_senha" value="#{usersEditMB.bean.user_senha}"
+						title="#{messages['users.alt.user_senha']}" />
+					<p:message for="user_senha" />
+					
+					<h:outputLabel value="#{messages['users.label.user_susep']}: " for="user_susep" styleClass="text-input" />
+					<h:inputText id="user_susep" value="#{usersEditMB.bean.user_susep}"
+						title="#{messages['users.alt.user_susep']}" />
+					<p:message for="user_susep" />
+					
+					<h:outputLabel value="#{messages['users.label.user_nome']}: " for="user_nome" styleClass="text-input" />
+					<h:inputText id="user_nome" value="#{usersEditMB.bean.user_nome}"
+						title="#{messages['users.alt.user_nome']}" />
+					<p:message for="user_nome" />
+					
+					<h:outputLabel value="#{messages['users.label.user_telefone']}: " for="user_telefone" styleClass="text-input" />
+					<h:inputText id="user_telefone" value="#{usersEditMB.bean.user_telefone}"
+						title="#{messages['users.alt.user_telefone']}" />
+					<p:message for="user_telefone" />
+					
+					<h:outputLabel value="#{messages['users.label.user_ativo']}: " for="user_ativo" styleClass="text-input" />
+					<h:inputText id="user_ativo" value="#{usersEditMB.bean.user_ativo}"
+						title="#{messages['users.alt.user_ativo']}" />
+					<p:message for="user_ativo" />
+					
+					<h:outputLabel value="#{messages['users.label.user_excluido']}: " for="user_excluido" styleClass="text-input" />
+					<h:inputText id="user_excluido" value="#{usersEditMB.bean.user_excluido}"
+						title="#{messages['users.alt.user_excluido']}" />
+					<p:message for="user_excluido" />
+					
+					<h:outputLabel value="#{messages['users.label.user_ipUpdate']}: " for="user_ipUpdate" styleClass="text-input" />
+					<h:inputText id="user_ipUpdate" value="#{usersEditMB.bean.user_ipUpdate}"
+						title="#{messages['users.alt.user_ipUpdate']}" />
+					<p:message for="user_ipUpdate" />
+					
+					<h:outputLabel value="#{messages['users.label.user_loginUpdate']}: " for="user_loginUpdate" styleClass="text-input" />
+					<h:inputText id="user_loginUpdate" value="#{usersEditMB.bean.user_loginUpdate}"
+						title="#{messages['users.alt.user_loginUpdate']}" />
+					<p:message for="user_loginUpdate" />
+					
+					<h:outputLabel value="#{messages['users.label.user_dtUpdate']}: " for="user_dtUpdate" styleClass="text-input" />
+					<p:calendar id="user_dtUpdate" value="#{usersEditMB.bean.user_dtUpdate}"
+					   pattern="#{messages['label.date.pattern']}" navigator="true" showButtonPanel="true"
+					   locale="#{currentLocale}" title="#{messages['users.alt.user_dtUpdate']}" />
+					   <p:message for="user_dtUpdate" />
+								
+					<h:outputLabel value="#{messages['users.label.user_perfil']}: " for="user_perfil" styleClass="text-input" />
+					<h:inputText id="user_perfil" value="#{usersEditMB.bean.user_perfil}"
+						title="#{messages['users.alt.user_perfil']}" />
+					<p:message for="user_perfil" />
+					
+					<h:outputLabel value="#{messages['users.label.user_company']}: " for="user_company" styleClass="text-input" />
+					<h:inputText id="user_company" value="#{usersEditMB.bean.user_company}"
+						title="#{messages['users.alt.user_company']}" />
+					<p:message for="user_company" />
+					
+				</h:panelGrid>
+			</p:fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>
