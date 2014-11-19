@@ -55,8 +55,8 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 		//Auditoria:
 		logBC.insert(AcaoEnum.CADASTROU, 
 				EntidadeEnum.USERS, 
-				bean.getUser_ipUpdate()," "/*, 
-				bean.getDadosAuditoria()*/);
+				bean.getUser_ipUpdate(), 
+				bean.getDadosAuditoria());
 	}
 
 	/**
@@ -81,8 +81,8 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 		this.getDelegate().insert(bean);
 		//Auditoria:
 		logBC.insert(AcaoEnum.CADASTROU, 
-				EntidadeEnum.USUARIO, 
-				bean.getUsua_usrcadastro(), 
+				EntidadeEnum.USERS, 
+				bean.getUser_ipUpdate(), 
 				bean.getDadosAuditoria());
 	}
 	
@@ -118,9 +118,9 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 		//Validacoes:
 		checkUsuarioPodeSerExcluido(id);
 		//Auditoria:
-		Usuario usuario = this.load(id);
+		Users usuario = this.load(id);
 		logBC.insert(AcaoEnum.EXCLUIU, 
-				EntidadeEnum.USUARIO, 
+				EntidadeEnum.USERS, 
 				usuario.getDadosAuditoria());
 		//Exclusao:
 		this.getDelegate().delete(id);
@@ -133,8 +133,8 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 	 * @return Usuario
 	 */
 	@Transactional
-	public Usuario getByLogin(String login, String senha) {
-		Usuario usuario = null;
+	public Users getByLogin(String login, String senha) {
+		Users usuario = null;
 		usuario = this.getDelegate().getByLogin(login, SenhaUtil.md5(senha));
 		return usuario;
 	}
@@ -145,8 +145,8 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 	 * @return Usuario
 	 */
 	@Transactional
-	public Usuario getByLogin(String login) {
-		Usuario usuario = null;
+	public Users getByLogin(String login) {
+		Users usuario = null;
 		usuario = this.getDelegate().getByLogin(login, true);
 		return usuario;
 	}
@@ -156,7 +156,7 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 	 * @return Lista de usuarios ativos
 	 */
 	@Transactional
-	public List<Usuario> getAtivos(){
+	public List<Users> getAtivos(){
 		return this.getDelegate().getAtivos();
 		
 	}
@@ -166,7 +166,7 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 	 * @return Lista de usuarios
 	 */
 	@Transactional
-	public List<Usuario>getByPerfil(){
+	public List<Users>getByPerfil(){
 		if(isAdministrator()){
 			return findAll();
 		}else{
@@ -180,7 +180,7 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 	 * @return Lista de usuarios
 	 */
 	@Transactional
-	public List<Usuario>getByPerfil(String codigoPerfil){
+	public List<Users>getByPerfil(String codigoPerfil){
 		return this.getDelegate().getByPerfil(codigoPerfil);
 	}	
 
@@ -190,7 +190,7 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 	 * @return
 	 */
 	@Transactional
-	public List<Usuario> getGerentesESupervisores() {
+	public List<Users> getGerentesESupervisores() {
 		return this.getDelegate().getGerentesESupervisores();
 	}
 	
@@ -204,17 +204,17 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 	 */
 	@Transactional
 	public void setNovaSenha(String login, String senhaAtual, String novaSenha, String repeticaoNovaSenha) {
-		Usuario usuario;
+		Users usuario;
 		usuario = this.getDelegate().getByLogin(login, SenhaUtil.md5(senhaAtual));
 		if (usuario != null) {
 			if (novaSenha.equals(repeticaoNovaSenha)) {
 				checkSenhaObedecePolitica(novaSenha);
 				//Altera:
-				usuario.setUsua_senha(SenhaUtil.md5(novaSenha));
+				usuario.setUser_senha(SenhaUtil.md5(novaSenha));
 				this.getDelegate().update(usuario);
 				//Auditoria:
 				logBC.insert(AcaoEnum.ALTEROU, 
-						EntidadeEnum.USUARIO, 
+						EntidadeEnum.USERS, 
 						usuario.getDadosAuditoria());
 			} else {
 				throw new BusinessException(resourceBundle.getString("usuariobc.insert.erro.senha"));
@@ -233,16 +233,16 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 	 */
 	@Transactional
 	public void setForceNovaSenha(String login, String novaSenha) {
-		Usuario usuario;
+		Users usuario;
 		usuario = this.getDelegate().getByLogin(login,true);
 		if (usuario != null) {
 			checkSenhaObedecePolitica(novaSenha);
 			//Altera:
-			usuario.setUsua_senha(SenhaUtil.md5(novaSenha));
+			usuario.setUser_senha(SenhaUtil.md5(novaSenha));
 			this.getDelegate().update(usuario);
 			//Auditoria:
 			logBC.insert(AcaoEnum.ALTEROU, 
-					EntidadeEnum.USUARIO, 
+					EntidadeEnum.USERS, 
 					usuario.getDadosAuditoria());
 		} else {
 			throw new BusinessException(resourceBundle.getString("usuario.mensagem.inativo"));
@@ -313,9 +313,9 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 	 */
 	public boolean isAdministrator() {
 		boolean retorno = false;
-		/*if (credenciaisMB.getVerificarPapel("ADMINISTRADOR")){
+		if (credenciaisMB.getVerificarPapel("ADMINISTRADOR")){
 				retorno =  true;
-		}*/
+		}/**/
 		return retorno;
 	}
 	
