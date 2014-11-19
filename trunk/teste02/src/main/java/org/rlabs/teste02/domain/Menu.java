@@ -36,26 +36,26 @@ public class Menu implements Serializable{
 	@Column(name="menu_id", nullable=false)
 	private Long menu_id;
 	
-	@Column(name="menu_classe")
+	@Column(name="menu_classe", length=25)
 	@Length(max=25)
 	private String menu_classe;
 	
-	@Column(name="menu_link")
+	@Column(name="menu_link", length=100)
 	@Length(max=100)
 	@NotNull
 	private String menu_link;
 	
-	@Column(name="menu_permissao")
-	@Length(max=10)
+	@Column(name="menu_permissao", length=20)
+	@Length(max=20)
 	@NotNull
 	private String menu_permissao;
 	
-	@Column(name="menu_nome")
+	@Column(name="menu_nome", length=25)
 	@Length(max=25)
 	@NotNull
 	private String menu_nome;
 	
-	@Column(name="menu_parent")
+	@Column(name="menu_parent", length=10)
 	@Length(max=10)
 	private String menu_parent;
 		
@@ -64,7 +64,7 @@ public class Menu implements Serializable{
 	
 	/* @NotNull
 	 * @Column(name="menu_parent")
-	 * @Column(name="audi_dml", nullable=false, columnDefinition="CHAR")
+	 * @Column(name="audi_dml", nullable=false, columnDefinition="CHAR", unique=true)
 	 * @Length(max=10)
 	 * @Temporal(value = TemporalType.TIMESTAMP)
 	 * @Lob
