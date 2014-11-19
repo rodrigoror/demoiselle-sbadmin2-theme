@@ -6,6 +6,8 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.rlabs.teste02.domain.Users;
+import org.rlabs.teste02.util.AcaoEnum;
+import org.rlabs.teste02.util.EntidadeEnum;
 import org.slf4j.Logger;
 
 import br.gov.frameworkdemoiselle.security.Authenticator;
@@ -33,12 +35,12 @@ public class Autenticador implements Authenticator{
 	/**
 	 * @uml.property  name="usuarioBC"
 	 * @uml.associationEnd  
-	 
+	 */
 	@Inject
-	private UsuarioBC usuarioBC;
+	private UsersBC usuarioBC;
 	
 	@Inject
-	private LogBC logBC;*/
+	private LogBC logBC;
 
 	/**
 	 * @uml.property  name="user"
@@ -54,19 +56,19 @@ public class Autenticador implements Authenticator{
 
 		boolean autenticado = false;
 
-		/*Users usuario = usuarioBC.getByLogin(credenciais.getLogin(), credenciais.getSenha());
+		Users usuario = userBC.getByLogin(credenciais.getLogin(), credenciais.getSenha());
 		if (usuario != null) {
 			autenticado = true;
-			credenciais.setId(usuario.getUsua_id());
-			credenciais.setNome(usuario.getUsua_nome());
-			credenciais.setPapel(usuario.getUsua_perfil().getPerf_codigo());
+			credenciais.setId(usuario.getUser_id());
+			credenciais.setNome(usuario.getUser_nome());
+			credenciais.setPapel(usuario.getUser_perfil().getPerf_codigo());
 			credenciais.setSenha(null);
 			//Auditoria:
-			logBC.insert(AcaoEnum.LOGOU, EntidadeEnum.USUARIO, credenciais.getLogin(), "IP: " + getClientIP());
+			logBC.insert(AcaoEnum.LOGOU, EntidadeEnum.USERS, credenciais.getLogin(), "IP: " + getClientIP());
 		} else {
 			credenciais.clear();
 			throw new RuntimeException("{mensagem.usuario.load.erro}");
-		}*/
+		}
 
 		//return autenticado;
 	}
@@ -77,7 +79,7 @@ public class Autenticador implements Authenticator{
 	 */
 	@Override
 	public User getUser() {
-		/*if (credenciais != null) {
+		if (credenciais != null) {
 			if (credenciais.getLogin() != null) {
 				user = new MyUser();
 				user.setId(credenciais.getLogin());
@@ -89,15 +91,15 @@ public class Autenticador implements Authenticator{
 			} else {
 				return null;
 			}
-		} else {*/
+		} else {
 			return null;
-		//}
+		}
 
 	}
 
 	@Override
 	public void unauthenticate() throws Exception {
-		//credenciais.clear();
+		credenciais.clear();
 	}
 
 	
