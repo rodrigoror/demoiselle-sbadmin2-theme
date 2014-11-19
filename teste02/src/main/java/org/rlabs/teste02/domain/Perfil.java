@@ -22,6 +22,7 @@ import javax.persistence.TemporalType;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
+ * Classe que contem o perfil dos usuarios, inicialmente serão apresenta
  * @author rodrigo.ramos
  */
 @Entity
