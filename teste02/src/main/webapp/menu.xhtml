@@ -82,6 +82,16 @@
        </li>
         <h:form>
 		<p:menubar>
+			<p:submenu label="#{messages['menu.users']}">
+				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/users_edit.jsf"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/users_list.jsf"></p:menuitem>
+			</p:submenu>
+
+			<p:submenu label="#{messages['menu.log']}">
+				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/log_edit.jsf"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/log_list.jsf"></p:menuitem>
+			</p:submenu>
+
 			<p:submenu label="#{messages['menu.menu']}">
 				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/menu_edit.jsf"></p:menuitem>
 				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/menu_list.jsf"></p:menuitem>

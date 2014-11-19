@@ -1,0 +1,80 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<h:form>
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton title="#{messages['button.new']}" icon="ui-icon-document" action="#{logListMB.getNextView}"
+						actionListener="#{logListMB.clear}" ajax="false" />
+
+					<p:commandButton title="#{messages['button.delete']}" icon="ui-icon-trash" onclick="confirmation.show()"
+						type="button" immediate="true" ajax="false" />
+
+					<p:confirmDialog message="#{messages['label.confirm.delete']}" showEffect="bounce" hideEffect="explode"
+						header="#{messages['label.dialog.alert']}!" severity="alert" widgetVar="confirmation">
+
+						<h:commandButton value="#{messages['button.dialog.yes']}" action="#{logListMB.deleteSelection}"
+							actionListener="#{logListMB.clear}" />
+						<h:commandButton value="#{messages['button.dialog.no']}" onclick="confirmation.hide()" type="button" />
+					</p:confirmDialog>
+				</p:toolbarGroup>
+			</p:toolbar>
+			<p:dataTable id="list" var="bean" value="#{logListMB.resultList}">
+				<f:facet name="header">#{messages['log.list.table.title']}</f:facet>
+				<p:column style="width:1%;">
+					<h:selectBooleanCheckbox value="#{logListMB.selection[bean.log_id]}"></h:selectBooleanCheckbox>
+				</p:column>
+				
+				<p:column style="width:5%;" sortBy="#{bean.log_id}">
+					<f:facet name="header">#{messages['log.label.log_id']}</f:facet>
+					<h:outputText value="#{bean.log_id}" />
+				</p:column>
+						
+				<p:column sortBy="#{bean.log_acao}">
+					<f:facet name="header">#{messages['log.label.log_acao']}</f:facet>
+					<h:commandLink action="#{logListMB.getNextView}" actionListener="#{logListMB.clear}">
+						<h:outputText value="#{bean.log_acao}" />
+						<f:param name="id" value="#{bean.log_id}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.log_entidade}">
+					<f:facet name="header">#{messages['log.label.log_entidade']}</f:facet>
+					<h:commandLink action="#{logListMB.getNextView}" actionListener="#{logListMB.clear}">
+						<h:outputText value="#{bean.log_entidade}" />
+						<f:param name="id" value="#{bean.log_id}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.log_data}">
+					<f:facet name="header">#{messages['log.label.log_data']}</f:facet>
+					<h:commandLink action="#{logListMB.getNextView}" actionListener="#{logListMB.clear}">
+						<h:outputText value="#{bean.log_data}" />
+						<f:param name="id" value="#{bean.log_id}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.log_usuario}">
+					<f:facet name="header">#{messages['log.label.log_usuario']}</f:facet>
+					<h:commandLink action="#{logListMB.getNextView}" actionListener="#{logListMB.clear}">
+						<h:outputText value="#{bean.log_usuario}" />
+						<f:param name="id" value="#{bean.log_id}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.log_dados}">
+					<f:facet name="header">#{messages['log.label.log_dados']}</f:facet>
+					<h:commandLink action="#{logListMB.getNextView}" actionListener="#{logListMB.clear}">
+						<h:outputText value="#{bean.log_dados}" />
+						<f:param name="id" value="#{bean.log_id}" />
+					</h:commandLink>
+				</p:column>
+						
+			</p:dataTable>
+		</h:form>
+
+	</ui:define>
+</ui:composition>
