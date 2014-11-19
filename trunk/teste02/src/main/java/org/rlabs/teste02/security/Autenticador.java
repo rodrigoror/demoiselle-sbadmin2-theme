@@ -1,11 +1,12 @@
 package org.rlabs.teste02.security;
 
-//import javax.enterprise.inject.Alternative;
+import javax.enterprise.inject.Alternative;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.rlabs.teste02.domain.Users;
+import org.slf4j.Logger;
 
 import br.gov.frameworkdemoiselle.security.Authenticator;
 import br.gov.frameworkdemoiselle.security.User;
@@ -25,9 +26,9 @@ public class Autenticador implements Authenticator{
 	/**
 	 * @uml.property  name="credenciais"
 	 * @uml.associationEnd  
-	 
+	 */
 	@Inject
-	private Credenciais credenciais;*/
+	private Credenciais credenciais;
 
 	/**
 	 * @uml.property  name="usuarioBC"
@@ -45,8 +46,8 @@ public class Autenticador implements Authenticator{
 	 */
 	private MyUser user = null;
 	
-	/*@Inject
-	private Logger logger; */
+	/**/@Inject
+	private Logger logger; 
 
 	@Override
 	public void authenticate() {
