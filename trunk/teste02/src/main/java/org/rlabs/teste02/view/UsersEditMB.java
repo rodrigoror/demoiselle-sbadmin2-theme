@@ -38,9 +38,9 @@ public class UsersEditMB extends AbstractEditPageBean<Users, Long> {
 		return getPreviousView();
 	}
 	
-	@Override
-	protected void handleLoad() {
-		setBean(this.usersBC.load(getId()));
+		@Override
+	protected Users handleLoad(Long arg0) {
+		return this.usersBC.load(getId());
 	}
 
 }

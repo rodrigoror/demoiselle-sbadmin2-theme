@@ -38,9 +38,14 @@ public class LogEditMB extends AbstractEditPageBean<Log, Long> {
 		return getPreviousView();
 	}
 	
-	@Override
+	/*@Override versao 2.3.9
 	protected void handleLoad() {
 		setBean(this.logBC.load(getId()));
+	}*/
+
+	@Override
+	protected Log handleLoad(Long arg0) {
+		return this.logBC.load(getId());
 	}
 
 }

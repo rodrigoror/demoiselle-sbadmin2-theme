@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Transient;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -25,8 +26,8 @@ import br.gov.sp.sjc.fadenp2.util.EntidadeEnum;*/
  * @author  rodrigo.ramos
  */
 @Entity
-@Table(name="LOG"/*, schema="FADENP"*/)
-//@SequenceGenerator(name="sq_log", sequenceName="FADENP.SQ_LOG")
+@Table(name="LOG"/*, schema="schema"*/)
+//@SequenceGenerator(name="sq_log", sequenceName="schema.SQ_LOG")
 public class Log implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -208,6 +209,18 @@ public class Log implements Serializable {
 	 */
 	public void setLog_dados(String log_dados) {
 		this.log_dados = log_dados;
+	}
+
+
+	/**
+	 * Metodo Padrao Auditoria 
+	 */
+	@Transient
+	public String getDadosAuditoria() {
+		return "Log [log_id=" + log_id + ", log_acao=" + log_acao
+				+ ", log_entidade=" + log_entidade + ", log_data=" + log_data
+				+ ", log_usuario=" + log_usuario + ", log_dados=" + log_dados
+				+ "]";
 	}
 	
 	

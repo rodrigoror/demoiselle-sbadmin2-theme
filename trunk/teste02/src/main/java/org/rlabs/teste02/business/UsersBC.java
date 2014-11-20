@@ -15,6 +15,7 @@ import org.rlabs.teste02.persistence.UsersDAO;
 import org.rlabs.teste02.util.AcaoEnum;
 import org.rlabs.teste02.util.EntidadeEnum;
 import org.rlabs.teste02.util.SenhaUtil;
+import org.rlabs.teste02.view.CredenciaisMB;
 import org.slf4j.Logger;
 
 @BusinessController
@@ -38,10 +39,11 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 	/**
 	 * Insere um usuario
 	 * @param bean Usuario
+	 * @return 
 	 */
 	@Override
 	@Transactional
-	public void insert(Users bean) {
+	public Users insert(Users bean) {
 		//Validacoes:
 		/*if (this.getDelegate().getByLogin(bean.getUser_login().toLowerCase(), false) != null) {
 			throw new BusinessException(resourceBundle.getString("usuariobc.insert.erro.existe"));
@@ -57,6 +59,7 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 				EntidadeEnum.USERS, 
 				bean.getUser_ipUpdate(), 
 				bean.getDadosAuditoria());
+		return bean;
 	}
 
 	/**
@@ -67,12 +70,12 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 	@Transactional
 	public void insert(Users bean, String confirmacaoSenha) {
 		//Validacoes:
-		if (this.getDelegate().getByLogin(bean.getUser_login().toLowerCase(), false) != null) {
+		/*if (this.getDelegate().getByLogin(bean.getUser_login().toLowerCase(), false) != null) {
 			throw new BusinessException(resourceBundle.getString("usuariobc.insert.erro.existe"));
 		}
 		if (!bean.getUser_senha().equals(confirmacaoSenha)) {
 			throw new BusinessException(resourceBundle.getString("usuariobc.insert.erro.senha"));
-		}
+		}*/
 		checkSenhaObedecePolitica(bean.getUser_senha());
 		//Ajustes:
 		bean.setUser_login(bean.getUser_login().toLowerCase());
@@ -89,23 +92,25 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 	/**
 	 * Altera um usuario
 	 * @param bean Usuario
+	 * @return 
 	 */
 	@Transactional
 	@Override
-	public void update(Users bean) {
+	public Users update(Users bean) {
 		//Validacoes:
-		Users usuario = this.getDelegate().getByLogin(bean.getUser_login().toLowerCase(), false);
+		/*Users usuario = this.getDelegate().getByLogin(bean.getUser_login().toLowerCase(), false);
 		if (usuario != null) {
 			if (!usuario.getUser_id().equals(bean.getUser_id())) {
 				throw new BusinessException(resourceBundle.getString("mensagem.registronaopodesercriado", "Outro usuário com o mesmo e-mail"));
 			}
-		}
+		}*/
 		//Atualiza:
 		this.getDelegate().update(bean);
 		//Auditoria:
 		logBC.insert(AcaoEnum.ALTEROU, 
 				EntidadeEnum.USERS, 
 				bean.getDadosAuditoria());
+		return bean;
 	}
 	
 	/**

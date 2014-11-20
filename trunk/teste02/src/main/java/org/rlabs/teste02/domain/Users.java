@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
@@ -337,5 +338,25 @@ public class Users implements Serializable{
 	public void setUser_company(Company user_company) {
 		this.user_company = user_company;
 	}
+
+	
+	
+	/**
+	 * Metodo Padrao Auditoria 
+	 */
+	@Transient
+	public String getDadosAuditoria() {
+		return "Users [user_id=" + user_id + ", user_login=" + user_login
+				+ ", user_cpf=" + user_cpf + ", user_senha=" + user_senha
+				+ ", user_susep=" + user_susep + ", user_nome=" + user_nome
+				+ ", user_telefone=" + user_telefone + ", user_ativo="
+				+ user_ativo + ", user_excluido=" + user_excluido
+				+ ", user_ipUpdate=" + user_ipUpdate + ", user_loginUpdate="
+				+ user_loginUpdate + ", user_dtUpdate=" + user_dtUpdate
+				+ ", user_perfil=" + user_perfil.getPerf_descricao() + ", user_company="
+				+ user_company.getComp_cnpj() + "]";
+	}
+
+	
 	
 }
