@@ -1,14 +1,18 @@
 package org.rlabs.teste02.business;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import br.gov.frameworkdemoiselle.lifecycle.Startup;
 import br.gov.frameworkdemoiselle.stereotype.BusinessController;
 import br.gov.frameworkdemoiselle.template.DelegateCrud;
 import br.gov.frameworkdemoiselle.transaction.Transactional;
 import br.gov.frameworkdemoiselle.util.ResourceBundle;
 
+import org.rlabs.teste02.domain.Company;
+import org.rlabs.teste02.domain.Perfil;
 import org.rlabs.teste02.domain.Users;
 import org.rlabs.teste02.exception.BusinessException;
 import org.rlabs.teste02.persistence.UsersDAO;
@@ -45,9 +49,9 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 	@Transactional
 	public Users insert(Users bean) {
 		//Validacoes:
-		/*if (this.getDelegate().getByLogin(bean.getUser_login().toLowerCase(), false) != null) {
+		if (this.getDelegate().getByLogin(bean.getUser_login().toLowerCase(), false) != null) {
 			throw new BusinessException(resourceBundle.getString("usuariobc.insert.erro.existe"));
-		}*/
+		}
 		checkSenhaObedecePolitica(bean.getUser_senha());
 		//Ajustes:
 		bean.setUser_login(bean.getUser_login().toLowerCase());
@@ -70,12 +74,12 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 	@Transactional
 	public void insert(Users bean, String confirmacaoSenha) {
 		//Validacoes:
-		/*if (this.getDelegate().getByLogin(bean.getUser_login().toLowerCase(), false) != null) {
+		if (this.getDelegate().getByLogin(bean.getUser_login().toLowerCase(), false) != null) {
 			throw new BusinessException(resourceBundle.getString("usuariobc.insert.erro.existe"));
 		}
 		if (!bean.getUser_senha().equals(confirmacaoSenha)) {
 			throw new BusinessException(resourceBundle.getString("usuariobc.insert.erro.senha"));
-		}*/
+		}
 		checkSenhaObedecePolitica(bean.getUser_senha());
 		//Ajustes:
 		bean.setUser_login(bean.getUser_login().toLowerCase());
@@ -98,12 +102,12 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 	@Override
 	public Users update(Users bean) {
 		//Validacoes:
-		/*Users usuario = this.getDelegate().getByLogin(bean.getUser_login().toLowerCase(), false);
+		Users usuario = this.getDelegate().getByLogin(bean.getUser_login().toLowerCase(), false);
 		if (usuario != null) {
 			if (!usuario.getUser_id().equals(bean.getUser_id())) {
 				throw new BusinessException(resourceBundle.getString("mensagem.registronaopodesercriado", "Outro usuário com o mesmo e-mail"));
 			}
-		}*/
+		}
 		//Atualiza:
 		this.getDelegate().update(bean);
 		//Auditoria:
@@ -120,15 +124,16 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 	@Transactional
 	@Override
 	public void delete(Long id) {
-		//Validacoes:
-		checkUsuarioPodeSerExcluido(id);
 		//Auditoria:
 		Users usuario = this.load(id);
 		logBC.insert(AcaoEnum.EXCLUIU, 
 				EntidadeEnum.USERS, 
 				usuario.getDadosAuditoria());
+		
 		//Exclusao:
-		this.getDelegate().delete(id);
+		//this.getDelegate().delete(id);
+		usuario.setUser_excluido(true);
+		this.getDelegate().update(usuario);
 	}
 	
 	/**
@@ -163,11 +168,12 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 	@Transactional
 	public List<Users> getAtivos(){
 		return this.getDelegate().getAtivos();
-		
 	}
 	
 	/**
-	 * Se quem esta logado e ADMINISTRADOR, retorna lista com todos os usuarios, senao retorna uma lista como todos que NaO sao administradores.
+	 * Se quem esta logado for ADMINISTRADOR, 
+	 * retorna lista com todos os usuarios, 
+	 * senao retorna uma lista como todos que NAO sao administradores.
 	 * @return Lista de usuarios
 	 */
 	@Transactional
@@ -189,17 +195,6 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 		return this.getDelegate().getByPerfil(codigoPerfil);
 	}	
 
-	
-	/**
-	 * Retorna uma lista dos GERENTES e SUPERVISORES ativos
-	 * @return
-	 */
-	@Transactional
-	public List<Users> getGerentesESupervisores() {
-		return this.getDelegate().getGerentesESupervisores();
-	}
-	
-	
 	/**
 	 * Atualiza a senha de um usuario (SOMENTE ATIVOS)
 	 * @param login
@@ -228,7 +223,6 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 			throw new BusinessException(resourceBundle.getString("usuariobc.insert.erro.senhaatual"));
 		}
 	}
-	
 	
 	/**
 	 * Forcando nova senha para o usuario encontrado (SOMENTE ATIVOS).
@@ -324,20 +318,20 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 		return retorno;
 	}
 	
-	/**
-	 * COMMENTADO Verifica se o usuario pode ser excluido, resultando em BusinessException se nao puder
-	 * @param id
-	 */
-	private void checkUsuarioPodeSerExcluido(Long id) {
-		/*List<Equipe> equipes;
-		// Verifica se nao esta como coordenador de equipe de alguma equipe
-		equipes = equipeDAO.findByCoordenadorEquipe(id);
-		if (!(equipes.isEmpty()))
-			throw new BusinessException(resourceBundle.getString("mensagem.registronaopodeserexcluido", "Usuário", "equipes"));
-		equipes.clear();
-		// Verifica se nao esta como coordenador gerencial de alguma equipe
-		equipes = equipeDAO.findByCoordenadorGerencial(id);
-		if (!(equipes.isEmpty()))
-			throw new BusinessException(resourceBundle.getString("mensagem.registronaopodeserexcluido", "Usuário", "equipes"));
-	*/}
+	@Startup
+	@Transactional
+	public void load() {
+		if (findAll().isEmpty()) {
+			//insert(new Menu("Classe", "Link","Permissao","Nome","Parent"));
+			insert(new Users("root@gmail.com",
+							"12345678909",
+							"123456789",
+							"10.0025038",
+							"Usuário Root",
+							"1239026900",true,false,"192.168.0.1","root@gmail.com",new Date(),
+							new Perfil("Root","ROOT",true,false,"192.168.0.1","root@gmail.com",new Date()),
+							new Company("56.758.210/0001-06","Razão Social","Nome Fantasia","Brasil","12999149812","José de Arimateia",true,false,"192.168.0.1","root@gmail.com",new Date())
+							));
+		}
+	}
 }

@@ -23,7 +23,7 @@ import org.hibernate.validator.constraints.Length;
  * @author rodrigo.ramos
  */
 @Entity
-@Table(name="SUBMENU"/*, schema="LOGRADOURO"*/)
+@Table(name="SUBMENU"/*, schema="schema"*/)
 public class SubMenu implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -36,17 +36,17 @@ public class SubMenu implements Serializable{
 	@Length(max=25)
 	private String smen_classe;
 	
-	@Column(name="smen_link")
+	@Column(name="smen_link", nullable=false)
 	@Length(max=100)
 	@NotNull
 	private String smen_link;
 	
-	@Column(name="smen_permissao")
+	@Column(name="smen_permissao", nullable=false)
 	@Length(max=100)
 	@NotNull
 	private String smen_permissao;
 	
-	@Column(name="smen_nome")
+	@Column(name="smen_nome", nullable=false)
 	@Length(max=25)
 	@NotNull
 	private String smen_nome;

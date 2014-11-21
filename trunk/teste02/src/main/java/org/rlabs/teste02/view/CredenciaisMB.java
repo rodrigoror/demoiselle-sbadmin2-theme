@@ -14,7 +14,6 @@ import br.gov.frameworkdemoiselle.security.SecurityContext;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.AbstractPageBean;
 
-
 /**
  * @author  rodrigo.ramos
  */
@@ -48,7 +47,6 @@ public class CredenciaisMB extends AbstractPageBean {
 
 	public void login() {
 		logger.info("login() securityContext.login()");
-		
 		try {
 			securityContext.login();
 		} catch (RuntimeException e) {
@@ -58,9 +56,7 @@ public class CredenciaisMB extends AbstractPageBean {
 
 	public void logout() {
 		logger.info("logout()");
-		
 		if (securityContext.getUser().getId() != null) {
-			
 			logger.info("logout() securityContext.logout()");
 			securityContext.logout();
 		} else {
@@ -73,12 +69,10 @@ public class CredenciaisMB extends AbstractPageBean {
 		logger.info("tratador()");
 		for (Excecao excecao : exception.getExcecoes()) {
 			logger.info("excecao()"+excecao.getMensagem());
-			
 			messageContext.add(excecao.getMensagem(), SeverityType.ERROR, excecao.getParametros());
 		}
 		exception.getExcecoes().clear();
 	}
-
 	
 	/**
 	 * Verifica se o usuário logado possui um dos papéis informados. Usado no menu.xhtml.
@@ -86,7 +80,6 @@ public class CredenciaisMB extends AbstractPageBean {
 	 * @return
 	 */
 	public boolean getVerificarPapel(String papeis) {
-
 		if (securityContext.getUser() != null) {
 			if (!papeis.trim().equals("")) {
 				return papeis.contains((CharSequence)securityContext.getUser().getAttribute("papel"));
@@ -98,7 +91,6 @@ public class CredenciaisMB extends AbstractPageBean {
 		}
 	}
 	
-
 	/**
 	 * Métodos Get's and Set's
 	 * @return
@@ -107,6 +99,7 @@ public class CredenciaisMB extends AbstractPageBean {
 	public Credenciais getCredenciais() {
 		return credenciais;
 	}
+	
 	/**
 	 * @param credenciais
 	 * @uml.property  name="credenciais"
