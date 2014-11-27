@@ -35,7 +35,7 @@ public class IntegerWriterUtil {
 	}
 
 	public String write(Integer amount) {
-		//TODO: implementar o restante para retornar qualquer numero inteiro por extenso, hoje retorna somente ate 20
+		//TODO OK - implementar o restante para retornar qualquer numero inteiro por extenso, hoje retorna somente ate 20
 		if(amount < 20){
 			return nomes.get(amount);
 		}else{

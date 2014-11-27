@@ -55,7 +55,7 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 		checkSenhaObedecePolitica(bean.getUser_senha());
 		//Ajustes:
 		bean.setUser_login(bean.getUser_login().toLowerCase());
-		bean.setUser_senha(SenhaUtil.md5(bean.getUser_senha()));
+		bean.setUser_senha(SenhaUtil.sha256(bean.getUser_senha()));
 		//Insere:
 		this.getDelegate().insert(bean);
 		//Auditoria:
@@ -83,7 +83,7 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 		checkSenhaObedecePolitica(bean.getUser_senha());
 		//Ajustes:
 		bean.setUser_login(bean.getUser_login().toLowerCase());
-		bean.setUser_senha(SenhaUtil.md5(bean.getUser_senha()));
+		bean.setUser_senha(SenhaUtil.sha256(bean.getUser_senha()));
 		//Insere:
 		this.getDelegate().insert(bean);
 		//Auditoria:
@@ -145,7 +145,7 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 	@Transactional
 	public Users getByLogin(String login, String senha) {
 		Users usuario = null;
-		usuario = this.getDelegate().getByLogin(login, SenhaUtil.md5(senha));
+		usuario = this.getDelegate().getByLogin(login, SenhaUtil.sha256(senha));
 		return usuario;
 	}
 	
@@ -205,12 +205,12 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 	@Transactional
 	public void setNovaSenha(String login, String senhaAtual, String novaSenha, String repeticaoNovaSenha) {
 		Users usuario;
-		usuario = this.getDelegate().getByLogin(login, SenhaUtil.md5(senhaAtual));
+		usuario = this.getDelegate().getByLogin(login, SenhaUtil.sha256(senhaAtual));
 		if (usuario != null) {
 			if (novaSenha.equals(repeticaoNovaSenha)) {
 				checkSenhaObedecePolitica(novaSenha);
 				//Altera:
-				usuario.setUser_senha(SenhaUtil.md5(novaSenha));
+				usuario.setUser_senha(SenhaUtil.sha256(novaSenha));
 				this.getDelegate().update(usuario);
 				//Auditoria:
 				logBC.insert(AcaoEnum.ALTEROU, 
@@ -237,7 +237,7 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 		if (usuario != null) {
 			checkSenhaObedecePolitica(novaSenha);
 			//Altera:
-			usuario.setUser_senha(SenhaUtil.md5(novaSenha));
+			usuario.setUser_senha(SenhaUtil.sha256(novaSenha));
 			this.getDelegate().update(usuario);
 			//Auditoria:
 			logBC.insert(AcaoEnum.ALTEROU, 

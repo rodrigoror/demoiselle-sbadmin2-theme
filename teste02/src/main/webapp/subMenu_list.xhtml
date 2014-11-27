@@ -1,0 +1,88 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<h:form>
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton title="#{messages['button.new']}" icon="ui-icon-document" action="#{subMenuListMB.getNextView}"
+						actionListener="#{subMenuListMB.clear}" ajax="false" />
+
+					<p:commandButton title="#{messages['button.delete']}" icon="ui-icon-trash" onclick="confirmation.show()"
+						type="button" immediate="true" ajax="false" />
+
+					<p:confirmDialog message="#{messages['label.confirm.delete']}" showEffect="bounce" hideEffect="explode"
+						header="#{messages['label.dialog.alert']}!" severity="alert" widgetVar="confirmation">
+
+						<h:commandButton value="#{messages['button.dialog.yes']}" action="#{subMenuListMB.deleteSelection}"
+							actionListener="#{subMenuListMB.clear}" />
+						<h:commandButton value="#{messages['button.dialog.no']}" onclick="confirmation.hide()" type="button" />
+					</p:confirmDialog>
+				</p:toolbarGroup>
+			</p:toolbar>
+			<p:dataTable id="list" var="bean" value="#{subMenuListMB.resultList}">
+				<f:facet name="header">#{messages['subMenu.list.table.title']}</f:facet>
+				<p:column style="width:1%;">
+					<h:selectBooleanCheckbox value="#{subMenuListMB.selection[bean.smen_id]}"></h:selectBooleanCheckbox>
+				</p:column>
+				
+				<p:column style="width:5%;" sortBy="#{bean.smen_id}">
+					<f:facet name="header">#{messages['subMenu.label.smen_id']}</f:facet>
+					<h:outputText value="#{bean.smen_id}" />
+				</p:column>
+						
+				<p:column sortBy="#{bean.smen_classe}">
+					<f:facet name="header">#{messages['subMenu.label.smen_classe']}</f:facet>
+					<h:commandLink action="#{subMenuListMB.getNextView}" actionListener="#{subMenuListMB.clear}">
+						<h:outputText value="#{bean.smen_classe}" />
+						<f:param name="id" value="#{bean.smen_id}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.smen_link}">
+					<f:facet name="header">#{messages['subMenu.label.smen_link']}</f:facet>
+					<h:commandLink action="#{subMenuListMB.getNextView}" actionListener="#{subMenuListMB.clear}">
+						<h:outputText value="#{bean.smen_link}" />
+						<f:param name="id" value="#{bean.smen_id}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.smen_permissao}">
+					<f:facet name="header">#{messages['subMenu.label.smen_permissao']}</f:facet>
+					<h:commandLink action="#{subMenuListMB.getNextView}" actionListener="#{subMenuListMB.clear}">
+						<h:outputText value="#{bean.smen_permissao}" />
+						<f:param name="id" value="#{bean.smen_id}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.smen_nome}">
+					<f:facet name="header">#{messages['subMenu.label.smen_nome']}</f:facet>
+					<h:commandLink action="#{subMenuListMB.getNextView}" actionListener="#{subMenuListMB.clear}">
+						<h:outputText value="#{bean.smen_nome}" />
+						<f:param name="id" value="#{bean.smen_id}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.smen_parent}">
+					<f:facet name="header">#{messages['subMenu.label.smen_parent']}</f:facet>
+					<h:commandLink action="#{subMenuListMB.getNextView}" actionListener="#{subMenuListMB.clear}">
+						<h:outputText value="#{bean.smen_parent}" />
+						<f:param name="id" value="#{bean.smen_id}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.smen_menu}">
+					<f:facet name="header">#{messages['subMenu.label.smen_menu']}</f:facet>
+					<h:commandLink action="#{subMenuListMB.getNextView}" actionListener="#{subMenuListMB.clear}">
+						<h:outputText value="#{bean.smen_menu}" />
+						<f:param name="id" value="#{bean.smen_id}" />
+					</h:commandLink>
+				</p:column>
+						
+			</p:dataTable>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,69 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<h:form prependId="false">
+
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton value="#{messages['button.save']}" action="#{subMenuEditMB.insert}"
+						rendered="#{!subMenuEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.save']}" action="#{subMenuEditMB.update}"
+						rendered="#{subMenuEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.delete']}" onclick="confirmation.show()"
+						rendered="#{subMenuEditMB.updateMode}" type="button" immediate="true" ajax="false" />
+					<p:confirmDialog message="#{messages['label.confirm.delete']}" showEffect="bounce" hideEffect="explode"
+						header="#{messages['label.dialog.delete']}" severity="alert" widgetVar="confirmation">
+						<h:commandButton value="#{messages['button.dialog.yes']}" action="#{subMenuEditMB.delete}" immediate="true"
+							ajax="false" />
+						<h:commandButton value="#{messages['button.dialog.no']}" onclick="confirmation.hide()" type="button" />
+					</p:confirmDialog>
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<br />
+
+			<p:fieldset legend="#{messages['subMenu.label']}" toggleable="true" toggleSpeed="500">
+				<h:panelGrid id="fields" columns="3">
+					
+					<h:outputLabel value="#{messages['subMenu.label.smen_id']}: " for="smen_id" styleClass="text-input" />
+					<h:outputText id="smen_id" value="#{subMenuEditMB.bean.smen_id}" />
+					<p:message for="smen_id" />
+					
+					<h:outputLabel value="#{messages['subMenu.label.smen_classe']}: " for="smen_classe" styleClass="text-input" />
+					<h:inputText id="smen_classe" value="#{subMenuEditMB.bean.smen_classe}"
+						title="#{messages['subMenu.alt.smen_classe']}" />
+					<p:message for="smen_classe" />
+					
+					<h:outputLabel value="#{messages['subMenu.label.smen_link']}: " for="smen_link" styleClass="text-input" />
+					<h:inputText id="smen_link" value="#{subMenuEditMB.bean.smen_link}"
+						title="#{messages['subMenu.alt.smen_link']}" />
+					<p:message for="smen_link" />
+					
+					<h:outputLabel value="#{messages['subMenu.label.smen_permissao']}: " for="smen_permissao" styleClass="text-input" />
+					<h:inputText id="smen_permissao" value="#{subMenuEditMB.bean.smen_permissao}"
+						title="#{messages['subMenu.alt.smen_permissao']}" />
+					<p:message for="smen_permissao" />
+					
+					<h:outputLabel value="#{messages['subMenu.label.smen_nome']}: " for="smen_nome" styleClass="text-input" />
+					<h:inputText id="smen_nome" value="#{subMenuEditMB.bean.smen_nome}"
+						title="#{messages['subMenu.alt.smen_nome']}" />
+					<p:message for="smen_nome" />
+					
+					<h:outputLabel value="#{messages['subMenu.label.smen_parent']}: " for="smen_parent" styleClass="text-input" />
+					<h:inputText id="smen_parent" value="#{subMenuEditMB.bean.smen_parent}"
+						title="#{messages['subMenu.alt.smen_parent']}" />
+					<p:message for="smen_parent" />
+					
+					<h:outputLabel value="#{messages['subMenu.label.smen_menu']}: " for="smen_menu" styleClass="text-input" />
+					<h:inputText id="smen_menu" value="#{subMenuEditMB.bean.smen_menu}"
+						title="#{messages['subMenu.alt.smen_menu']}" />
+					<p:message for="smen_menu" />
+					
+				</h:panelGrid>
+			</p:fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>
