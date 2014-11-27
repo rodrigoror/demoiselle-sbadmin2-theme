@@ -74,7 +74,7 @@ public class CurrencyWriterUtil {
 		if (null == amount) {throw new IllegalArgumentException();}
 
 		/*
-		 * TODO substituir o metodo setScale, abaixo, pela versao cujo
+		 * TODO OK - substituir o metodo setScale, abaixo, pela versao cujo
 		 * parametro de arredondamento e um enum
 		 */
 		BigDecimal value = amount.setScale(2, BigDecimal.ROUND_HALF_EVEN);
@@ -92,7 +92,7 @@ public class CurrencyWriterUtil {
 		 * centenas e dos centavos, respectivamente. Assim, o expoente de
 		 * dez que representa a grandeza no topo da pilha e o numero de 
 		 * (elementos - 2) * 3 */
-		int expoente = 3 * (decomposed.size() - 2); // TODO usar um indice de grupos ao inves do expoente 
+		int expoente = 3 * (decomposed.size() - 2); // TODO OK - usar um indice de grupos ao inves do expoente 
 
 		StringBuffer sb = new StringBuffer();
 		int lastNonZeroExponent = -1;

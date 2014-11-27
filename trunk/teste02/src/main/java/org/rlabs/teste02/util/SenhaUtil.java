@@ -5,8 +5,15 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import javax.inject.Inject;
+
+import org.slf4j.Logger;
+
 public class SenhaUtil implements Serializable{
 	private static final long serialVersionUID = 1L;
+	
+	@Inject
+	private static Logger logger;
 
 	public static String md5(String senha){  
         String sen = "";  
@@ -43,7 +50,7 @@ public class SenhaUtil implements Serializable{
         for (int i = 0; i < byteData.length; i++) {
          sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
         }
-        System.out.println("Hex format : " + sb.toString());
+       logger.info("Hex format : " + sb.toString());
  
         //convert the byte to hex format method 2
         StringBuffer hexString = new StringBuffer();
@@ -52,7 +59,7 @@ public class SenhaUtil implements Serializable{
    	     	if(hex.length()==1) hexString.append('0');
    	     	hexString.append(hex);
     	}
-    	System.out.println("Hex format : " + hexString.toString());
+    	logger.info("Hex format : " + hexString.toString());
 		
 		return senha;
 		

@@ -21,11 +21,20 @@
          <!-- Menu dinamico -->
        	<c:forEach var="item" items="#{menuListMB.resultList}">
           <li >
-			<a class="#{menuListMB.active}" href="#{item.menu_link}"> 
+			<a class="#{menuListMB.active}" href="#{item.menu_link}" target="#{item.menu_parent}"> 
 				<i class="#{item.menu_classe}"></i> 
 				<span>#{item.menu_nome}</span>
-			</a>
-	   	  </li>
+				</a><c:if test="#{subMenuListMB.active}"><span class="fa arrow"></span>
+					<ul class="nav nav-second-level">
+						<c:forEach var="item2" items="#{subMenuListMB.resultList}">
+							 <li>
+			                    <a href="#{item2.menu_link}" target="#{item.menu_parent}">#{item2.menu_nome}</a>
+			                </li>
+						</c:forEach>
+					</ul>
+            		<!-- /.nav-second-level -->
+				</c:if>
+		 </li>
         </c:forEach>
 	     <!-- /.Menu dinamico -->
        	
@@ -82,6 +91,11 @@
        </li>
         <h:form>
 		<p:menubar>
+			<p:submenu label="#{messages['menu.subMenu']}">
+				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/subMenu_edit.jsf"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/subMenu_list.jsf"></p:menuitem>
+			</p:submenu>
+
 			<p:submenu label="#{messages['menu.users']}">
 				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/users_edit.jsf"></p:menuitem>
 				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/users_list.jsf"></p:menuitem>

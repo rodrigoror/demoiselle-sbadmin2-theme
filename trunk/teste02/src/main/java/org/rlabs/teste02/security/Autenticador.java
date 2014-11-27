@@ -1,6 +1,6 @@
 package org.rlabs.teste02.security;
 
-import javax.enterprise.inject.Alternative;
+
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -56,11 +56,8 @@ public class Autenticador implements Authenticator{
 	@Override
 	public void authenticate() {
 
-		boolean autenticado = false;
-
 		Users usuario = usuarioBC.getByLogin(credenciais.getLogin(), credenciais.getSenha());
 		if (usuario != null) {
-			autenticado = true;
 			credenciais.setId(usuario.getUser_id());
 			credenciais.setNome(usuario.getUser_nome());
 			credenciais.setPapel(usuario.getUser_perfil().getPerf_codigo());
