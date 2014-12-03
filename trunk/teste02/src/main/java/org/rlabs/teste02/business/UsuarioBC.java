@@ -1,4 +1,4 @@
-package org.rlabs.teste02.business;
+/*package org.rlabs.teste02.business;
 
 import java.util.List;
 
@@ -18,12 +18,12 @@ import br.gov.sp.sjc.fadenp2.persistence.UsuarioDAO;
 import br.gov.sp.sjc.fadenp2.util.AcaoEnum;
 import br.gov.sp.sjc.fadenp2.util.EntidadeEnum;
 import br.gov.sp.sjc.fadenp2.util.SenhaUtil;
-import br.gov.sp.sjc.fadenp2.view.CredenciaisMB;
+import org.rlabs.teste02.view.CredenciaisMB;
 
-/**
+*//**
  * Classe BC que controla o usuario
  * @author  rodrigo.ramos
- */
+ *//*
 @BusinessController
 public class UsuarioBC extends DelegateCrud<Usuario, Long, UsuarioDAO> {
 
@@ -44,13 +44,13 @@ public class UsuarioBC extends DelegateCrud<Usuario, Long, UsuarioDAO> {
 	@Inject
 	private Logger logger;
 	
-	/**
+	*//**
 	 * Insere um usuario
 	 * @param bean Usuario
-	 */
+	 *//*
 	@Override
 	@Transactional
-	public void insert(Usuario bean) {
+	public void insert(org.rlabs.teste02.domain.Usuario bean) {
 		//Validacoes:
 		if (this.getDelegate().getByLogin(bean.getUsua_login().toLowerCase(), false) != null) {
 			throw new BusinessException(resourceBundle.getString("usuariobc.insert.erro.existe"));
@@ -68,11 +68,11 @@ public class UsuarioBC extends DelegateCrud<Usuario, Long, UsuarioDAO> {
 				bean.getDadosAuditoria());
 	}
 
-	/**
+	*//**
 	 * Insere um usuario
 	 * @param bean Usuario
 	 * @param confirmacaoSenha Confirmacao da senha
-	 */
+	 *//*
 	@Transactional
 	public void insert(Usuario bean, String confirmacaoSenha) {
 		//Validacoes:
@@ -95,10 +95,10 @@ public class UsuarioBC extends DelegateCrud<Usuario, Long, UsuarioDAO> {
 				bean.getDadosAuditoria());
 	}
 	
-	/**
+	*//**
 	 * Altera um usuario
 	 * @param bean Usuario
-	 */
+	 *//*
 	@Transactional
 	@Override
 	public void update(Usuario bean) {
@@ -117,10 +117,10 @@ public class UsuarioBC extends DelegateCrud<Usuario, Long, UsuarioDAO> {
 				bean.getDadosAuditoria());
 	}
 	
-	/**
+	*//**
 	 * Exclui um usuario
 	 * @param id ID do usuario
-	 */
+	 *//*
 	@Transactional
 	@Override
 	public void delete(Long id) {
@@ -135,12 +135,12 @@ public class UsuarioBC extends DelegateCrud<Usuario, Long, UsuarioDAO> {
 		this.getDelegate().delete(id);
 	}
 	
-	/**
+	*//**
 	 * Usado para autenticacao do usuario, atraves de login e senha (SOMENTE ATIVOS)
 	 * @param login
 	 * @param senha (sem MD5)
 	 * @return Usuario
-	 */
+	 *//*
 	@Transactional
 	public Usuario getByLogin(String login, String senha) {
 		Usuario usuario = null;
@@ -148,11 +148,11 @@ public class UsuarioBC extends DelegateCrud<Usuario, Long, UsuarioDAO> {
 		return usuario;
 	}
 	
-	/**
+	*//**
 	 * Usado para autenticacao do usuario (SOMENTE ATIVOS), para busca apenas por login
 	 * @param login
 	 * @return Usuario
-	 */
+	 *//*
 	@Transactional
 	public Usuario getByLogin(String login) {
 		Usuario usuario = null;
@@ -160,20 +160,20 @@ public class UsuarioBC extends DelegateCrud<Usuario, Long, UsuarioDAO> {
 		return usuario;
 	}
 	
-	/**
+	*//**
 	 * Retorna uma lista dos usuarios ativos
 	 * @return Lista de usuarios ativos
-	 */
+	 *//*
 	@Transactional
 	public List<Usuario> getAtivos(){
 		return this.getDelegate().getAtivos();
 		
 	}
 	
-	/**
+	*//**
 	 * Se quem esta logado e ADMINISTRADOR, retorna lista com todos os usuarios, senao retorna uma lista como todos que NaO sao administradores.
 	 * @return Lista de usuarios
-	 */
+	 *//*
 	@Transactional
 	public List<Usuario>getByPerfil(){
 		if(isAdministrator()){
@@ -183,34 +183,34 @@ public class UsuarioBC extends DelegateCrud<Usuario, Long, UsuarioDAO> {
 		}
 	}
 	
-	/**
+	*//**
 	 * Retorna uma lista de usuarios (SOMENTE ATIVOS) pelo codigo do perfil (ex: COORDENADOR)
 	 * @param codigoPerfil
 	 * @return Lista de usuarios
-	 */
+	 *//*
 	@Transactional
 	public List<Usuario>getByPerfil(String codigoPerfil){
 		return this.getDelegate().getByPerfil(codigoPerfil);
 	}	
 
 	
-	/**
+	*//**
 	 * Retorna uma lista dos GERENTES e SUPERVISORES ativos
 	 * @return
-	 */
+	 *//*
 	@Transactional
 	public List<Usuario> getGerentesESupervisores() {
 		return this.getDelegate().getGerentesESupervisores();
 	}
 	
 	
-	/**
+	*//**
 	 * Atualiza a senha de um usuario (SOMENTE ATIVOS)
 	 * @param login
 	 * @param senhaAtual
 	 * @param novaSenha
 	 * @param repeticaoNovaSenha
-	 */
+	 *//*
 	@Transactional
 	public void setNovaSenha(String login, String senhaAtual, String novaSenha, String repeticaoNovaSenha) {
 		Usuario usuario;
@@ -234,12 +234,12 @@ public class UsuarioBC extends DelegateCrud<Usuario, Long, UsuarioDAO> {
 	}
 	
 	
-	/**
+	*//**
 	 * Forcando nova senha para o usuario encontrado (SOMENTE ATIVOS).
 	 * Valido somente para usuarios ativos.
 	 * @param login
 	 * @param novaSenha
-	 */
+	 *//*
 	@Transactional
 	public void setForceNovaSenha(String login, String novaSenha) {
 		Usuario usuario;
@@ -258,11 +258,11 @@ public class UsuarioBC extends DelegateCrud<Usuario, Long, UsuarioDAO> {
 		}
 	}
 	
-	/**
+	*//**
 	 *  Testa se uma senha obedece a politica de senhas da aplicacao.
 	 *  Se nao obedecer, joga uma BusinessException
 	 * @param senha
-	 */
+	 *//*
 	private void checkSenhaObedecePolitica(String senha) {
 		if (senha.length() >= 6) {
 			if (senha.length() <= 10) {
@@ -283,11 +283,11 @@ public class UsuarioBC extends DelegateCrud<Usuario, Long, UsuarioDAO> {
 		}
 	}
 	
-	/**
+	*//**
 	 * Retorna se uma string contem pelo menos uma letra
 	 * @param valor
 	 * @return
-	 */
+	 *//*
 	private boolean getStringContemLetra(String valor) {
 		String check = "abcdefghijklmnopqrstuvwxyz";
 		boolean retorno = false;
@@ -300,10 +300,10 @@ public class UsuarioBC extends DelegateCrud<Usuario, Long, UsuarioDAO> {
 		return retorno;
 	}
 
-	/**
+	*//**
 	 *  Retorna se uma string contem pelo menos um numero
 	 *  @return boolean
-	 */
+	 *//*
 	private boolean getStringContemNumero(String valor) {
 		String check = "0123456789";
 		boolean retorno = false;
@@ -316,10 +316,10 @@ public class UsuarioBC extends DelegateCrud<Usuario, Long, UsuarioDAO> {
 		return retorno;
 	}
 	
-	/**
+	*//**
 	 * Retorna se o usuario logado atualmente e administrador
 	 * @return
-	 */
+	 *//*
 	public boolean isAdministrator() {
 		boolean retorno = false;
 		if (credenciaisMB.getVerificarPapel("ADMINISTRADOR")){
@@ -328,10 +328,10 @@ public class UsuarioBC extends DelegateCrud<Usuario, Long, UsuarioDAO> {
 		return retorno;
 	}
 	
-	/**
+	*//**
 	 * Verifica se o usuario pode ser excluido, resultando em BusinessException se nao puder
 	 * @param id
-	 */
+	 *//*
 	private void checkUsuarioPodeSerExcluido(Long id) {
 		List<Equipe> equipes;
 		// Verifica se nao esta como coordenador de equipe de alguma equipe
@@ -345,3 +345,4 @@ public class UsuarioBC extends DelegateCrud<Usuario, Long, UsuarioDAO> {
 			throw new BusinessException(resourceBundle.getString("mensagem.registronaopodeserexcluido", "Usuário", "equipes"));
 	}
 }
+*/

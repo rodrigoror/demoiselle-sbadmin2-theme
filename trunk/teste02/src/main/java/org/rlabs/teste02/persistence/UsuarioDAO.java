@@ -1,4 +1,4 @@
-package org.rlabs.teste02.persistence;
+/*package org.rlabs.teste02.persistence;
 
 
 import java.util.List;
@@ -18,12 +18,12 @@ public class UsuarioDAO extends JPACrud<Usuario, Long> {
 	@Inject
 	private EntityManager em;
 
-	/** 
+	*//** 
 	 * Buscar um usuario atraves dos parametros informados (SOMENTE ATIVOS)
 	 * @param login
 	 * @param senha
 	 * @return Objeto Usuario
-	 */
+	 *//*
 	public Usuario getByLogin(String login, String senha){
 		
 		String qr = "SELECT u "
@@ -47,12 +47,12 @@ public class UsuarioDAO extends JPACrud<Usuario, Long> {
 	}
 	
 
-	/** 
+	*//** 
 	 * Buscar um usuario atraves dos parametros informados (SOMENTE ATIVOS)
 	 * @param login
 	 * @param senha
 	 * @return Objeto Usuario
-	 */
+	 *//*
 	@SuppressWarnings("unchecked")
 	public Usuario getByLogin(String login, boolean somenteAtivos){
 		
@@ -81,11 +81,11 @@ public class UsuarioDAO extends JPACrud<Usuario, Long> {
 	}
 	
 	
-	/** 
+	*//** 
 	 * Buscar uma lista de usuarios Ativos
 	 * @param pAtivo
 	 * @return List<Usuario>
-	 */
+	 *//*
 	public List<Usuario> getAtivos(){
 		
 		String qr = "SELECT u FROM Usuario u WHERE u.usua_ativo = :pAtivo";
@@ -130,10 +130,10 @@ public class UsuarioDAO extends JPACrud<Usuario, Long> {
 	}
 	
 	
-	/**
+	*//**
 	 * Retorna uma lista dos GERENTES e SUPERVISORES ativos
 	 * @return
-	 */
+	 *//*
 	public List<Usuario> getGerentesESupervisores(){
 		
 		String qr = "SELECT u FROM Usuario u " + 
@@ -154,12 +154,12 @@ public class UsuarioDAO extends JPACrud<Usuario, Long> {
 	}
 	
 	
-	/** 
+	*//** 
 	 * Buscar uma lista de usuarios exceto aqueles com perfil Administrador
 	 * @param pAtivo
 	 * @param pPerfilCodigo
 	 * @return List<Usuario>
-	 */
+	 *//*
 	public List<Usuario> findExceptAdm(){
 		
 		String qr = "SELECT u FROM Usuario u WHERE u.usua_perfil.perf_codigo <> :pPerfilCodigo";
@@ -173,3 +173,4 @@ public class UsuarioDAO extends JPACrud<Usuario, Long> {
 	}
 	
 }
+*/
