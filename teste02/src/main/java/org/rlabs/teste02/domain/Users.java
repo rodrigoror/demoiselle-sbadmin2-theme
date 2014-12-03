@@ -35,7 +35,7 @@ public class Users implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	/**
-	 * @uml.property  name="usua_id"
+	 * ID do usuário
 	 */
 	@Id
 	@GeneratedValue(strategy = SEQUENCE)
@@ -59,46 +59,79 @@ public class Users implements Serializable{
 	@Length(max=11)
 	private String user_cpf;
 	
+	/**
+	 * Senha do usuário
+	 */
 	@Column(name="user_senha", nullable=false, length=100)
 	@NotNull
 	@Length(max=100)
 	private String user_senha;
 	
+	/**
+	 * Identificação do SUSEP do corretor
+	 */
 	@Column(name="user_susep", length=11, unique=true)
 	@NotNull
 	@Length(max=11)
 	private String user_susep;
 
+	/**
+	 * Nome do Usuário
+	 */
 	@Column(name="user_nome", nullable=false, length=100)
 	@NotNull
 	@Length(max=100)
 	private String user_nome;
 	
 
+	/**
+	 * Telefone do Usuário
+	 */
 	@Column(name="user_telefone", length=10)
 	@Length(max=10)
 	private String user_telefone;
 	
+	/**
+	 * Identifica se o usuário está ativo no sistema 
+	 */
 	@Column(name="user_ativo")
 	private Boolean user_ativo;
 	
+	/**
+	 * Identifica se o usuário foi excluido do sistema
+	 */
 	@Column(name="user_excluido")
 	private Boolean user_excluido;
 
+	/**
+	 * Identifica o IP que realizou o ultimo Update 
+	 */
 	@Column(name="user_ipUpdate", nullable=false)
 	private String user_ipUpdate;
 	
+	/**
+	 * Identifica o login que realizou o ultimo update
+	 */
 	@Column(name="user_loginUpdate", nullable=false)
 	private String user_loginUpdate;
 	
+	/**
+	 * Identifica a data do ultimo update
+	 */
 	@Column(name="user_dtUpdate", nullable=false)
 	@Temporal(value = TemporalType.TIMESTAMP)
 	private Date user_dtUpdate;
 	
+	/**
+	 * relaciona com o perfil do usuário (Root, Root-Atedimento ...)
+	 */
 	@ManyToOne
 	@JoinColumn(name="perf_id", nullable=false)
 	private Perfil user_perfil;
 	
+	/**
+	 * Identifica de qual CIA o user pertence
+	 */
 	@ManyToOne
     @JoinColumn(name="comp_id", nullable=false)	
 	private Company user_company;

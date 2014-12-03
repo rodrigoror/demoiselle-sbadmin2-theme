@@ -22,6 +22,10 @@ import org.rlabs.teste02.util.SenhaUtil;
 import org.rlabs.teste02.view.CredenciaisMB;
 import org.slf4j.Logger;
 
+/**
+ * Classe BC que controla o usuario
+ * @author  rodrigoror@gmail.com
+ */
 @BusinessController
 public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 	
