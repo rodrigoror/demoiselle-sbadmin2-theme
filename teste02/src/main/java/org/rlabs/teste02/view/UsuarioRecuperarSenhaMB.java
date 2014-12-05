@@ -1,4 +1,4 @@
-package org.rlabs.teste02.view;
+/*package org.rlabs.teste02.view;
 
 import java.util.Map;
 
@@ -16,8 +16,7 @@ import br.gov.frameworkdemoiselle.security.RequiredRole;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.AbstractPageBean;
 import br.gov.frameworkdemoiselle.util.ResourceBundle;
-import br.gov.sp.sjc.fadenp2.business.UsuarioBC;
-import br.gov.sp.sjc.fadenp2.exception.BusinessException;
+
 
 @ViewController
 @PreviousView("/usuario_list.jsf")
@@ -57,12 +56,12 @@ public class UsuarioRecuperarSenhaMB extends AbstractPageBean {
 		return usuarioBC.load(getId()).getCpfFormatado().toString();
 	}
 	
-	/** 
+	*//** 
 	 * Acadêmico do 3º ano de Sistemas de Informação - FIMES - Mineiros - GO 
 	 * Alterado para gerar senhas com letras e numeros em todas as vezes.
 	 * @author Walfrides Marçal 
 	 * @see http://www.guj.com.br/java/67904-gerador-de-senha-alfanumerico
-	 */ 
+	 *//* 
 	private String geraSenha(){
 		String[] carct = {
 				"a","b","c","d","e","f","g","h","i","j","k","m","n","p","q","r","s","t","u","v","w","x","y","z",
@@ -117,3 +116,4 @@ public class UsuarioRecuperarSenhaMB extends AbstractPageBean {
 
 
 }
+*/

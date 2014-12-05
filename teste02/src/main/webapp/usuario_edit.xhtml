@@ -1,0 +1,123 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<h:form prependId="false">
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton value="#{messages['button.save']}"
+						action="#{usuarioEditMB.insert}"
+						rendered="#{!usuarioEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.save']}"
+						action="#{usuarioEditMB.update}"
+						rendered="#{usuarioEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.delete']}"
+						onclick="confirmation.show()"
+						rendered="#{usuarioEditMB.updateMode}" type="button"
+						immediate="true" ajax="false" />
+					<p:confirmDialog message="#{messages['label.confirm.delete']}"
+						showEffect="bounce" hideEffect="explode"
+						header="#{messages['label.dialog.delete']}" severity="alert"
+						widgetVar="confirmation">
+						<h:commandButton value="#{messages['button.dialog.yes']}"
+							action="#{usuarioEditMB.delete}" immediate="true" ajax="false" />
+						<h:commandButton value="#{messages['button.dialog.no']}"
+							onclick="confirmation.hide()" type="button" />
+					</p:confirmDialog>
+					<p:commandButton value="#{messages['button.back']}"
+						action="#{usuarioEditMB.getPreviousView}" ajax="false"
+						immediate="true" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<br />
+
+			<div align="left" style="width: 800px;">
+				<p:messages id="msg" closable="true" globalOnly="true" />
+			</div>
+
+			<p:fieldset legend="#{messages['usuario.label']}" toggleable="true"
+				toggleSpeed="500">
+				<h:panelGrid id="fields" columns="3">
+					<h:outputLabel value="#{messages['usuario.label.usua_id']}: "
+						for="usua_id" styleClass="text-input" />
+					<h:outputText id="usua_id" value="#{usuarioEditMB.bean.usua_id}" />
+					<p:message for="usua_id" />
+
+					<h:outputLabel value="* #{messages['usuario.label.usua_nome']}: "
+						for="usua_nome" styleClass="text-input" />
+					<h:inputText id="usua_nome" value="#{usuarioEditMB.bean.usua_nome}"
+						title="#{messages['usuario.alt.usua_nome']}" maxlength="50" />
+					<p:message for="usua_nome" />
+
+					<h:outputLabel value="* #{messages['usuario.label.usua_login']}: "
+						for="usua_login" styleClass="text-input" />
+					<h:inputText id="usua_login"
+						value="#{usuarioEditMB.bean.usua_login}"
+						pattern="#{messages['label.date.pattern']}" navigator="true"
+						showButtonPanel="true" locale="#{currentLocale}"
+						title="#{messages['usuario.alt.usua_login']}"
+						disabled="#{usuarioEditMB.updateMode}" maxlength="50" />
+					<p:message for="usua_login" />
+					
+					<h:outputLabel value="* #{messages['usuario.label.usua_cpf']}: "
+						for="usua_cpf" styleClass="text-input" />
+					<p:inputMask id="usua_cpf" value="#{usuarioEditMB.bean.usua_cpf}"
+						title="#{messages['usuario.alt.usua_cpf']}" maxlength="14"
+						mask="999.999.999-99" />
+					<p:message for="usua_cpf" />
+
+
+					<h:outputLabel value="* #{messages['usuario.label.usua_senha']}: "
+						for="usua_senha" styleClass="text-input"
+						rendered="#{!usuarioEditMB.updateMode}" />
+					<p:password id="usua_senha" feedback="false"
+						value="#{usuarioEditMB.bean.usua_senha}" maxlength="10"
+						title="#{messages['usuario.alt.usua_senha']}"
+						rendered="#{!usuarioEditMB.updateMode}" />
+					<p:message for="usua_senha" rendered="#{!usuarioEditMB.updateMode}" />
+
+					<h:outputLabel
+						value="* #{messages['usuario.label.usua_confirmasenha']}: "
+						for="usua_senha_confirma" styleClass="text-input"
+						rendered="#{!usuarioEditMB.updateMode}" />
+					<p:password id="usua_senha_confirma" feedback="false"
+						value="#{usuarioEditMB.confirmacaoSenha}" maxlength="10"
+						title="#{messages['usuario.alt.usua_confirmasenha']}"
+						rendered="#{!usuarioEditMB.updateMode}" />
+					<p:message for="usua_senha_confirma"
+						rendered="#{!usuarioEditMB.updateMode}" />
+
+					<h:outputLabel value="* #{messages['usuario.label.usua_perfil']}: "
+						for="usua_perfil" styleClass="text-input" />
+					<h:selectOneMenu id="usua_perfil"
+						value="#{usuarioEditMB.bean.usua_perfil}" required="true"
+						requiredMessage="#{messages['mensagem.requerido']}">
+						<f:converter converterId="perfilConverter" />
+						<f:selectItem itemValue="#{null}" itemLabel="" />
+						<f:selectItems value="#{usuarioEditMB.ativos}" var="perfil"
+							itemLabel="#{perfil.perf_descricao}" itemValue="#{perfil}" />
+					</h:selectOneMenu>
+					<p:message for="usua_perfil" />
+					
+					<h:outputLabel value="#{messages['usuario.label.usua_telefones']}: "
+						for="usua_telefones" styleClass="text-input" />
+					<h:inputText id="usua_telefones" value="#{usuarioEditMB.bean.usua_telefones}"
+						title="#{messages['usuario.alt.usua_telefones']}" maxlength="50" />
+					<p:message for="usua_telefones" />
+
+					<h:outputLabel value="#{messages['modalidade.label.ativo']}: "
+						for="usua_ativo" styleClass="text-input" />
+					<h:selectBooleanCheckbox id="usua_ativo"
+						value="#{usuarioEditMB.ativo}" />
+					<p:message for="usua_ativo" />
+
+				</h:panelGrid>
+			</p:fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>
