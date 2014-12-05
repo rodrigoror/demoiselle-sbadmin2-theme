@@ -1,4 +1,11 @@
 <beans xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/beans_1_0.xsd">
-
+  <!-- 
+  <class>br.gov.sp.sjc.fadenp2.security.Autenticador</class>
+  <class>br.gov.sp.sjc.fadenp2.security.Autorizador</class>
+  -->
+  <!--
+		<class>br.gov.frameworkdemoiselle.transaction.JPATransaction</class>
+		<class>br.gov.frameworkdemoiselle.transaction.JTATransaction</class>
+		-->
 </beans>
