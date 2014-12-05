@@ -1,0 +1,55 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+	<ui:define name="body">
+
+		<div align="center">
+
+			<f:view>
+
+				<div align="left" style="width: 800px;">
+					<p:messages id="msg" closable="true" globalOnly="true" />
+				</div>
+
+				<h:form id="form">
+
+					<p:toolbar style="width: 790px;">
+						<p:toolbarGroup align="center">
+							<h:outputText id="tituloLogin" value="Alterar senha de acesso" />
+						</p:toolbarGroup>
+						<p:toolbarGroup align="right">
+						<!--Utilizando o 1_4 que é o mesmo para todos os usuários-->
+						<p:commandButton title="Ajuda"
+								icon="ui-icon-help" onclick="abreAjuda('1_4')" 
+								type="button" immediate="true" ajax="false" />
+						</p:toolbarGroup>
+					</p:toolbar>
+
+					<p:panel style="width: 790px;">
+						<h:panelGrid columns="3">
+							<h:outputLabel value="Senha atual:" for="senha_atual" styleClass="text-input" />
+							<p:password id="senha_atual" feedback="false" value="#{usuarioAlterarSenhaMB.senhaAtual}" maxlength="10" />
+							<p:message for="senha_atual" />
+
+							<h:outputLabel value="Nova senha:" for="nova_senha" styleClass="text-input" />
+							<p:password id="nova_senha" feedback="true" value="#{usuarioAlterarSenhaMB.novaSenha}" maxlength="10" />
+							<p:message for="nova_senha" />
+
+							<h:outputLabel value="Repita a nova senha:" for="nova_senha_repeticao" styleClass="text-input" />
+							<p:password id="nova_senha_repeticao" feedback="false" value="#{usuarioAlterarSenhaMB.novaSenhaRepeticao}" maxlength="10" />
+							<p:message for="nova_senha_repeticao" />
+						</h:panelGrid>
+					</p:panel>
+
+					<br />
+
+					<p:commandButton id="botaoAlterar" value="Alterar" action="#{usuarioAlterarSenhaMB.alterarSenha()}" ajax="false" />
+
+				</h:form>
+			</f:view>
+
+		</div>
+
+	</ui:define>
+</ui:composition>

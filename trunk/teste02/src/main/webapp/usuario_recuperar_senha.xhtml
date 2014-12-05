@@ -1,0 +1,47 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<div align="center">
+			<f:view>
+			<h:panelGrid columns="2">
+				<h1 style="text-align:center;">Recuperar Senha</h1>	
+				<h3>Nome: #{usuarioRecuperarSenhaMB.nomePessoa}</h3>	
+				<h3>CPF: #{usuarioRecuperarSenhaMB.cpfPessoa}</h3>	
+			</h:panelGrid>
+				<div align="left" style="width: 800px;">
+					<p:messages id="msg" closable="true" globalOnly="true" />
+				</div>
+
+				<h:form id="form">
+					<p:toolbar style="width: 790px;">
+						<p:toolbarGroup>
+							<p:commandButton value="#{messages['button.back']}" 
+								action="#{usuarioRecuperarSenhaMB.getPreviousView}" 
+								ajax="false"
+								imediate="true">
+								<f:param name="id" value="#{usuarioRecuperarSenhaMB.id}" />
+							</p:commandButton>
+						</p:toolbarGroup>
+						<p:toolbarGroup align="right">
+							<p:commandButton title="Ajuda"
+								icon="ui-icon-help" onclick="abreAjuda('2_11')" 
+								type="button" immediate="true" ajax="false" />
+						</p:toolbarGroup>
+					</p:toolbar>
+
+					<p:panel style="width: 790px;">
+						<p:commandButton 
+								id="botaoGerar" 
+								value="#{messages['usuario.label.gerar']}" 
+								action="#{usuarioRecuperarSenhaMB.getGerarSenha}" 
+								ajax="false" >
+								<f:param name="id" value="#{usuarioRecuperarSenhaMB.id}" />
+						</p:commandButton>
+					</p:panel>
+				</h:form>
+			</f:view>
+		</div>
+	</ui:define>
+</ui:composition>

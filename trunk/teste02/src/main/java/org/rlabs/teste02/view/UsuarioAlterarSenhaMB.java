@@ -1,4 +1,4 @@
-package org.rlabs.teste02.view;
+/*package org.rlabs.teste02.view;
 
 import javax.inject.Inject;
 
@@ -12,8 +12,7 @@ import br.gov.frameworkdemoiselle.security.RequiredRole;
 import br.gov.frameworkdemoiselle.security.SecurityContext;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.AbstractPageBean;
-import br.gov.sp.sjc.fadenp2.business.UsuarioBC;
-import br.gov.sp.sjc.fadenp2.exception.BusinessException;
+import org.rlabs.teste02.exception.BusinessException;
 
 @ViewController
 @PreviousView("/index.jsf")
@@ -75,3 +74,4 @@ public class UsuarioAlterarSenhaMB extends AbstractPageBean {
 	}
 
 }
+*/

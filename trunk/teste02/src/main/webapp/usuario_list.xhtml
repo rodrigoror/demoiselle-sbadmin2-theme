@@ -1,0 +1,112 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/main.xhtml">
+
+	<ui:define name="body" acceptcharset="ISO-8859-1" lang="pt_BR">
+		<h:form>
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton title="#{messages['button.new']}"
+						icon="ui-icon-document"
+						action="#{usuarioListMB.getNextView}"
+						actionListener="#{usuarioListMB.clear}" ajax="false" />
+
+					<p:commandButton title="#{messages['button.delete']}"
+						icon="ui-icon-trash" onclick="confirmation.show()" type="button"
+						immediate="true" ajax="false" />
+
+					<p:confirmDialog message="#{messages['label.confirm.delete']}"
+						showEffect="bounce" hideEffect="explode"
+						header="#{messages['label.dialog.alert']}!" severity="alert"
+						widgetVar="confirmation">
+
+						<h:commandButton value="#{messages['button.dialog.yes']}"
+							action="#{usuarioListMB.deleteSelection}"
+							actionListener="#{usuarioListMB.clear}" />
+						<h:commandButton value="#{messages['button.dialog.no']}"
+							onclick="confirmation.hide()" type="button" />
+					</p:confirmDialog>
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:commandButton title="Ajuda"
+						icon="ui-icon-help" onclick="abreAjuda('2_1')" 
+						type="button" immediate="true" ajax="false" />
+				</p:toolbarGroup>
+					
+			</p:toolbar>
+			
+			<div align="left" style="width: 800px;">
+				<p:messages id="msg" closable="true" globalOnly="true" />
+			</div>
+
+			<p:dataTable id="list" var="bean"
+					value="#{usuarioListMB.resultList}"
+					emptyMessage="#{messages['datatable.empty']}"
+					filteredValue="#{pessoaListMB.filteredPessoas}"
+					>
+				<f:facet name="header">#{messages['usuario.list.table.title']}</f:facet>
+				<p:column style="width:5%;">
+					<h:selectBooleanCheckbox
+						value="#{usuarioListMB.selection[bean.usua_id]}" />
+				</p:column>
+				<p:column style="width:5%;" sortBy="#{bean.usua_id}">
+					<f:facet name="header">#{messages['usuario.label.usua_id']}</f:facet>
+					<h:outputText value="#{bean.usua_id}" />
+				</p:column>
+				<p:column sortBy="#{bean.usua_nome}"
+					filterBy="#{bean.usua_nome}"
+					filterMatchMode="contains">
+					<f:facet name="header">#{messages['usuario.label.usua_nome']}</f:facet>
+					<h:commandLink action="#{usuarioListMB.getNextView}"
+						actionListener="#{usuarioListMB.clear}">
+						<h:outputText value="#{bean.usua_nome}" />
+						<f:param name="id" value="#{bean.usua_id}" />
+					</h:commandLink>
+				</p:column>
+				<p:column sortBy="#{bean.usua_login}"
+					filterBy="#{bean.usua_login}"
+					filterMatchMode="contains">
+					<f:facet name="header">#{messages['usuario.label.usua_login']}</f:facet>
+					<h:commandLink action="#{usuarioListMB.getNextView}"
+						actionListener="#{usuarioListMB.clear}">
+						<h:outputText value="#{bean.usua_login}" />
+						<f:param name="id" value="#{bean.usua_id}" />
+					</h:commandLink>
+				</p:column>
+				<p:column sortBy="#{bean.usua_cpf}">
+					<f:facet name="header">#{messages['usuario.label.usua_cpf']}</f:facet>
+					<h:commandLink action="#{usuarioListMB.getNextView}"
+						actionListener="#{usuarioListMB.clear}">
+						<h:outputText value="#{bean.cpfFormatado}" />
+						<f:param name="id" value="#{bean.usua_id}" />
+					</h:commandLink>
+				</p:column>
+				<p:column sortBy="#{bean.usua_perfil.perf_descricao}"
+				filterBy="#{bean.usua_perfil.perf_descricao}"
+					filterMatchMode="contains">
+					<f:facet name="header">#{messages['usuario.label.usua_perfil']}</f:facet>
+					<h:commandLink action="#{usuarioListMB.getNextView}"
+						actionListener="#{usuarioListMB.clear}">
+						<h:outputText value="#{bean.usua_perfil.perf_descricao}" />
+						<f:param name="id" value="#{bean.usua_id}" />
+					</h:commandLink>
+				</p:column>
+				<p:column sortBy="#{bean.usua_ativo}" style="text-align:center">
+					<f:facet name="header">#{messages['modalidade.label.ativo']}</f:facet>
+					<h:graphicImage url="images/ativo2.png" rendered="#{bean.usua_ativo}" title="#{bean.userAtivo}"/>
+				    <h:graphicImage url="images/inativo.png" rendered="#{!bean.usua_ativo}" title="#{bean.userAtivo}" /> 
+				</p:column>	
+				<p:column style="text-align:center">
+					<f:facet name="header">#{messages['usuario.label.alterasenha']}</f:facet>
+					<h:commandLink action="#{usuarioListMB.getRecuperarSenha}" actionListener="#{usuarioListMB.clear}">
+						<h:outputText value="#{messages['usuario.label.alterasenha']}" />
+						<f:param name="id" value="#{bean.usua_id}" />
+					</h:commandLink> 
+				</p:column>	
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>

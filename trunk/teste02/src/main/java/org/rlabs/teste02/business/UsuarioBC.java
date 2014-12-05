@@ -10,14 +10,14 @@ import br.gov.frameworkdemoiselle.stereotype.BusinessController;
 import br.gov.frameworkdemoiselle.template.DelegateCrud;
 import br.gov.frameworkdemoiselle.transaction.Transactional;
 import br.gov.frameworkdemoiselle.util.ResourceBundle;
-import br.gov.sp.sjc.fadenp2.domain.Equipe;
-import br.gov.sp.sjc.fadenp2.domain.Usuario;
-import br.gov.sp.sjc.fadenp2.exception.BusinessException;
-import br.gov.sp.sjc.fadenp2.persistence.EquipeDAO;
-import br.gov.sp.sjc.fadenp2.persistence.UsuarioDAO;
-import br.gov.sp.sjc.fadenp2.util.AcaoEnum;
-import br.gov.sp.sjc.fadenp2.util.EntidadeEnum;
-import br.gov.sp.sjc.fadenp2.util.SenhaUtil;
+
+import org.rlabs.teste02.domain.Usuario;
+import org.rlabs.teste02.exception.BusinessException;
+
+import org.rlabs.teste02.persistence.UsuarioDAO;
+import org.rlabs.teste02.util.AcaoEnum;
+import org.rlabs.teste02.util.EntidadeEnum;
+import org.rlabs.teste02.util.SenhaUtil;
 import org.rlabs.teste02.view.CredenciaisMB;
 
 *//**
