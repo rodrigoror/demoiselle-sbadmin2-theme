@@ -10,12 +10,29 @@
 
 		<class>org.rlabs.teste02.domain.Bookmark</class>
 		<class>org.rlabs.teste02.domain.Menu</class>
+		<class>org.rlabs.teste02.domain.SubMenu</class>
+		<class>org.rlabs.teste02.domain.Company</class>
+		<class>org.rlabs.teste02.domain.Log</class>
+		<class>org.rlabs.teste02.domain.Perfil</class>
+		<class>org.rlabs.teste02.domain.Users</class>
 
 		<properties>
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="false" />
+			<!-- Opcoes hibernate.hbm2ddl.auto: validate, update, create, create-drop -->
 			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
+			
+			<!--
+			<property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+			<propertyname="hibernate.hbm2ddl.auto" value="update"/>
+			-->
+
+			<!-- 
+			<property name="eclipselink.logging.level" value="FINE" />
+			<property name="eclipselink.ddl-generation" value="create-tables" />
+			<property name="eclipselink.ddl-generation.output-mode" value="database" />
+			-->
 		</properties>
 	</persistence-unit>
 
