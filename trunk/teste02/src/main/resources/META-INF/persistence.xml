@@ -12,6 +12,7 @@
 		<class>org.rlabs.teste02.domain.Menu</class>
 		<class>org.rlabs.teste02.domain.SubMenu</class>
 		<class>org.rlabs.teste02.domain.Company</class>
+		<class>org.rlabs.teste02.domain.CompanyEnd</class>
 		<class>org.rlabs.teste02.domain.Log</class>
 		<class>org.rlabs.teste02.domain.Perfil</class>
 		<class>org.rlabs.teste02.domain.Users</class>

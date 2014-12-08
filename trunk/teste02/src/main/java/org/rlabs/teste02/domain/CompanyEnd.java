@@ -35,7 +35,7 @@ public class CompanyEnd implements Serializable{
 	 */
 	@Id
 	@GeneratedValue(strategy = SEQUENCE)
-	@Column(name="cend_id", nullable=false)
+	@Column(name="cend_id")
 	private Long cend_id;
 	
 	@Column(name="cend_cep",nullable=false)

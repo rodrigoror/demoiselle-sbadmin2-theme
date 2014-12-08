@@ -54,5 +54,25 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- <dependency>
+	        <groupId>br.gov.frameworkdemoiselle.component.audit</groupId>
+	        <artifactId>demoiselle-audit-auditors-persistence</artifactId>
+	        <version>1.0.3</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>br.gov.frameworkdemoiselle.component.audit</groupId>
+	        <artifactId>demoiselle-audit-auditors-view</artifactId>
+	        <version>1.0.3</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>br.gov.frameworkdemoiselle.component.audit</groupId>
+	        <artifactId>demoiselle-audit-processors-rest</artifactId>
+	        <version>1.0.3</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>br.gov.frameworkdemoiselle.component.audit</groupId>
+	        <artifactId>demoiselle-audit-processors-mongo</artifactId>
+	        <version>1.0.3</version>
+	    </dependency> -->
 	</dependencies>
 </project>

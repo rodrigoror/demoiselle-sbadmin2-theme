@@ -1,5 +1,7 @@
 package org.rlabs.teste02.domain;
 
+import static javax.persistence.GenerationType.SEQUENCE;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -7,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Transient;
 
 import javax.persistence.Id;
@@ -33,44 +36,37 @@ public class Log implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @uml.property  name="log_id"
 	 */
 	@Id
 	//@GeneratedValue(generator="sq_log")
+	@GeneratedValue(strategy = SEQUENCE)
 	@Column (name="log_id")
 	private Long log_id;
 
 	/**
-	 * @uml.property  name="log_acao"
-	 * @uml.associationEnd  
 	 */
 	@Column (name="log_acao", nullable=false, columnDefinition="varchar2(50)") //,CONSTRAINT cons_log_acao CHECK (log_acao IN ('CADASTRADO', 'DELETADO', 'ALTERADO','PESQUISADO')),")
 	@Enumerated (EnumType.STRING)
 	private AcaoEnum log_acao;
 
 	/**
-	 * @uml.property  name="log_entidade"
-	 * @uml.associationEnd  
 	 */
 	@Column (name="log_entidade", nullable=false, columnDefinition = "varchar2(50)") //,CONSTRAINT cons_log_entidade CHECK (log_entidade IN ('SISTEMA', 'ERRO', 'USUARIO', 'PERFIL')),")
 	@Enumerated (EnumType.STRING)
 	private EntidadeEnum log_entidade;
 	
 	/**
-	 * @uml.property  name="log_data"
 	 */
 	@Column (name="log_data", nullable=false)
 	@Temporal(value=TemporalType.TIMESTAMP)
 	private Date log_data;
 	
 	/**
-	 * @uml.property  name="log_usuario"
 	 */
 	@Column(name="log_usuario", length=50)
 	private String log_usuario;
 
 	/**
-	 * @uml.property  name="log_dados"
 	 */
 	@Column(name="log_dados", length=4000)
 	private String log_dados;
