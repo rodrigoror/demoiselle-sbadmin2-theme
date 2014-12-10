@@ -29,8 +29,8 @@ import org.hibernate.validator.constraints.NotBlank;
  * @author rodrigo.ramos
  */
 @Entity
-@Table(name="USERS"/*, schema="SCHEMA"*/)
-public class Users implements Serializable{
+@Table(name="USERSLOGIN"/*, schema="SCHEMA"*/)
+public class UsersLogin implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -39,7 +39,7 @@ public class Users implements Serializable{
 	 */
 	@Id
 	@GeneratedValue(strategy = SEQUENCE)
-	@Column(name="user_id", nullable=false)
+	@Column(name="user_id")
 	private Long user_id;
 	
 	/**
@@ -136,7 +136,7 @@ public class Users implements Serializable{
     @JoinColumn(name="comp_id", nullable=false)	
 	private Company user_company;
 	
-	public Users() {
+	public UsersLogin() {
 		super();
 	}
 
@@ -155,7 +155,7 @@ public class Users implements Serializable{
 	 * @param user_perfil
 	 * @param user_company
 	 */
-	public Users(String user_login, String user_cpf, String user_senha,
+	public UsersLogin(String user_login, String user_cpf, String user_senha,
 			String user_susep, String user_nome, String user_telefone,
 			Boolean user_ativo, Boolean user_excluido, String user_ipUpdate,
 			String user_loginUpdate, Date user_dtUpdate, Perfil user_perfil,

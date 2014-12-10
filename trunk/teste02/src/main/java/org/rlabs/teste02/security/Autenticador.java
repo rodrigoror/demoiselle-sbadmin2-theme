@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.rlabs.teste02.business.LogBC;
 import org.rlabs.teste02.business.UsersBC;
-import org.rlabs.teste02.domain.Users;
+import org.rlabs.teste02.domain.UsersLogin;
 import org.rlabs.teste02.util.AcaoEnum;
 import org.rlabs.teste02.util.EntidadeEnum;
 import org.slf4j.Logger;
@@ -56,7 +56,7 @@ public class Autenticador implements Authenticator{
 	@Override
 	public void authenticate() {
 
-		Users usuario = usuarioBC.getByLogin(credenciais.getLogin(), credenciais.getSenha());
+		UsersLogin usuario = usuarioBC.getByLogin(credenciais.getLogin(), credenciais.getSenha());
 		if (usuario != null) {
 			credenciais.setId(usuario.getUser_id());
 			credenciais.setNome(usuario.getUser_nome());

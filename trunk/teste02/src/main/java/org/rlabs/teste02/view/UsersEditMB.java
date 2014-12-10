@@ -6,11 +6,11 @@ import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.AbstractEditPageBean;
 import br.gov.frameworkdemoiselle.transaction.Transactional;
 import org.rlabs.teste02.business.UsersBC;
-import org.rlabs.teste02.domain.Users;
+import org.rlabs.teste02.domain.UsersLogin;
 
 @ViewController
 @PreviousView("./users_list.jsf")
-public class UsersEditMB extends AbstractEditPageBean<Users, Long> {
+public class UsersEditMB extends AbstractEditPageBean<UsersLogin, Long> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -39,7 +39,7 @@ public class UsersEditMB extends AbstractEditPageBean<Users, Long> {
 	}
 	
 		@Override
-	protected Users handleLoad(Long arg0) {
+	protected UsersLogin handleLoad(Long arg0) {
 		return this.usersBC.load(getId());
 	}
 

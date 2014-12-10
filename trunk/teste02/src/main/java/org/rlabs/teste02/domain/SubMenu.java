@@ -29,7 +29,7 @@ public class SubMenu implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = SEQUENCE)
-	@Column(name="smen_id", nullable=false)
+	@Column(name="smen_id")
 	private Long smen_id;
 	
 	@Column(name="smen_classe")

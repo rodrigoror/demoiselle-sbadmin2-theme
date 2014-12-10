@@ -33,7 +33,7 @@ public class Perfil implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = SEQUENCE)
-	@Column(name="perf_id", nullable=false)
+	@Column(name="perf_id")
 	private Long perf_id;
 	
 	@Column (name="perf_descricao", nullable=false, length=50)
@@ -61,7 +61,7 @@ public class Perfil implements Serializable{
 	private Date perf_dtUpdate;
 	
 	@OneToMany(mappedBy="user_perfil", fetch=FetchType.LAZY)
-    private Set<Users> perfilUsers;
+    private Set<UsersLogin> perfilUsers;
 
 	/**
 	 * 
@@ -208,14 +208,14 @@ public class Perfil implements Serializable{
 	/**
 	 * @return the perfilUsers
 	 */
-	public Set<Users> getPerfilUsers() {
+	public Set<UsersLogin> getPerfilUsers() {
 		return perfilUsers;
 	}
 
 	/**
 	 * @param perfilUsers the perfilUsers to set
 	 */
-	public void setPerfilUsers(Set<Users> perfilUsers) {
+	public void setPerfilUsers(Set<UsersLogin> perfilUsers) {
 		this.perfilUsers = perfilUsers;
 	}
 	

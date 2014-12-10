@@ -13,7 +13,7 @@ import br.gov.frameworkdemoiselle.util.ResourceBundle;
 
 import org.rlabs.teste02.domain.Company;
 import org.rlabs.teste02.domain.Perfil;
-import org.rlabs.teste02.domain.Users;
+import org.rlabs.teste02.domain.UsersLogin;
 import org.rlabs.teste02.exception.BusinessException;
 import org.rlabs.teste02.persistence.UsersDAO;
 import org.rlabs.teste02.util.AcaoEnum;
@@ -27,7 +27,7 @@ import org.slf4j.Logger;
  * @author  rodrigoror@gmail.com
  */
 @BusinessController
-public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
+public class UsersBC extends DelegateCrud<UsersLogin, Long, UsersDAO> {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -51,7 +51,7 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 	 */
 	@Override
 	@Transactional
-	public Users insert(Users bean) {
+	public UsersLogin insert(UsersLogin bean) {
 		//Validacoes:
 		if (this.getDelegate().getByLogin(bean.getUser_login().toLowerCase(), false) != null) {
 			throw new BusinessException(resourceBundle.getString("usuariobc.insert.erro.existe"));
@@ -76,7 +76,7 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 	 * @param confirmacaoSenha Confirmacao da senha
 	 */
 	@Transactional
-	public void insert(Users bean, String confirmacaoSenha) {
+	public void insert(UsersLogin bean, String confirmacaoSenha) {
 		//Validacoes:
 		if (this.getDelegate().getByLogin(bean.getUser_login().toLowerCase(), false) != null) {
 			throw new BusinessException(resourceBundle.getString("usuariobc.insert.erro.existe"));
@@ -104,9 +104,9 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 	 */
 	@Transactional
 	@Override
-	public Users update(Users bean) {
+	public UsersLogin update(UsersLogin bean) {
 		//Validacoes:
-		Users usuario = this.getDelegate().getByLogin(bean.getUser_login().toLowerCase(), false);
+		UsersLogin usuario = this.getDelegate().getByLogin(bean.getUser_login().toLowerCase(), false);
 		if (usuario != null) {
 			if (!usuario.getUser_id().equals(bean.getUser_id())) {
 				throw new BusinessException(resourceBundle.getString("mensagem.registronaopodesercriado", "Outro usuário com o mesmo e-mail"));
@@ -129,7 +129,7 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 	@Override
 	public void delete(Long id) {
 		//Auditoria:
-		Users usuario = this.load(id);
+		UsersLogin usuario = this.load(id);
 		logBC.insert(AcaoEnum.EXCLUIU, 
 				EntidadeEnum.USERS, 
 				usuario.getDadosAuditoria());
@@ -147,8 +147,8 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 	 * @return Usuario
 	 */
 	@Transactional
-	public Users getByLogin(String login, String senha) {
-		Users usuario = null;
+	public UsersLogin getByLogin(String login, String senha) {
+		UsersLogin usuario = null;
 		usuario = this.getDelegate().getByLogin(login, SenhaUtil.sha256(senha));
 		return usuario;
 	}
@@ -159,8 +159,8 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 	 * @return Usuario
 	 */
 	@Transactional
-	public Users getByLogin(String login) {
-		Users usuario = null;
+	public UsersLogin getByLogin(String login) {
+		UsersLogin usuario = null;
 		usuario = this.getDelegate().getByLogin(login, true);
 		return usuario;
 	}
@@ -170,7 +170,7 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 	 * @return Lista de usuarios ativos
 	 */
 	@Transactional
-	public List<Users> getAtivos(){
+	public List<UsersLogin> getAtivos(){
 		return this.getDelegate().getAtivos();
 	}
 	
@@ -181,7 +181,7 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 	 * @return Lista de usuarios
 	 */
 	@Transactional
-	public List<Users>getByPerfil(){
+	public List<UsersLogin>getByPerfil(){
 		if(isAdministrator()){
 			return findAll();
 		}else{
@@ -195,7 +195,7 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 	 * @return Lista de usuarios
 	 */
 	@Transactional
-	public List<Users>getByPerfil(String codigoPerfil){
+	public List<UsersLogin>getByPerfil(String codigoPerfil){
 		return this.getDelegate().getByPerfil(codigoPerfil);
 	}	
 
@@ -208,7 +208,7 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 	 */
 	@Transactional
 	public void setNovaSenha(String login, String senhaAtual, String novaSenha, String repeticaoNovaSenha) {
-		Users usuario;
+		UsersLogin usuario;
 		usuario = this.getDelegate().getByLogin(login, SenhaUtil.sha256(senhaAtual));
 		if (usuario != null) {
 			if (novaSenha.equals(repeticaoNovaSenha)) {
@@ -236,7 +236,7 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 	 */
 	@Transactional
 	public void setForceNovaSenha(String login, String novaSenha) {
-		Users usuario;
+		UsersLogin usuario;
 		usuario = this.getDelegate().getByLogin(login,true);
 		if (usuario != null) {
 			checkSenhaObedecePolitica(novaSenha);
@@ -327,7 +327,7 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 	public void load() {
 		if (findAll().isEmpty()) {
 			//insert(new Menu("Classe", "Link","Permissao","Nome","Parent"));
-			insert(new Users("root@gmail.com",
+			insert(new UsersLogin("root@gmail.com",
 							"12345678909",
 							"123456789",
 							"10.0025038",
