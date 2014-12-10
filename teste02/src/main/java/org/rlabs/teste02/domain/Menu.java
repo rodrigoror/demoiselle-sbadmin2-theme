@@ -33,7 +33,7 @@ public class Menu implements Serializable{
 	 */
 	@Id
 	@GeneratedValue(strategy = SEQUENCE)
-	@Column(name="menu_id", nullable=false)
+	@Column(name="menu_id")
 	private Long menu_id;
 	
 	@Column(name="menu_classe", length=25)

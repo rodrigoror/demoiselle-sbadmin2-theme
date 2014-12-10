@@ -33,7 +33,7 @@ public class Company implements Serializable{
 	 */
 	@Id
 	@GeneratedValue(strategy = SEQUENCE)
-	@Column(name="comp_id", nullable=false)
+	@Column(name="comp_id")
 	private Long comp_id;
 	
 	@Column(name="comp_cnpj", nullable=false)
@@ -74,7 +74,7 @@ public class Company implements Serializable{
     private Set<CompanyEnd> companyEnds;
 	
 	@OneToMany(mappedBy="user_company")
-    private Set<Users> companyUsers;
+    private Set<UsersLogin> companyUsers;
 
 	public Company() {
 		super();
@@ -117,14 +117,14 @@ public class Company implements Serializable{
 	/**
 	 * @return the companyUsers
 	 */
-	public Set<Users> getCompanyUsers() {
+	public Set<UsersLogin> getCompanyUsers() {
 		return companyUsers;
 	}
 
 	/**
 	 * @param companyUsers the companyUsers to set
 	 */
-	public void setCompanyUsers(Set<Users> companyUsers) {
+	public void setCompanyUsers(Set<UsersLogin> companyUsers) {
 		this.companyUsers = companyUsers;
 	}
 

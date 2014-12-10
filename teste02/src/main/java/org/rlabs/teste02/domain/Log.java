@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Transient;
 
 import javax.persistence.Id;
