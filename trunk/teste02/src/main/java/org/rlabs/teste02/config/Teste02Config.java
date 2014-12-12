@@ -4,11 +4,11 @@ import br.gov.frameworkdemoiselle.annotation.Name;
 import br.gov.frameworkdemoiselle.configuration.Configuration;
 
 /**
- * Configuracoes do projeto FADENP
- * @author equipe
+ * Configuracoes do projeto
+ * @author Equipe
  * @see http://demoiselle.sourceforge.net/docs/framework/reference/2.3.4/html/configuracao.html#d0e668
  */
-@Configuration(resource="fadenp")
+@Configuration(resource="teste02")
 public class Teste02Config {
 
 	@Name("email.remetente")
