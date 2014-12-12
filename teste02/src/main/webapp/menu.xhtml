@@ -24,16 +24,24 @@
 			<a class="#{menuListMB.active}" href="#{item.menu_link}" target="#{item.menu_parent}"> 
 				<i class="#{item.menu_classe}"></i> 
 				<span>#{item.menu_nome}</span>
-				</a><c:if test="#{subMenuListMB.active}"><span class="fa arrow"></span>
-					<ul class="nav nav-second-level">
-						<c:forEach var="item2" items="#{subMenuListMB.resultList}">
-							 <li>
-			                    <a href="#{item2.menu_link}" target="#{item.menu_parent}">#{item2.menu_nome}</a>
-			                </li>
-						</c:forEach>
-					</ul>
-            		<!-- /.nav-second-level -->
-				</c:if>
+			
+			<c:choose>
+	   			<c:when test="#{subMenuListMB.isExists}"> <!-- if condition REFAZER ESTE TESTE -->
+					<span class="fa arrow"></span>
+					</a>
+						<ul class="nav nav-second-level">
+							<c:forEach var="item2" items="#{subMenuListMB.resultList}">
+								 <li>
+				                    <a href="#{item2.menu_link}" target="#{item.menu_parent}">#{item2.menu_nome}</a>
+				                </li>
+							</c:forEach>
+						</ul>
+				</c:when>
+	            <!-- /.nav-second-level -->
+	            <c:otherwise> <!-- else condition -->
+	            	</a>
+	            </c:otherwise>
+			</c:choose>
 		 </li>
         </c:forEach>
 	     <!-- /.Menu dinamico -->

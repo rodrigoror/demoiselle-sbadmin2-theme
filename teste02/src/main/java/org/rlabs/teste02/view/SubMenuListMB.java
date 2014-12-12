@@ -39,5 +39,13 @@ public class SubMenuListMB extends AbstractListPageBean<SubMenu, Long> {
 		}
 		return getPreviousView();
 	}
-
+	
+	public String getActive(){
+		return "active";
+	}
+	
+	//TODO Verificar se o menu possue submenu para que serja possivel criar o submenu
+	public Boolean isExists(){
+		return true;
+	}
 }

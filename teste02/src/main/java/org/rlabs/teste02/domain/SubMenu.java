@@ -32,10 +32,6 @@ public class SubMenu implements Serializable{
 	@Column(name="smen_id")
 	private Long smen_id;
 	
-	@Column(name="smen_classe")
-	@Length(max=25)
-	private String smen_classe;
-	
 	@Column(name="smen_link", nullable=false)
 	@Length(max=100)
 	@NotNull
@@ -71,20 +67,6 @@ public class SubMenu implements Serializable{
 	 */
 	public void setSmen_id(Long smen_id) {
 		this.smen_id = smen_id;
-	}
-
-	/**
-	 * @return the smen_classe
-	 */
-	public String getSmen_classe() {
-		return smen_classe;
-	}
-
-	/**
-	 * @param smen_classe the smen_classe to set
-	 */
-	public void setSmen_classe(String smen_classe) {
-		this.smen_classe = smen_classe;
 	}
 
 	/**
@@ -162,7 +144,7 @@ public class SubMenu implements Serializable{
 	 */
 	@Override
 	public String toString() {
-		return "SubMenu [smen_id=" + smen_id + ", smen_classe=" + smen_classe
+		return "SubMenu [smen_id=" + smen_id 
 				+ ", smen_link=" + smen_link + ", smen_permissao="
 				+ smen_permissao + ", smen_nome=" + smen_nome
 				+ ", smen_parent=" + smen_parent + ", smen_menu=" + smen_menu.getMenu_nome()
@@ -170,24 +152,22 @@ public class SubMenu implements Serializable{
 	}
 
 	/**
-	 * 
+	 * Construtor
 	 */
 	public SubMenu() {
 		super();
 	}
 
 	/**
-	 * @param smen_classe
 	 * @param smen_link
 	 * @param smen_permissao
 	 * @param smen_nome
 	 * @param smen_parent
 	 * @param smen_menu
 	 */
-	public SubMenu(String smen_classe, String smen_link, String smen_permissao,
+	public SubMenu(String smen_link, String smen_permissao,
 			String smen_nome, String smen_parent, Menu smen_menu) {
 		super();
-		this.smen_classe = smen_classe;
 		this.smen_link = smen_link;
 		this.smen_permissao = smen_permissao;
 		this.smen_nome = smen_nome;
