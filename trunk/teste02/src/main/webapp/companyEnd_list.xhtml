@@ -1,0 +1,144 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<h:form>
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton title="#{messages['button.new']}" icon="ui-icon-document" action="#{companyEndListMB.getNextView}"
+						actionListener="#{companyEndListMB.clear}" ajax="false" />
+
+					<p:commandButton title="#{messages['button.delete']}" icon="ui-icon-trash" onclick="confirmation.show()"
+						type="button" immediate="true" ajax="false" />
+
+					<p:confirmDialog message="#{messages['label.confirm.delete']}" showEffect="bounce" hideEffect="explode"
+						header="#{messages['label.dialog.alert']}!" severity="alert" widgetVar="confirmation">
+
+						<h:commandButton value="#{messages['button.dialog.yes']}" action="#{companyEndListMB.deleteSelection}"
+							actionListener="#{companyEndListMB.clear}" />
+						<h:commandButton value="#{messages['button.dialog.no']}" onclick="confirmation.hide()" type="button" />
+					</p:confirmDialog>
+				</p:toolbarGroup>
+			</p:toolbar>
+			<p:dataTable id="list" var="bean" value="#{companyEndListMB.resultList}">
+				<f:facet name="header">#{messages['companyEnd.list.table.title']}</f:facet>
+				<p:column style="width:1%;">
+					<h:selectBooleanCheckbox value="#{companyEndListMB.selection[bean.cend_id]}"></h:selectBooleanCheckbox>
+				</p:column>
+				
+				<p:column style="width:5%;" sortBy="#{bean.cend_id}">
+					<f:facet name="header">#{messages['companyEnd.label.cend_id']}</f:facet>
+					<h:outputText value="#{bean.cend_id}" />
+				</p:column>
+						
+				<p:column sortBy="#{bean.cend_cep}">
+					<f:facet name="header">#{messages['companyEnd.label.cend_cep']}</f:facet>
+					<h:commandLink action="#{companyEndListMB.getNextView}" actionListener="#{companyEndListMB.clear}">
+						<h:outputText value="#{bean.cend_cep}" />
+						<f:param name="id" value="#{bean.cend_id}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.cend_end}">
+					<f:facet name="header">#{messages['companyEnd.label.cend_end']}</f:facet>
+					<h:commandLink action="#{companyEndListMB.getNextView}" actionListener="#{companyEndListMB.clear}">
+						<h:outputText value="#{bean.cend_end}" />
+						<f:param name="id" value="#{bean.cend_id}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.cend_num}">
+					<f:facet name="header">#{messages['companyEnd.label.cend_num']}</f:facet>
+					<h:commandLink action="#{companyEndListMB.getNextView}" actionListener="#{companyEndListMB.clear}">
+						<h:outputText value="#{bean.cend_num}" />
+						<f:param name="id" value="#{bean.cend_id}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.cend_comp}">
+					<f:facet name="header">#{messages['companyEnd.label.cend_comp']}</f:facet>
+					<h:commandLink action="#{companyEndListMB.getNextView}" actionListener="#{companyEndListMB.clear}">
+						<h:outputText value="#{bean.cend_comp}" />
+						<f:param name="id" value="#{bean.cend_id}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.cend_bairro}">
+					<f:facet name="header">#{messages['companyEnd.label.cend_bairro']}</f:facet>
+					<h:commandLink action="#{companyEndListMB.getNextView}" actionListener="#{companyEndListMB.clear}">
+						<h:outputText value="#{bean.cend_bairro}" />
+						<f:param name="id" value="#{bean.cend_id}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.cend_cidade}">
+					<f:facet name="header">#{messages['companyEnd.label.cend_cidade']}</f:facet>
+					<h:commandLink action="#{companyEndListMB.getNextView}" actionListener="#{companyEndListMB.clear}">
+						<h:outputText value="#{bean.cend_cidade}" />
+						<f:param name="id" value="#{bean.cend_id}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.cend_estado}">
+					<f:facet name="header">#{messages['companyEnd.label.cend_estado']}</f:facet>
+					<h:commandLink action="#{companyEndListMB.getNextView}" actionListener="#{companyEndListMB.clear}">
+						<h:outputText value="#{bean.cend_estado}" />
+						<f:param name="id" value="#{bean.cend_id}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.cend_ativo}">
+					<f:facet name="header">#{messages['companyEnd.label.cend_ativo']}</f:facet>
+					<h:commandLink action="#{companyEndListMB.getNextView}" actionListener="#{companyEndListMB.clear}">
+						<h:outputText value="#{bean.cend_ativo}" />
+						<f:param name="id" value="#{bean.cend_id}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.cend_excluido}">
+					<f:facet name="header">#{messages['companyEnd.label.cend_excluido']}</f:facet>
+					<h:commandLink action="#{companyEndListMB.getNextView}" actionListener="#{companyEndListMB.clear}">
+						<h:outputText value="#{bean.cend_excluido}" />
+						<f:param name="id" value="#{bean.cend_id}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.cend_ipUpdate}">
+					<f:facet name="header">#{messages['companyEnd.label.cend_ipUpdate']}</f:facet>
+					<h:commandLink action="#{companyEndListMB.getNextView}" actionListener="#{companyEndListMB.clear}">
+						<h:outputText value="#{bean.cend_ipUpdate}" />
+						<f:param name="id" value="#{bean.cend_id}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.cend_loginUpdate}">
+					<f:facet name="header">#{messages['companyEnd.label.cend_loginUpdate']}</f:facet>
+					<h:commandLink action="#{companyEndListMB.getNextView}" actionListener="#{companyEndListMB.clear}">
+						<h:outputText value="#{bean.cend_loginUpdate}" />
+						<f:param name="id" value="#{bean.cend_id}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.cend_dtUpdate}">
+					<f:facet name="header">#{messages['companyEnd.label.cend_dtUpdate']}</f:facet>
+					<h:commandLink action="#{companyEndListMB.getNextView}" actionListener="#{companyEndListMB.clear}">
+						<h:outputText value="#{bean.cend_dtUpdate}" />
+						<f:param name="id" value="#{bean.cend_id}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.cend_company}">
+					<f:facet name="header">#{messages['companyEnd.label.cend_company']}</f:facet>
+					<h:commandLink action="#{companyEndListMB.getNextView}" actionListener="#{companyEndListMB.clear}">
+						<h:outputText value="#{bean.cend_company}" />
+						<f:param name="id" value="#{bean.cend_id}" />
+					</h:commandLink>
+				</p:column>
+						
+			</p:dataTable>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

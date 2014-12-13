@@ -1,18 +1,15 @@
 package org.rlabs.teste02.business;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import br.gov.frameworkdemoiselle.lifecycle.Startup;
+
 import br.gov.frameworkdemoiselle.stereotype.BusinessController;
 import br.gov.frameworkdemoiselle.template.DelegateCrud;
 import br.gov.frameworkdemoiselle.transaction.Transactional;
 import br.gov.frameworkdemoiselle.util.ResourceBundle;
 
-import org.rlabs.teste02.domain.Company;
-import org.rlabs.teste02.domain.Perfil;
 import org.rlabs.teste02.domain.Users;
 import org.rlabs.teste02.exception.BusinessException;
 import org.rlabs.teste02.persistence.UsersDAO;
@@ -54,7 +51,7 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 	public Users insert(Users bean) {
 		//Validacoes:
 		if (this.getDelegate().getByLogin(bean.getUser_login().toLowerCase(), false) != null) {
-			throw new BusinessException(resourceBundle.getString("usuariobc.insert.erro.existe"));
+			throw new BusinessException("Erro Existe");//throw new BusinessException(resourceBundle.getString("usuariobc.insert.erro.existe"));
 		}
 		checkSenhaObedecePolitica(bean.getUser_senha());
 		//Ajustes:
@@ -65,8 +62,7 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 		//Auditoria:
 		logBC.insert(AcaoEnum.CADASTROU, 
 				EntidadeEnum.USERS, 
-				bean.getUser_ipUpdate(), 
-				bean.getDadosAuditoria());
+				bean.getLog());
 		return bean;
 	}
 
@@ -79,10 +75,10 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 	public void insert(Users bean, String confirmacaoSenha) {
 		//Validacoes:
 		if (this.getDelegate().getByLogin(bean.getUser_login().toLowerCase(), false) != null) {
-			throw new BusinessException(resourceBundle.getString("usuariobc.insert.erro.existe"));
+			throw new BusinessException("Já Existe");//throw new BusinessException(resourceBundle.getString("usuariobc.insert.erro.existe"));
 		}
 		if (!bean.getUser_senha().equals(confirmacaoSenha)) {
-			throw new BusinessException(resourceBundle.getString("usuariobc.insert.erro.senha"));
+			throw new BusinessException("Senha Incorreta");//throw new BusinessException(resourceBundle.getString("usuariobc.insert.erro.senha"));
 		}
 		checkSenhaObedecePolitica(bean.getUser_senha());
 		//Ajustes:
@@ -94,7 +90,7 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 		logBC.insert(AcaoEnum.CADASTROU, 
 				EntidadeEnum.USERS, 
 				bean.getUser_ipUpdate(), 
-				bean.getDadosAuditoria());
+				bean.getLog());
 	}
 	
 	/**
@@ -109,7 +105,7 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 		Users usuario = this.getDelegate().getByLogin(bean.getUser_login().toLowerCase(), false);
 		if (usuario != null) {
 			if (!usuario.getUser_id().equals(bean.getUser_id())) {
-				throw new BusinessException(resourceBundle.getString("mensagem.registronaopodesercriado", "Outro usuário com o mesmo e-mail"));
+				throw new BusinessException("Outro usuário com o mesmo e-mail");//throw new BusinessException(resourceBundle.getString("mensagem.registronaopodesercriado", "Outro usuário com o mesmo e-mail"));
 			}
 		}
 		//Atualiza:
@@ -117,7 +113,7 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 		//Auditoria:
 		logBC.insert(AcaoEnum.ALTEROU, 
 				EntidadeEnum.USERS, 
-				bean.getDadosAuditoria());
+				bean.getLog());
 		return bean;
 	}
 	
@@ -132,7 +128,7 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 		Users usuario = this.load(id);
 		logBC.insert(AcaoEnum.EXCLUIU, 
 				EntidadeEnum.USERS, 
-				usuario.getDadosAuditoria());
+				usuario.getLog());
 		
 		//Exclusao:
 		//this.getDelegate().delete(id);
@@ -219,7 +215,7 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 				//Auditoria:
 				logBC.insert(AcaoEnum.ALTEROU, 
 						EntidadeEnum.USERS, 
-						usuario.getDadosAuditoria());
+						usuario.getLog());
 			} else {
 				throw new BusinessException(resourceBundle.getString("usuariobc.insert.erro.senha"));
 			}
@@ -246,9 +242,9 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 			//Auditoria:
 			logBC.insert(AcaoEnum.ALTEROU, 
 					EntidadeEnum.USERS, 
-					usuario.getDadosAuditoria());
+					usuario.getLog());
 		} else {
-			throw new BusinessException(resourceBundle.getString("usuario.mensagem.inativo"));
+			throw new BusinessException("Usuário Inativo");//throw new BusinessException(resourceBundle.getString("usuario.mensagem.inativo"));
 		}
 	}
 	
@@ -259,21 +255,21 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 	 */
 	private void checkSenhaObedecePolitica(String senha) {
 		if (senha.length() >= 6) {
-			if (senha.length() <= 10) {
+			if (senha.length() <= 20) {
 				if (getStringContemLetra(senha)) {
 					if (getStringContemNumero(senha)) {
 						logger.info(" --- Senha obedece a política");
 					} else {
-						throw new BusinessException(resourceBundle.getString("usuariobc.politica.letranumero"));
+						throw new BusinessException("Não obedece a politica");//throw new BusinessException(resourceBundle.getString("usuariobc.politica.letranumero"));
 					}
 				} else {
-					throw new BusinessException(resourceBundle.getString("usuariobc.politica.letranumero"));
+					throw new BusinessException("Não Obedece a Politica");//throw new BusinessException(resourceBundle.getString("usuariobc.politica.letranumero"));
 				}
 			} else {
-				throw new BusinessException(resourceBundle.getString("usuariobc.politica.caracteresmax"));
+				throw new BusinessException("Ultrapassou o maximo");//throw new BusinessException(resourceBundle.getString("usuariobc.politica.caracteresmax"));
 			}
 		} else {
-			throw new BusinessException(resourceBundle.getString("usuariobc.politica.caracteresmin"));
+			throw new BusinessException("Nao Ultrapassou o minimo");//throw new BusinessException(resourceBundle.getString("usuariobc.politica.caracteresmin"));
 		}
 	}
 	
@@ -321,21 +317,5 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 		}/**/
 		return retorno;
 	}
-	
-	@Startup
-	@Transactional
-	public void load() {
-		if (findAll().isEmpty()) {
-			//insert(new Menu("Classe", "Link","Permissao","Nome","Parent"));
-			insert(new Users("root@gmail.com",
-							"12345678909",
-							"123456789",
-							"10.0025038",
-							"Usuário Root",
-							"1239026900",true,false,"192.168.0.1","root@gmail.com",new Date(),
-							new Perfil("Root","ROOT",true,false,"192.168.0.1","root@gmail.com",new Date()),
-							new Company("56.758.210/0001-06","Razão Social","Nome Fantasia","Brasil","12999149812","José de Arimateia",true,false,"192.168.0.1","root@gmail.com",new Date())
-							));
-		}
-	}
+
 }

@@ -29,7 +29,7 @@ public class BookmarkBCTest {
 
 	@Test
 	public void testLoad() {
-		bookmarkBC.load();
+		bookmarkBC.load(1L);
 		List<Bookmark> listaBookmarks = bookmarkBC.findAll();
 		assertNotNull(listaBookmarks);
 		assertEquals(10, listaBookmarks.size());

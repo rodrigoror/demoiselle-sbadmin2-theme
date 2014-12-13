@@ -209,10 +209,11 @@ public class Log implements Serializable {
 
 
 	/**
-	 * Metodo Padrao Auditoria 
+	 * Usado para auditoria e log
+	 * @see java.lang.Object#toString()
 	 */
 	@Transient
-	public String getDadosAuditoria() {
+	public String getLog() {
 		return "Log [log_id=" + log_id + ", log_acao=" + log_acao
 				+ ", log_entidade=" + log_entidade + ", log_data=" + log_data
 				+ ", log_usuario=" + log_usuario + ", log_dados=" + log_dados

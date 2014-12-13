@@ -6,12 +6,14 @@ package org.rlabs.teste02.util;
 public enum EntidadeEnum {
 	
 	/* Cadastros basicos (colocar em ordem alfabetica) */
-	COMPANY 	   	(10, "COMPANY"), 
-	COMPANYEND   	(15, "COMPANYEND"), 
-	MENU 			(20, "MENU"),
-	PERFIL			(35, "PERFIL"),
-	SUBMENU			(40, "SUBMENU"),
-	USERS			(45, "USERS");
+	BOOKMARK		(100, "BOOKMARK"),
+	COMPANY 	   	(200, "COMPANY"), 
+	COMPANYEND   	(300, "COMPANYEND"),
+	INICIALIZADOR	(400, "INICIALIZADOR"),
+	MENU 			(500, "MENU"),
+	PERFIL			(600, "PERFIL"),
+	SUBMENU			(700, "SUBMENU"),
+	USERS			(800, "USERS");
 	
 	private Integer id;
 	

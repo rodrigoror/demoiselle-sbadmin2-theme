@@ -1,0 +1,80 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<h:form prependId="false">
+
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton value="#{messages['button.save']}" action="#{perfilEditMB.insert}"
+						rendered="#{!perfilEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.save']}" action="#{perfilEditMB.update}"
+						rendered="#{perfilEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.delete']}" onclick="confirmation.show()"
+						rendered="#{perfilEditMB.updateMode}" type="button" immediate="true" ajax="false" />
+					<p:confirmDialog message="#{messages['label.confirm.delete']}" showEffect="bounce" hideEffect="explode"
+						header="#{messages['label.dialog.delete']}" severity="alert" widgetVar="confirmation">
+						<h:commandButton value="#{messages['button.dialog.yes']}" action="#{perfilEditMB.delete}" immediate="true"
+							ajax="false" />
+						<h:commandButton value="#{messages['button.dialog.no']}" onclick="confirmation.hide()" type="button" />
+					</p:confirmDialog>
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<br />
+
+			<p:fieldset legend="#{messages['perfil.label']}" toggleable="true" toggleSpeed="500">
+				<h:panelGrid id="fields" columns="3">
+					
+					<h:outputLabel value="#{messages['perfil.label.perf_id']}: " for="perf_id" styleClass="text-input" />
+					<h:outputText id="perf_id" value="#{perfilEditMB.bean.perf_id}" />
+					<p:message for="perf_id" />
+					
+					<h:outputLabel value="#{messages['perfil.label.perf_descricao']}: " for="perf_descricao" styleClass="text-input" />
+					<h:inputText id="perf_descricao" value="#{perfilEditMB.bean.perf_descricao}"
+						title="#{messages['perfil.alt.perf_descricao']}" />
+					<p:message for="perf_descricao" />
+					
+					<h:outputLabel value="#{messages['perfil.label.perf_codigo']}: " for="perf_codigo" styleClass="text-input" />
+					<h:inputText id="perf_codigo" value="#{perfilEditMB.bean.perf_codigo}"
+						title="#{messages['perfil.alt.perf_codigo']}" />
+					<p:message for="perf_codigo" />
+					
+					<h:outputLabel value="#{messages['perfil.label.perf_ativo']}: " for="perf_ativo" styleClass="text-input" />
+					<h:inputText id="perf_ativo" value="#{perfilEditMB.bean.perf_ativo}"
+						title="#{messages['perfil.alt.perf_ativo']}" />
+					<p:message for="perf_ativo" />
+					
+					<h:outputLabel value="#{messages['perfil.label.perf_excluido']}: " for="perf_excluido" styleClass="text-input" />
+					<h:inputText id="perf_excluido" value="#{perfilEditMB.bean.perf_excluido}"
+						title="#{messages['perfil.alt.perf_excluido']}" />
+					<p:message for="perf_excluido" />
+					
+					<h:outputLabel value="#{messages['perfil.label.perf_ipUpdate']}: " for="perf_ipUpdate" styleClass="text-input" />
+					<h:inputText id="perf_ipUpdate" value="#{perfilEditMB.bean.perf_ipUpdate}"
+						title="#{messages['perfil.alt.perf_ipUpdate']}" />
+					<p:message for="perf_ipUpdate" />
+					
+					<h:outputLabel value="#{messages['perfil.label.perf_loginUpdate']}: " for="perf_loginUpdate" styleClass="text-input" />
+					<h:inputText id="perf_loginUpdate" value="#{perfilEditMB.bean.perf_loginUpdate}"
+						title="#{messages['perfil.alt.perf_loginUpdate']}" />
+					<p:message for="perf_loginUpdate" />
+					
+					<h:outputLabel value="#{messages['perfil.label.perf_dtUpdate']}: " for="perf_dtUpdate" styleClass="text-input" />
+					<p:calendar id="perf_dtUpdate" value="#{perfilEditMB.bean.perf_dtUpdate}"
+					   pattern="#{messages['label.date.pattern']}" navigator="true" showButtonPanel="true"
+					   locale="#{currentLocale}" title="#{messages['perfil.alt.perf_dtUpdate']}" />
+					   <p:message for="perf_dtUpdate" />
+								
+					<h:outputLabel value="#{messages['perfil.label.perfilUsers']}: " for="perfilUsers" styleClass="text-input" />
+					<h:inputText id="perfilUsers" value="#{perfilEditMB.bean.perfilUsers}"
+						title="#{messages['perfil.alt.perfilUsers']}" />
+					<p:message for="perfilUsers" />
+					
+				</h:panelGrid>
+			</p:fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>

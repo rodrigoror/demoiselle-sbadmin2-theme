@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
@@ -139,11 +140,12 @@ public class SubMenu implements Serializable{
 		this.smen_menu = smen_menu;
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * Usado para auditoria e log
 	 * @see java.lang.Object#toString()
 	 */
-	@Override
-	public String toString() {
+	@Transient
+	public String getLog() {
 		return "SubMenu [smen_id=" + smen_id 
 				+ ", smen_link=" + smen_link + ", smen_permissao="
 				+ smen_permissao + ", smen_nome=" + smen_nome
