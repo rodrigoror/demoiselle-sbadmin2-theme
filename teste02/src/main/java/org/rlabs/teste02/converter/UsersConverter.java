@@ -8,11 +8,11 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
 import org.rlabs.teste02.business.UsersBC;
-import org.rlabs.teste02.domain.UsersLogin;
+import org.rlabs.teste02.domain.Users;
 
 import br.gov.frameworkdemoiselle.util.Beans;
 
-@FacesConverter (forClass = UsersLogin.class)
+@FacesConverter (forClass = Users.class)
 public class UsersConverter   implements Converter, Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -30,8 +30,8 @@ public class UsersConverter   implements Converter, Serializable {
 	@Override
 	public String getAsString(FacesContext arg0, UIComponent arg1, Object objeto) {
 
-		if (objeto != null && objeto instanceof UsersLogin) {
-			UsersLogin usuario = (UsersLogin) objeto;
+		if (objeto != null && objeto instanceof Users) {
+			Users usuario = (Users) objeto;
 			if (usuario.getUser_id() != null) {
 				return usuario.getUser_id().toString();
 			}

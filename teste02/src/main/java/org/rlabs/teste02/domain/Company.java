@@ -74,7 +74,7 @@ public class Company implements Serializable{
     private Set<CompanyEnd> companyEnds;
 	
 	@OneToMany(mappedBy="user_company")
-    private Set<UsersLogin> companyUsers;
+    private Set<Users> companyUsers;
 
 	public Company() {
 		super();
@@ -117,14 +117,14 @@ public class Company implements Serializable{
 	/**
 	 * @return the companyUsers
 	 */
-	public Set<UsersLogin> getCompanyUsers() {
+	public Set<Users> getCompanyUsers() {
 		return companyUsers;
 	}
 
 	/**
 	 * @param companyUsers the companyUsers to set
 	 */
-	public void setCompanyUsers(Set<UsersLogin> companyUsers) {
+	public void setCompanyUsers(Set<Users> companyUsers) {
 		this.companyUsers = companyUsers;
 	}
 

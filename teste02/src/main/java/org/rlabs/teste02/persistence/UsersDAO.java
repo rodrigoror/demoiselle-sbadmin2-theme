@@ -8,10 +8,10 @@ import javax.persistence.EntityManager;
 import br.gov.frameworkdemoiselle.stereotype.PersistenceController;
 import br.gov.frameworkdemoiselle.template.JPACrud;
 
-import org.rlabs.teste02.domain.UsersLogin;
+import org.rlabs.teste02.domain.Users;
 
 @PersistenceController
-public class UsersDAO extends JPACrud<UsersLogin, Long> {
+public class UsersDAO extends JPACrud<Users, Long> {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -25,10 +25,10 @@ public class UsersDAO extends JPACrud<UsersLogin, Long> {
 	 * @return Objeto Usuario
 	 */
 	@SuppressWarnings("unchecked")
-	public UsersLogin getByLogin(String login, Boolean somenteAtivos) {
+	public Users getByLogin(String login, Boolean somenteAtivos) {
 String qr = "SELECT u FROM Users u WHERE u.user_login = :pLogin";
 		
-		List<UsersLogin> usuarios;
+		List<Users> usuarios;
 		
 		if (somenteAtivos) {
 			qr += " AND u.user_ativo = :pAtivo";
@@ -56,18 +56,18 @@ String qr = "SELECT u FROM Users u WHERE u.user_login = :pLogin";
 	 * @param pAtivo
 	 * @return List<Users>
 	 */
-	public List<UsersLogin> getAtivos() {
+	public List<Users> getAtivos() {
 		String qr = "SELECT u FROM Users u WHERE u.user_ativo = :pAtivo";
 		
 		@SuppressWarnings("unchecked")
-		 List<UsersLogin> usuarios = em.createQuery(qr)
+		 List<Users> usuarios = em.createQuery(qr)
 				.setParameter("pAtivo", true)
 				.getResultList();
 		
 		return usuarios;
 	}
 
-	public UsersLogin getByLogin(String login, String md5) {
+	public Users getByLogin(String login, String md5) {
 		String qr = "SELECT u "
 				+ "FROM Users u "
 				+ "WHERE u.user_login = :pLogin "
@@ -76,7 +76,7 @@ String qr = "SELECT u FROM Users u WHERE u.user_login = :pLogin";
 				+ "AND u.user_excluido = :pExcluido";
 		
 		@SuppressWarnings("unchecked")
-		List<UsersLogin> usuarios = em.createQuery(qr)
+		List<Users> usuarios = em.createQuery(qr)
 				.setParameter("pLogin", login.toLowerCase())
 				.setParameter("pSenha", md5)
 				.setParameter("pAtivo", true)
@@ -93,7 +93,7 @@ String qr = "SELECT u FROM Users u WHERE u.user_login = :pLogin";
 	/**
 	 * Retorna uma lista de usuários pertencentes ao codigo indicado
 	 */
-	public List<UsersLogin> getByPerfil(String codigoPerfil) {
+	public List<Users> getByPerfil(String codigoPerfil) {
 		String qr = "SELECT u "
 				+ "FROM Users u "
 				+ "WHERE u.user_perfil.perf_codigo = :pcodigoPerfil "
@@ -101,7 +101,7 @@ String qr = "SELECT u FROM Users u WHERE u.user_login = :pLogin";
 				+ "ORDER BY u.user_nome ASC";
 		
 		@SuppressWarnings("unchecked")
-		 List<UsersLogin> usuarios = em.createQuery(qr)
+		 List<Users> usuarios = em.createQuery(qr)
 				.setParameter("pcodigoPerfil", codigoPerfil)
 				.setParameter("pAtivo", true)				
 				.getResultList();
@@ -117,14 +117,14 @@ String qr = "SELECT u FROM Users u WHERE u.user_login = :pLogin";
 	 * @param pPerfilCodigo
 	 * @return List<Usuario>
 	 */
-	public List<UsersLogin> findExceptAdm(){
+	public List<Users> findExceptAdm(){
 		
 		String qr = "SELECT u "
 				+ "FROM Users u "
 				+ "WHERE u.user_perfil.perf_codigo <> :pPerfilCodigo";
 		
 		@SuppressWarnings("unchecked")
-		 List<UsersLogin> usuarios = em.createQuery(qr)
+		 List<Users> usuarios = em.createQuery(qr)
 				.setParameter("pPerfilCodigo", "ADMINISTRADOR")
 				.getResultList();
 		

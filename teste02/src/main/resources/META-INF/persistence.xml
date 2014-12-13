@@ -15,7 +15,7 @@
 		<class>org.rlabs.teste02.domain.CompanyEnd</class>
 		<class>org.rlabs.teste02.domain.Log</class>
 		<class>org.rlabs.teste02.domain.Perfil</class>
-		<class>org.rlabs.teste02.domain.UsersLogin</class>
+		<class>org.rlabs.teste02.domain.Users</class>
 
 		<properties>
 			<property name="hibernate.show_sql" value="true" />

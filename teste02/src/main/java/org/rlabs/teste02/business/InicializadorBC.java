@@ -61,7 +61,9 @@ public class InicializadorBC {
 	private void onLoadBookmarks() {
 		
 		Bookmark bookmark;
-		bookmark = new Bookmark("Demoiselle Portal", "http://www.frameworkdemoiselle.gov.br");
+		bookmark = new Bookmark();
+		bookmark.setLink( "http://www.frameworkdemoiselle.gov.br");
+		bookmark.setDescription("Demoiselle Portal");
 		bookmarkBC.insert(bookmark);
 		
 		bookmarkBC.insert(new Bookmark("Demoiselle SourceForge", "http://sf.net/projects/demoiselle"));

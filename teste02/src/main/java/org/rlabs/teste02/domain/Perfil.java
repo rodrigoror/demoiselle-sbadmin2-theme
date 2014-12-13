@@ -61,7 +61,7 @@ public class Perfil implements Serializable{
 	private Date perf_dtUpdate;
 	
 	@OneToMany(mappedBy="user_perfil", fetch=FetchType.LAZY)
-    private Set<UsersLogin> perfilUsers;
+    private Set<Users> perfilUsers;
 
 	/**
 	 * 
@@ -208,14 +208,14 @@ public class Perfil implements Serializable{
 	/**
 	 * @return the perfilUsers
 	 */
-	public Set<UsersLogin> getPerfilUsers() {
+	public Set<Users> getPerfilUsers() {
 		return perfilUsers;
 	}
 
 	/**
 	 * @param perfilUsers the perfilUsers to set
 	 */
-	public void setPerfilUsers(Set<UsersLogin> perfilUsers) {
+	public void setPerfilUsers(Set<Users> perfilUsers) {
 		this.perfilUsers = perfilUsers;
 	}
 	
