@@ -1,0 +1,105 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<h:form prependId="false">
+
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton value="#{messages['button.save']}" action="#{companyEditMB.insert}"
+						rendered="#{!companyEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.save']}" action="#{companyEditMB.update}"
+						rendered="#{companyEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.delete']}" onclick="confirmation.show()"
+						rendered="#{companyEditMB.updateMode}" type="button" immediate="true" ajax="false" />
+					<p:confirmDialog message="#{messages['label.confirm.delete']}" showEffect="bounce" hideEffect="explode"
+						header="#{messages['label.dialog.delete']}" severity="alert" widgetVar="confirmation">
+						<h:commandButton value="#{messages['button.dialog.yes']}" action="#{companyEditMB.delete}" immediate="true"
+							ajax="false" />
+						<h:commandButton value="#{messages['button.dialog.no']}" onclick="confirmation.hide()" type="button" />
+					</p:confirmDialog>
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<br />
+
+			<p:fieldset legend="#{messages['company.label']}" toggleable="true" toggleSpeed="500">
+				<h:panelGrid id="fields" columns="3">
+					
+					<h:outputLabel value="#{messages['company.label.comp_id']}: " for="comp_id" styleClass="text-input" />
+					<h:outputText id="comp_id" value="#{companyEditMB.bean.comp_id}" />
+					<p:message for="comp_id" />
+					
+					<h:outputLabel value="#{messages['company.label.comp_cnpj']}: " for="comp_cnpj" styleClass="text-input" />
+					<h:inputText id="comp_cnpj" value="#{companyEditMB.bean.comp_cnpj}"
+						title="#{messages['company.alt.comp_cnpj']}" />
+					<p:message for="comp_cnpj" />
+					
+					<h:outputLabel value="#{messages['company.label.comp_razaoSocial']}: " for="comp_razaoSocial" styleClass="text-input" />
+					<h:inputText id="comp_razaoSocial" value="#{companyEditMB.bean.comp_razaoSocial}"
+						title="#{messages['company.alt.comp_razaoSocial']}" />
+					<p:message for="comp_razaoSocial" />
+					
+					<h:outputLabel value="#{messages['company.label.comp_nomeFantasia']}: " for="comp_nomeFantasia" styleClass="text-input" />
+					<h:inputText id="comp_nomeFantasia" value="#{companyEditMB.bean.comp_nomeFantasia}"
+						title="#{messages['company.alt.comp_nomeFantasia']}" />
+					<p:message for="comp_nomeFantasia" />
+					
+					<h:outputLabel value="#{messages['company.label.comp_pais']}: " for="comp_pais" styleClass="text-input" />
+					<h:inputText id="comp_pais" value="#{companyEditMB.bean.comp_pais}"
+						title="#{messages['company.alt.comp_pais']}" />
+					<p:message for="comp_pais" />
+					
+					<h:outputLabel value="#{messages['company.label.comp_fone']}: " for="comp_fone" styleClass="text-input" />
+					<h:inputText id="comp_fone" value="#{companyEditMB.bean.comp_fone}"
+						title="#{messages['company.alt.comp_fone']}" />
+					<p:message for="comp_fone" />
+					
+					<h:outputLabel value="#{messages['company.label.comp_responsavel']}: " for="comp_responsavel" styleClass="text-input" />
+					<h:inputText id="comp_responsavel" value="#{companyEditMB.bean.comp_responsavel}"
+						title="#{messages['company.alt.comp_responsavel']}" />
+					<p:message for="comp_responsavel" />
+					
+					<h:outputLabel value="#{messages['company.label.comp_ativo']}: " for="comp_ativo" styleClass="text-input" />
+					<h:inputText id="comp_ativo" value="#{companyEditMB.bean.comp_ativo}"
+						title="#{messages['company.alt.comp_ativo']}" />
+					<p:message for="comp_ativo" />
+					
+					<h:outputLabel value="#{messages['company.label.comp_excluido']}: " for="comp_excluido" styleClass="text-input" />
+					<h:inputText id="comp_excluido" value="#{companyEditMB.bean.comp_excluido}"
+						title="#{messages['company.alt.comp_excluido']}" />
+					<p:message for="comp_excluido" />
+					
+					<h:outputLabel value="#{messages['company.label.comp_ipUpdate']}: " for="comp_ipUpdate" styleClass="text-input" />
+					<h:inputText id="comp_ipUpdate" value="#{companyEditMB.bean.comp_ipUpdate}"
+						title="#{messages['company.alt.comp_ipUpdate']}" />
+					<p:message for="comp_ipUpdate" />
+					
+					<h:outputLabel value="#{messages['company.label.comp_loginUpdate']}: " for="comp_loginUpdate" styleClass="text-input" />
+					<h:inputText id="comp_loginUpdate" value="#{companyEditMB.bean.comp_loginUpdate}"
+						title="#{messages['company.alt.comp_loginUpdate']}" />
+					<p:message for="comp_loginUpdate" />
+					
+					<h:outputLabel value="#{messages['company.label.comp_dtUpdate']}: " for="comp_dtUpdate" styleClass="text-input" />
+					<p:calendar id="comp_dtUpdate" value="#{companyEditMB.bean.comp_dtUpdate}"
+					   pattern="#{messages['label.date.pattern']}" navigator="true" showButtonPanel="true"
+					   locale="#{currentLocale}" title="#{messages['company.alt.comp_dtUpdate']}" />
+					   <p:message for="comp_dtUpdate" />
+								
+					<h:outputLabel value="#{messages['company.label.companyEnds']}: " for="companyEnds" styleClass="text-input" />
+					<h:inputText id="companyEnds" value="#{companyEditMB.bean.companyEnds}"
+						title="#{messages['company.alt.companyEnds']}" />
+					<p:message for="companyEnds" />
+					
+					<h:outputLabel value="#{messages['company.label.companyUsers']}: " for="companyUsers" styleClass="text-input" />
+					<h:inputText id="companyUsers" value="#{companyEditMB.bean.companyUsers}"
+						title="#{messages['company.alt.companyUsers']}" />
+					<p:message for="companyUsers" />
+					
+				</h:panelGrid>
+			</p:fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>

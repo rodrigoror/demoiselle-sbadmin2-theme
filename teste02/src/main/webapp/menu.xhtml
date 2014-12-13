@@ -99,6 +99,21 @@
        </li>
         <h:form>
 		<p:menubar>
+			<p:submenu label="#{messages['menu.perfil']}">
+				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/perfil_edit.jsf"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/perfil_list.jsf"></p:menuitem>
+			</p:submenu>
+
+			<p:submenu label="#{messages['menu.companyEnd']}">
+				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/companyEnd_edit.jsf"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/companyEnd_list.jsf"></p:menuitem>
+			</p:submenu>
+
+			<p:submenu label="#{messages['menu.company']}">
+				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/company_edit.jsf"></p:menuitem>
+				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/company_list.jsf"></p:menuitem>
+			</p:submenu>
+
 			<p:submenu label="#{messages['menu.subMenu']}">
 				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/subMenu_edit.jsf"></p:menuitem>
 				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/subMenu_list.jsf"></p:menuitem>

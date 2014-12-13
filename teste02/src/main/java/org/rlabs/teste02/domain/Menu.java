@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
@@ -176,11 +177,12 @@ public class Menu implements Serializable{
 		super();
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * Usado para auditoria e log
 	 * @see java.lang.Object#toString()
 	 */
-	@Override
-	public String toString() {
+	@Transient
+	public String getLog() {
 		return "Menu [menu_id=" + menu_id + ", menu_classe=" + menu_classe
 				+ ", menu_link=" + menu_link + ", menu_permissao="
 				+ menu_permissao + ", menu_nome=" + menu_nome

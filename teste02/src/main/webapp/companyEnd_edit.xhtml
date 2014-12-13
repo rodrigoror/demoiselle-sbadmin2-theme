@@ -1,0 +1,105 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<h:form prependId="false">
+
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton value="#{messages['button.save']}" action="#{companyEndEditMB.insert}"
+						rendered="#{!companyEndEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.save']}" action="#{companyEndEditMB.update}"
+						rendered="#{companyEndEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.delete']}" onclick="confirmation.show()"
+						rendered="#{companyEndEditMB.updateMode}" type="button" immediate="true" ajax="false" />
+					<p:confirmDialog message="#{messages['label.confirm.delete']}" showEffect="bounce" hideEffect="explode"
+						header="#{messages['label.dialog.delete']}" severity="alert" widgetVar="confirmation">
+						<h:commandButton value="#{messages['button.dialog.yes']}" action="#{companyEndEditMB.delete}" immediate="true"
+							ajax="false" />
+						<h:commandButton value="#{messages['button.dialog.no']}" onclick="confirmation.hide()" type="button" />
+					</p:confirmDialog>
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<br />
+
+			<p:fieldset legend="#{messages['companyEnd.label']}" toggleable="true" toggleSpeed="500">
+				<h:panelGrid id="fields" columns="3">
+					
+					<h:outputLabel value="#{messages['companyEnd.label.cend_id']}: " for="cend_id" styleClass="text-input" />
+					<h:outputText id="cend_id" value="#{companyEndEditMB.bean.cend_id}" />
+					<p:message for="cend_id" />
+					
+					<h:outputLabel value="#{messages['companyEnd.label.cend_cep']}: " for="cend_cep" styleClass="text-input" />
+					<h:inputText id="cend_cep" value="#{companyEndEditMB.bean.cend_cep}"
+						title="#{messages['companyEnd.alt.cend_cep']}" />
+					<p:message for="cend_cep" />
+					
+					<h:outputLabel value="#{messages['companyEnd.label.cend_end']}: " for="cend_end" styleClass="text-input" />
+					<h:inputText id="cend_end" value="#{companyEndEditMB.bean.cend_end}"
+						title="#{messages['companyEnd.alt.cend_end']}" />
+					<p:message for="cend_end" />
+					
+					<h:outputLabel value="#{messages['companyEnd.label.cend_num']}: " for="cend_num" styleClass="text-input" />
+					<h:inputText id="cend_num" value="#{companyEndEditMB.bean.cend_num}"
+						title="#{messages['companyEnd.alt.cend_num']}" />
+					<p:message for="cend_num" />
+					
+					<h:outputLabel value="#{messages['companyEnd.label.cend_comp']}: " for="cend_comp" styleClass="text-input" />
+					<h:inputText id="cend_comp" value="#{companyEndEditMB.bean.cend_comp}"
+						title="#{messages['companyEnd.alt.cend_comp']}" />
+					<p:message for="cend_comp" />
+					
+					<h:outputLabel value="#{messages['companyEnd.label.cend_bairro']}: " for="cend_bairro" styleClass="text-input" />
+					<h:inputText id="cend_bairro" value="#{companyEndEditMB.bean.cend_bairro}"
+						title="#{messages['companyEnd.alt.cend_bairro']}" />
+					<p:message for="cend_bairro" />
+					
+					<h:outputLabel value="#{messages['companyEnd.label.cend_cidade']}: " for="cend_cidade" styleClass="text-input" />
+					<h:inputText id="cend_cidade" value="#{companyEndEditMB.bean.cend_cidade}"
+						title="#{messages['companyEnd.alt.cend_cidade']}" />
+					<p:message for="cend_cidade" />
+					
+					<h:outputLabel value="#{messages['companyEnd.label.cend_estado']}: " for="cend_estado" styleClass="text-input" />
+					<h:inputText id="cend_estado" value="#{companyEndEditMB.bean.cend_estado}"
+						title="#{messages['companyEnd.alt.cend_estado']}" />
+					<p:message for="cend_estado" />
+					
+					<h:outputLabel value="#{messages['companyEnd.label.cend_ativo']}: " for="cend_ativo" styleClass="text-input" />
+					<h:inputText id="cend_ativo" value="#{companyEndEditMB.bean.cend_ativo}"
+						title="#{messages['companyEnd.alt.cend_ativo']}" />
+					<p:message for="cend_ativo" />
+					
+					<h:outputLabel value="#{messages['companyEnd.label.cend_excluido']}: " for="cend_excluido" styleClass="text-input" />
+					<h:inputText id="cend_excluido" value="#{companyEndEditMB.bean.cend_excluido}"
+						title="#{messages['companyEnd.alt.cend_excluido']}" />
+					<p:message for="cend_excluido" />
+					
+					<h:outputLabel value="#{messages['companyEnd.label.cend_ipUpdate']}: " for="cend_ipUpdate" styleClass="text-input" />
+					<h:inputText id="cend_ipUpdate" value="#{companyEndEditMB.bean.cend_ipUpdate}"
+						title="#{messages['companyEnd.alt.cend_ipUpdate']}" />
+					<p:message for="cend_ipUpdate" />
+					
+					<h:outputLabel value="#{messages['companyEnd.label.cend_loginUpdate']}: " for="cend_loginUpdate" styleClass="text-input" />
+					<h:inputText id="cend_loginUpdate" value="#{companyEndEditMB.bean.cend_loginUpdate}"
+						title="#{messages['companyEnd.alt.cend_loginUpdate']}" />
+					<p:message for="cend_loginUpdate" />
+					
+					<h:outputLabel value="#{messages['companyEnd.label.cend_dtUpdate']}: " for="cend_dtUpdate" styleClass="text-input" />
+					<p:calendar id="cend_dtUpdate" value="#{companyEndEditMB.bean.cend_dtUpdate}"
+					   pattern="#{messages['label.date.pattern']}" navigator="true" showButtonPanel="true"
+					   locale="#{currentLocale}" title="#{messages['companyEnd.alt.cend_dtUpdate']}" />
+					   <p:message for="cend_dtUpdate" />
+								
+					<h:outputLabel value="#{messages['companyEnd.label.cend_company']}: " for="cend_company" styleClass="text-input" />
+					<h:inputText id="cend_company" value="#{companyEndEditMB.bean.cend_company}"
+						title="#{messages['companyEnd.alt.cend_company']}" />
+					<p:message for="cend_company" />
+					
+				</h:panelGrid>
+			</p:fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>

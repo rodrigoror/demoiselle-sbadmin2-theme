@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
@@ -318,6 +319,23 @@ public class CompanyEnd implements Serializable{
 	 */
 	public void setCend_company(Company cend_company) {
 		this.cend_company = cend_company;
+	}
+
+	/**
+	 * Usado para auditoria e log
+	 * @see java.lang.Object#toString()
+	 */
+	@Transient
+	public String getLog() {
+		return "CompanyEnd [cend_id=" + cend_id + ", cend_cep=" + cend_cep
+				+ ", cend_end=" + cend_end + ", cend_num=" + cend_num
+				+ ", cend_comp=" + cend_comp + ", cend_bairro=" + cend_bairro
+				+ ", cend_cidade=" + cend_cidade + ", cend_estado="
+				+ cend_estado + ", cend_ativo=" + cend_ativo
+				+ ", cend_excluido=" + cend_excluido + ", cend_ipUpdate="
+				+ cend_ipUpdate + ", cend_loginUpdate=" + cend_loginUpdate
+				+ ", cend_dtUpdate=" + cend_dtUpdate + ", cend_company="
+				+ cend_company.getComp_nomeFantasia() + "]";
 	}
 	
 }

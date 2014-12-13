@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public class Bookmark implements Serializable {
@@ -58,6 +59,16 @@ public class Bookmark implements Serializable {
 	
 	public void setLink(String link) {
 		this.link = link;
+	}
+
+	/**
+	 * Usado para auditoria e log
+	 * @see java.lang.Object#toString()
+	 */
+	@Transient
+	public String getLog() {
+		return "Bookmark [id=" + id + ", description=" + description
+				+ ", link=" + link + "]";
 	}
 
 }

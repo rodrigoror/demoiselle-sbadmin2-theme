@@ -375,10 +375,11 @@ public class Users implements Serializable{
 	
 	
 	/**
-	 * Metodo Padrao Auditoria 
+	 * Usado para auditoria e log
+	 * @see java.lang.Object#toString()
 	 */
 	@Transient
-	public String getDadosAuditoria() {
+	public String getLog() {
 		return "Users [user_id=" + user_id + ", user_login=" + user_login
 				+ ", user_cpf=" + user_cpf + ", user_senha=" + user_senha
 				+ ", user_susep=" + user_susep + ", user_nome=" + user_nome

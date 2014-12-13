@@ -1,0 +1,144 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<h:form>
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton title="#{messages['button.new']}" icon="ui-icon-document" action="#{companyListMB.getNextView}"
+						actionListener="#{companyListMB.clear}" ajax="false" />
+
+					<p:commandButton title="#{messages['button.delete']}" icon="ui-icon-trash" onclick="confirmation.show()"
+						type="button" immediate="true" ajax="false" />
+
+					<p:confirmDialog message="#{messages['label.confirm.delete']}" showEffect="bounce" hideEffect="explode"
+						header="#{messages['label.dialog.alert']}!" severity="alert" widgetVar="confirmation">
+
+						<h:commandButton value="#{messages['button.dialog.yes']}" action="#{companyListMB.deleteSelection}"
+							actionListener="#{companyListMB.clear}" />
+						<h:commandButton value="#{messages['button.dialog.no']}" onclick="confirmation.hide()" type="button" />
+					</p:confirmDialog>
+				</p:toolbarGroup>
+			</p:toolbar>
+			<p:dataTable id="list" var="bean" value="#{companyListMB.resultList}">
+				<f:facet name="header">#{messages['company.list.table.title']}</f:facet>
+				<p:column style="width:1%;">
+					<h:selectBooleanCheckbox value="#{companyListMB.selection[bean.comp_id]}"></h:selectBooleanCheckbox>
+				</p:column>
+				
+				<p:column style="width:5%;" sortBy="#{bean.comp_id}">
+					<f:facet name="header">#{messages['company.label.comp_id']}</f:facet>
+					<h:outputText value="#{bean.comp_id}" />
+				</p:column>
+						
+				<p:column sortBy="#{bean.comp_cnpj}">
+					<f:facet name="header">#{messages['company.label.comp_cnpj']}</f:facet>
+					<h:commandLink action="#{companyListMB.getNextView}" actionListener="#{companyListMB.clear}">
+						<h:outputText value="#{bean.comp_cnpj}" />
+						<f:param name="id" value="#{bean.comp_id}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.comp_razaoSocial}">
+					<f:facet name="header">#{messages['company.label.comp_razaoSocial']}</f:facet>
+					<h:commandLink action="#{companyListMB.getNextView}" actionListener="#{companyListMB.clear}">
+						<h:outputText value="#{bean.comp_razaoSocial}" />
+						<f:param name="id" value="#{bean.comp_id}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.comp_nomeFantasia}">
+					<f:facet name="header">#{messages['company.label.comp_nomeFantasia']}</f:facet>
+					<h:commandLink action="#{companyListMB.getNextView}" actionListener="#{companyListMB.clear}">
+						<h:outputText value="#{bean.comp_nomeFantasia}" />
+						<f:param name="id" value="#{bean.comp_id}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.comp_pais}">
+					<f:facet name="header">#{messages['company.label.comp_pais']}</f:facet>
+					<h:commandLink action="#{companyListMB.getNextView}" actionListener="#{companyListMB.clear}">
+						<h:outputText value="#{bean.comp_pais}" />
+						<f:param name="id" value="#{bean.comp_id}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.comp_fone}">
+					<f:facet name="header">#{messages['company.label.comp_fone']}</f:facet>
+					<h:commandLink action="#{companyListMB.getNextView}" actionListener="#{companyListMB.clear}">
+						<h:outputText value="#{bean.comp_fone}" />
+						<f:param name="id" value="#{bean.comp_id}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.comp_responsavel}">
+					<f:facet name="header">#{messages['company.label.comp_responsavel']}</f:facet>
+					<h:commandLink action="#{companyListMB.getNextView}" actionListener="#{companyListMB.clear}">
+						<h:outputText value="#{bean.comp_responsavel}" />
+						<f:param name="id" value="#{bean.comp_id}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.comp_ativo}">
+					<f:facet name="header">#{messages['company.label.comp_ativo']}</f:facet>
+					<h:commandLink action="#{companyListMB.getNextView}" actionListener="#{companyListMB.clear}">
+						<h:outputText value="#{bean.comp_ativo}" />
+						<f:param name="id" value="#{bean.comp_id}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.comp_excluido}">
+					<f:facet name="header">#{messages['company.label.comp_excluido']}</f:facet>
+					<h:commandLink action="#{companyListMB.getNextView}" actionListener="#{companyListMB.clear}">
+						<h:outputText value="#{bean.comp_excluido}" />
+						<f:param name="id" value="#{bean.comp_id}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.comp_ipUpdate}">
+					<f:facet name="header">#{messages['company.label.comp_ipUpdate']}</f:facet>
+					<h:commandLink action="#{companyListMB.getNextView}" actionListener="#{companyListMB.clear}">
+						<h:outputText value="#{bean.comp_ipUpdate}" />
+						<f:param name="id" value="#{bean.comp_id}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.comp_loginUpdate}">
+					<f:facet name="header">#{messages['company.label.comp_loginUpdate']}</f:facet>
+					<h:commandLink action="#{companyListMB.getNextView}" actionListener="#{companyListMB.clear}">
+						<h:outputText value="#{bean.comp_loginUpdate}" />
+						<f:param name="id" value="#{bean.comp_id}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.comp_dtUpdate}">
+					<f:facet name="header">#{messages['company.label.comp_dtUpdate']}</f:facet>
+					<h:commandLink action="#{companyListMB.getNextView}" actionListener="#{companyListMB.clear}">
+						<h:outputText value="#{bean.comp_dtUpdate}" />
+						<f:param name="id" value="#{bean.comp_id}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.companyEnds}">
+					<f:facet name="header">#{messages['company.label.companyEnds']}</f:facet>
+					<h:commandLink action="#{companyListMB.getNextView}" actionListener="#{companyListMB.clear}">
+						<h:outputText value="#{bean.companyEnds}" />
+						<f:param name="id" value="#{bean.comp_id}" />
+					</h:commandLink>
+				</p:column>
+						
+				<p:column sortBy="#{bean.companyUsers}">
+					<f:facet name="header">#{messages['company.label.companyUsers']}</f:facet>
+					<h:commandLink action="#{companyListMB.getNextView}" actionListener="#{companyListMB.clear}">
+						<h:outputText value="#{bean.companyUsers}" />
+						<f:param name="id" value="#{bean.comp_id}" />
+					</h:commandLink>
+				</p:column>
+						
+			</p:dataTable>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

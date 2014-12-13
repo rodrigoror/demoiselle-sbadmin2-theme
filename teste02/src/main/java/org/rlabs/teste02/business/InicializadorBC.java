@@ -3,12 +3,21 @@
  */
 package org.rlabs.teste02.business;
 
+import java.util.Date;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.rlabs.teste02.config.Teste02Config;
 import org.rlabs.teste02.domain.Bookmark;
+import org.rlabs.teste02.domain.Company;
+import org.rlabs.teste02.domain.Log;
 import org.rlabs.teste02.domain.Menu;
+import org.rlabs.teste02.domain.Perfil;
 import org.rlabs.teste02.domain.SubMenu;
+import org.rlabs.teste02.domain.Users;
+import org.rlabs.teste02.util.AcaoEnum;
+import org.rlabs.teste02.util.EntidadeEnum;
 import org.slf4j.Logger;
 
 import br.gov.frameworkdemoiselle.lifecycle.Startup;
@@ -36,6 +45,20 @@ public class InicializadorBC {
 	
 	@Inject
 	private SubMenuBC subMenuBC;
+		
+	@Inject
+	private PerfilBC perfilBC;
+	
+	@Inject
+	private CompanyBC companyBC;
+	
+	@Inject
+	private UsersBC usersBC;
+	
+	@Inject
+	private LogBC logBC;
+	
+	//*
 	
 	/**
 	 * Faz carga inicial de dados
@@ -51,7 +74,7 @@ public class InicializadorBC {
 			this.onLoadSubMenu();
 			this.onLoadCompany();
 			this.onLoadPerfil();
-			this.onLoadUsersLogin();
+			this.onLoadUsers();
 			this.onLoadLog();
 		} else {
 			logger.info("--- InicializadorBC: Sistema NÃO está em modo debugger ---");
@@ -59,22 +82,23 @@ public class InicializadorBC {
 	}
 	
 	private void onLoadBookmarks() {
-		
-		Bookmark bookmark;
-		bookmark = new Bookmark();
-		bookmark.setLink( "http://www.frameworkdemoiselle.gov.br");
-		bookmark.setDescription("Demoiselle Portal");
-		bookmarkBC.insert(bookmark);
-		
-		bookmarkBC.insert(new Bookmark("Demoiselle SourceForge", "http://sf.net/projects/demoiselle"));
-		bookmarkBC.insert(new Bookmark("Twitter", "http://twitter.frameworkdemoiselle.gov.br"));
-		bookmarkBC.insert(new Bookmark("Blog", "http://blog.frameworkdemoiselle.gov.br"));
-		bookmarkBC.insert(new Bookmark("Wiki", "http://wiki.frameworkdemoiselle.gov.br"));
-		bookmarkBC.insert(new Bookmark("Bug Tracking", "http://tracker.frameworkdemoiselle.gov.br"));
-		bookmarkBC.insert(new Bookmark("Forum", "http://forum.frameworkdemoiselle.gov.br"));
-		bookmarkBC.insert(new Bookmark("SVN", "http://svn.frameworkdemoiselle.gov.br"));
-		bookmarkBC.insert(new Bookmark("Maven", "http://repository.frameworkdemoiselle.gov.br"));
-		bookmarkBC.insert(new Bookmark("Downloads", "http://download.frameworkdemoiselle.gov.br"));
+		if (bookmarkBC.findAll().isEmpty()) {
+			Bookmark bookmark;
+			bookmark = new Bookmark();
+			bookmark.setLink( "http://www.frameworkdemoiselle.gov.br");
+			bookmark.setDescription("Demoiselle Portal");
+			bookmarkBC.insert(bookmark);
+			
+			bookmarkBC.insert(new Bookmark("Demoiselle SourceForge", "http://sf.net/projects/demoiselle"));
+			bookmarkBC.insert(new Bookmark("Twitter", "http://twitter.frameworkdemoiselle.gov.br"));
+			bookmarkBC.insert(new Bookmark("Blog", "http://blog.frameworkdemoiselle.gov.br"));
+			bookmarkBC.insert(new Bookmark("Wiki", "http://wiki.frameworkdemoiselle.gov.br"));
+			bookmarkBC.insert(new Bookmark("Bug Tracking", "http://tracker.frameworkdemoiselle.gov.br"));
+			bookmarkBC.insert(new Bookmark("Forum", "http://forum.frameworkdemoiselle.gov.br"));
+			bookmarkBC.insert(new Bookmark("SVN", "http://svn.frameworkdemoiselle.gov.br"));
+			bookmarkBC.insert(new Bookmark("Maven", "http://repository.frameworkdemoiselle.gov.br"));
+			bookmarkBC.insert(new Bookmark("Downloads", "http://download.frameworkdemoiselle.gov.br"));
+		}
 	}
 	
 	private void onLoadMenu(){
@@ -103,29 +127,108 @@ public class InicializadorBC {
 	
 	private void onLoadSubMenu(){
 		if (subMenuBC.findAll().isEmpty()) {
+			List<Menu> lstMenu = menuBC.findAll();
 			Menu menu;
-			menu = menuBC.load(1L);
-			subMenuBC.insert(new SubMenu("teste.html","","SubMenu01","_parent",menu)); 
+			menu = lstMenu.get(0);
+			subMenuBC.insert(new SubMenu("teste.html","","SubMenu00","_parent",menu)); 
 			
-			menu = menuBC.load(2L);
+			menu = lstMenu.get(1);
+			subMenuBC.insert(new SubMenu("teste.html","","SubMenu01","_blank",menu)); 
+			
+			menu = lstMenu.get(2);
 			subMenuBC.insert(new SubMenu("teste.html","","SubMenu02","_blank",menu)); 
+			
+			menu = lstMenu.get(3);
+			subMenuBC.insert(new SubMenu("teste.html","","SubMenu03","_blank",menu)); 
+			
+			menu = lstMenu.get(4);
+			subMenuBC.insert(new SubMenu("teste.html","","SubMenu04","_blank",menu)); 
+		}
+	}
+	
+	
+	private void onLoadPerfil(){
+		if (perfilBC.findAll().isEmpty()) {
+			Perfil perfil;
+			perfil = new Perfil();
+			perfil.setPerf_ativo(true);
+			perfil.setPerf_codigo("ROOT");
+			perfil.setPerf_descricao("Root");
+			perfil.setPerf_excluido(false);
+			perfil.setPerf_dtUpdate(new Date());
+			perfil.setPerf_ipUpdate("192.168.0.1");//sistema
+			perfil.setPerf_loginUpdate("sistema@rlabs.com");
+			perfilBC.insert(perfil);
+			
 		}
 	}
 	
 	private void onLoadCompany(){
-		
+		if(companyBC.findAll().isEmpty()){
+			Company cia = new Company();
+			cia.setComp_ativo(true);
+			cia.setComp_cnpj("56.758.210/0001-06");
+			cia.setComp_dtUpdate(new Date());
+			cia.setComp_excluido(false);
+			cia.setComp_fone("1200000000");
+			cia.setComp_ipUpdate("192.168.0.1");
+			cia.setComp_loginUpdate("sistema@rlabs.com");
+			cia.setComp_nomeFantasia("Empresa Padrão");
+			cia.setComp_pais("Brasil");
+			cia.setComp_razaoSocial("Empresa Padrão S/A");
+			cia.setComp_responsavel("Root of Debian");
+			//cia.setCompanyEnds(companyEnds);
+			companyBC.insert(cia);
+			
+			
+		}
 	}
 	
-	private void onLoadPerfil(){
-		
-	}
+	
 
-	private void onLoadUsersLogin(){
-		
+	private void onLoadUsers(){
+		if (usersBC.findAll().isEmpty()) {
+			List<Company> lstCompany = companyBC.findAll();
+			List<Perfil> lstPerfil = perfilBC.findAll();
+			
+			Users users;
+			users = new Users();
+			users.setUser_login("rodrigoror@gmail.com");
+			users.setUser_cpf("12345678909");
+			users.setUser_susep("01234");
+			users.setUser_senha("root#1745$ROOT");
+			users.setUser_ativo(true);
+			users.setUser_nome("Root of Debian RoD");
+			users.setUser_excluido(false);
+			
+			Company user_company = lstCompany.get(0);
+			users.setUser_company(user_company);
+			
+			users.setUser_dtUpdate(new Date());
+			users.setUser_ipUpdate("192.168.0.1");
+			users.setUser_loginUpdate("sistema@rlabs.com");
+			
+			Perfil user_perfil = lstPerfil.get(0);
+			users.setUser_perfil(user_perfil);
+			
+			usersBC.insert(users);
+					
+					
+					
+		}
 	}
 	
 	private void onLoadLog(){
-		
+		if (logBC.findAll().isEmpty()) {
+			Log log = new Log();
+			log.setLog_acao(AcaoEnum.CADASTROU);
+			log.setLog_entidade(EntidadeEnum.INICIALIZADOR);
+			log.setLog_usuario("Sistema");
+			log.setLog_dados("SE VC VER ESTE CAMPO, QUER DIZER QUE O SISTEMA NÃO INSERIU NENHUMA OUTRA CLASSE NO INICIALIZADORBC");
+			log.setLog_data(new Date());
+			logBC.insert(log);
+			
+		}
 	}
 	
 

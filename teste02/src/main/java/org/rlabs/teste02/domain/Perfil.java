@@ -18,6 +18,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -217,6 +218,20 @@ public class Perfil implements Serializable{
 	 */
 	public void setPerfilUsers(Set<Users> perfilUsers) {
 		this.perfilUsers = perfilUsers;
+	}
+
+	/**
+	 * Usado para auditoria e log
+	 * @see java.lang.Object#toString()
+	 */
+	@Transient
+	public String getLog() {
+		return "Perfil [perf_id=" + perf_id + ", perf_descricao="
+				+ perf_descricao + ", perf_codigo=" + perf_codigo
+				+ ", perf_ativo=" + perf_ativo + ", perf_excluido="
+				+ perf_excluido + ", perf_ipUpdate=" + perf_ipUpdate
+				+ ", perf_loginUpdate=" + perf_loginUpdate + ", perf_dtUpdate="
+				+ perf_dtUpdate + "]";
 	}
 	
 	

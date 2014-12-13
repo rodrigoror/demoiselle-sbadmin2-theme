@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 /**
  * @author rodrigo.ramos
@@ -310,7 +311,21 @@ public class Company implements Serializable{
 		this.companyEnds = companyEnds;
 	}
 
-	
-	
+	/**
+	 * Usado para auditoria e log
+	 * @see java.lang.Object#toString()
+	 */
+	@Transient
+	public String getLog() {
+		return "Company [comp_id=" + comp_id + ", comp_cnpj=" + comp_cnpj
+				+ ", comp_razaoSocial=" + comp_razaoSocial
+				+ ", comp_nomeFantasia=" + comp_nomeFantasia + ", comp_pais="
+				+ comp_pais + ", comp_fone=" + comp_fone
+				+ ", comp_responsavel=" + comp_responsavel + ", comp_ativo="
+				+ comp_ativo + ", comp_excluido=" + comp_excluido
+				+ ", comp_ipUpdate=" + comp_ipUpdate + ", comp_loginUpdate="
+				+ comp_loginUpdate + ", comp_dtUpdate=" + comp_dtUpdate
+				+ "]";
+	}
 	
 }
