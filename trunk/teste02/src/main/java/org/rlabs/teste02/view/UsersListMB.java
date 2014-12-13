@@ -9,12 +9,12 @@ import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.AbstractListPageBean;
 import br.gov.frameworkdemoiselle.transaction.Transactional;
 import org.rlabs.teste02.business.UsersBC;
-import org.rlabs.teste02.domain.UsersLogin;
+import org.rlabs.teste02.domain.Users;
 
 @ViewController
 @NextView("./users_edit.jsf")
 @PreviousView("./users_list.jsf")
-public class UsersListMB extends AbstractListPageBean<UsersLogin, Long> {
+public class UsersListMB extends AbstractListPageBean<Users, Long> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -22,7 +22,7 @@ public class UsersListMB extends AbstractListPageBean<UsersLogin, Long> {
 	private UsersBC usersBC;
 	
 	@Override
-	protected List<UsersLogin> handleResultList() {
+	protected List<Users> handleResultList() {
 		return this.usersBC.findAll();
 	}
 	
