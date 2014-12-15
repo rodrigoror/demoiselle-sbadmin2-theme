@@ -33,14 +33,6 @@
 					<h:outputText value="#{bean.smen_id}" />
 				</p:column>
 						
-				<p:column sortBy="#{bean.smen_classe}">
-					<f:facet name="header">#{messages['subMenu.label.smen_classe']}</f:facet>
-					<h:commandLink action="#{subMenuListMB.getNextView}" actionListener="#{subMenuListMB.clear}">
-						<h:outputText value="#{bean.smen_classe}" />
-						<f:param name="id" value="#{bean.smen_id}" />
-					</h:commandLink>
-				</p:column>
-						
 				<p:column sortBy="#{bean.smen_link}">
 					<f:facet name="header">#{messages['subMenu.label.smen_link']}</f:facet>
 					<h:commandLink action="#{subMenuListMB.getNextView}" actionListener="#{subMenuListMB.clear}">

@@ -7,7 +7,7 @@
 <div class="sidebar-nav navbar-collapse">
 	<ul class="nav" id="side-menu">
 		<li class="sidebar-search">
-           <div class="input-group custom-search-form">
+           <!-- <div class="input-group custom-search-form">
                  <input type="text" class="form-control" placeholder="Search..." />
                  <span class="input-group-btn">
                  <button class="btn btn-default" type="button">
@@ -15,88 +15,36 @@
                  </button>
              </span>
              </div>
-             <!--  input-group --> 
+               input-group --> 
          </li>
          
          <!-- Menu dinamico -->
        	<c:forEach var="item" items="#{menuListMB.resultList}">
           <li >
-			<a class="#{menuListMB.active}" href="#{item.menu_link}" target="#{item.menu_parent}"> 
-				<i class="#{item.menu_classe}"></i> 
-				<span>#{item.menu_nome}</span>
-			
-			<c:choose>
-	   			<c:when test="#{subMenuListMB.isExists}"> <!-- if condition REFAZER ESTE TESTE -->
-					<span class="fa arrow"></span>
-					</a>
-						<ul class="nav nav-second-level">
-							<c:forEach var="item2" items="#{subMenuListMB.resultList}">
-								 <li>
-				                    <a href="#{item2.menu_link}" target="#{item.menu_parent}">#{item2.menu_nome}</a>
-				                </li>
-							</c:forEach>
-						</ul>
-				</c:when>
-	            <!-- /.nav-second-level -->
-	            <c:otherwise> <!-- else condition -->
-	            	</a>
-	            </c:otherwise>
-			</c:choose>
+	        <c:if test="#{subMenuListMB.isExists(item.menu_id)}">
+				<a class="#{menuListMB.active}" href="#{item.menu_link}" target="#{item.menu_parent}"> 
+					<i class="#{item.menu_classe}"></i> 
+					#{item.menu_nome}
+				 	<span class="fa arrow"></span>
+				 </a>
+				 <ul class="nav nav-second-level">
+					<c:forEach var="item2" items="#{subMenuListMB.getSubMenu(item.menu_id)}">
+						 <li>
+				             <a href="#{item2.smen_link}" target="#{item2.smen_parent}">#{item2.smen_nome}</a>
+				         </li>
+					</c:forEach>
+				</ul>
+			</c:if>
+			<c:if test="#{!subMenuListMB.isExists(item.menu_id)}">
+				<a href="#{item.menu_link}" target="#{item.menu_parent}"> 
+					<i class="#{item.menu_classe}"></i> 
+					#{item.menu_nome}
+				</a>
+			</c:if>
 		 </li>
         </c:forEach>
 	     <!-- /.Menu dinamico -->
-       	
-		<li>
-        	<a class="active" href="index.html">
-	        	<i class="fa fa-dashboard fa-fw"></i> 
-	            Dashboard
-            </a>
-       	</li>
-		<li>
-            <a href="#">
-            <i class="fa fa-bar-chart-o fa-fw"></i> 
-            Charts
-            <span class="fa arrow"></span></a>
-            <ul class="nav nav-second-level">
-                <li>
-                    <a href="flot.html">Flot Charts</a>
-                </li>
-                <li>
-                    <a href="morris.html">Morris.js Charts</a>
-                </li>
-            </ul>
-            <!-- /.nav-second-level -->
-        </li>
-        <li>
-           <a href="#"><i class="fa fa-sitemap fa-fw"></i> Menu Antigo html<span class="fa arrow"></span></a>
-           <ul class="nav nav-second-level">
-               <li>
-                   <a href="menu_list.jsf">#{messages['menu.menu']} - #{messages['menu.menuitem.list']}</a>
-               </li>
-               <li>
-                   <a href="bookmark_list.jsf">#{messages['menu.bookmark']} - #{messages['menu.menuitem.list']}</a>
-               </li>
-               <li>
-                   <a href="#">Third Level <span class="fa arrow"></span></a>
-                   <ul class="nav nav-third-level">
-                       <li>
-                           <a href="#">Third Level Item</a>
-                       </li>
-                       <li>
-                           <a href="#">Third Level Item</a>
-                       </li>
-                       <li>
-                           <a href="#">Third Level Item</a>
-                       </li>
-                       <li>
-                           <a href="#">Third Level Item</a>
-                       </li>
-                   </ul>
-                   <!-- /.nav-third-level -->
-               </li>
-           </ul>
-           <!-- /.nav-second-level -->
-       </li>
+  
         <h:form>
 		<p:menubar>
 			<p:submenu label="#{messages['menu.perfil']}">

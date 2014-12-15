@@ -32,9 +32,13 @@
 					<h:outputText id="menu_id" value="#{menuEditMB.bean.menu_id}" />
 					<p:message for="menu_id" />
 					
-					<h:outputLabel value="#{messages['menu.label.menu_classe']}: " for="menu_classe" styleClass="text-input" />
-					<h:inputText id="menu_classe" value="#{menuEditMB.bean.menu_classe}"
-						title="#{messages['menu.alt.menu_classe']}" />
+					<h:outputLabel value="* #{messages['menu.label.menu_classe']}: "
+						for="menu_classe" styleClass="text-input" />
+					<h:selectOneMenu id="menu_classe" value="#{menuEditMB.bean.menu_classe}" 
+						required="true" requiredMessage="#{messages['mensagem.requerido']}"
+						>
+						<f:selectItems value="#{menuEditMB.classes}" var="icon" />
+					</h:selectOneMenu>
 					<p:message for="menu_classe" />
 					
 					<h:outputLabel value="#{messages['menu.label.menu_link']}: " for="menu_link" styleClass="text-input" />
