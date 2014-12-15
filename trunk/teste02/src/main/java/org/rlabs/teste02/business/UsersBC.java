@@ -56,7 +56,7 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 		checkSenhaObedecePolitica(bean.getUser_senha());
 		//Ajustes:
 		bean.setUser_login(bean.getUser_login().toLowerCase());
-		bean.setUser_senha(SenhaUtil.sha256(bean.getUser_senha()));
+		bean.setUser_senha(/*SenhaUtil.sha256(*/bean.getUser_senha())/*)*/;
 		//Insere:
 		this.getDelegate().insert(bean);
 		//Auditoria:
@@ -83,7 +83,7 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 		checkSenhaObedecePolitica(bean.getUser_senha());
 		//Ajustes:
 		bean.setUser_login(bean.getUser_login().toLowerCase());
-		bean.setUser_senha(SenhaUtil.sha256(bean.getUser_senha()));
+		bean.setUser_senha(/*SenhaUtil.sha256(*/bean.getUser_senha())/*)*/;//TODO corrigir a criptografia
 		//Insere:
 		this.getDelegate().insert(bean);
 		//Auditoria:
@@ -210,7 +210,7 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 			if (novaSenha.equals(repeticaoNovaSenha)) {
 				checkSenhaObedecePolitica(novaSenha);
 				//Altera:
-				usuario.setUser_senha(SenhaUtil.sha256(novaSenha));
+				usuario.setUser_senha(/*SenhaUtil.sha256(*/novaSenha/*)*/);
 				this.getDelegate().update(usuario);
 				//Auditoria:
 				logBC.insert(AcaoEnum.ALTEROU, 
@@ -237,7 +237,7 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 		if (usuario != null) {
 			checkSenhaObedecePolitica(novaSenha);
 			//Altera:
-			usuario.setUser_senha(SenhaUtil.sha256(novaSenha));
+			usuario.setUser_senha(/*SenhaUtil.sha256(*/novaSenha)/*)*/;
 			this.getDelegate().update(usuario);
 			//Auditoria:
 			logBC.insert(AcaoEnum.ALTEROU, 
@@ -314,8 +314,7 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 		boolean retorno = false;
 		if (credenciaisMB.getVerificarPapel("ADMINISTRADOR")){
 				retorno =  true;
-		}/**/
+		}
 		return retorno;
 	}
-
 }

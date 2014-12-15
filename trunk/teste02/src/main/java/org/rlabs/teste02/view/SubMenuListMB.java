@@ -21,6 +21,10 @@ public class SubMenuListMB extends AbstractListPageBean<SubMenu, Long> {
 	@Inject
 	private SubMenuBC subMenuBC;
 	
+	public List<SubMenu> getSubMenu(Long menu_id){
+		return this.subMenuBC.getSubMenu(menu_id);
+	}
+	
 	@Override
 	protected List<SubMenu> handleResultList() {
 		return this.subMenuBC.findAll();
@@ -40,12 +44,30 @@ public class SubMenuListMB extends AbstractListPageBean<SubMenu, Long> {
 		return getPreviousView();
 	}
 	
-	public String getActive(){
-		return "active";
+	/**
+	 * 
+	 * @return
+	 */
+	public String getActive(Long menu_id){
+		String retorno = "active"; 
+		
+		//TODO Verificar se o cara logado clicou no menu e inserir active apenas para o menu que ele clicou
+		//talvez usar session para gravar.
+		if(this.subMenuBC.getSubMenu(menu_id).isEmpty()){
+			retorno = "#";
+		}
+		return retorno;
 	}
 	
-	//TODO Verificar se o menu possue submenu para que serja possivel criar o submenu
-	public Boolean isExists(){
-		return true;
+	/**
+	 * 
+	 * @return
+	 */
+	public Boolean isExists(Long menu_id){
+		Boolean retorno = true;
+		if(this.subMenuBC.getSubMenu(menu_id).isEmpty()){
+			retorno = false;
+		}
+		return retorno;
 	}
 }

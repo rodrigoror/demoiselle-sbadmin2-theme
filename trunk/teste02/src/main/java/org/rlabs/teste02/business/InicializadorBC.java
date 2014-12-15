@@ -114,35 +114,30 @@ public class InicializadorBC {
 			menu.setMenu_parent("_parent");
 			menuBC.insert(menu);
 			
-			menuBC.insert(new Menu("fa fa-table fa-fw", "index.jsf","","Importar Propostas","_parent"));
-			menuBC.insert(new Menu("fa fa-edit fa-fw", "index.jsf","","Timeline","_parent"));
-			menuBC.insert(new Menu("fa fa-wrench fa-fw", "index.jsf","","Finanças","_parent"));
-			menuBC.insert(new Menu("fa fa-sitemap fa-fw", "index.jsf","","Cadastros","_parent"));
-			menuBC.insert(new Menu("fa fa-files-o fa-fw", "index.jsf","","E-mail","_parent"));
-			menuBC.insert(new Menu("fa fa-table fa-fw", "bookmark_list.jsf","","Bookmark","_parent"));
-			menuBC.insert(new Menu("fa fa-table fa-fw", "menu_list.jsf","","Menus","_parent"));
-			menuBC.insert(new Menu("fa fa-table fa-fw", "submenu_list.jsf","","SubMenus","_parent"));
+			menuBC.insert(new Menu("fa fa-cloud-upload fa-fw", "index.jsf?#","","Importar Propostas","_parent"));
+			menuBC.insert(new Menu("fa fa-edit fa-fw", "index.jsf?#","","Timeline","_parent"));
+			menuBC.insert(new Menu("fa fa-money fa-fw", "index.jsf?#","","Finanças","_parent"));
+			menuBC.insert(new Menu("fa fa-archive fa-fw", "index.jsf?#","","Cadastros","_parent"));
+			menuBC.insert(new Menu("fa fa-envelope fa-fw", "index.jsf?#","","E-mail","_parent"));
+			menuBC.insert(new Menu("fa fa-bookmark fa-fw", "bookmark_list.jsf","","Bookmark","_parent"));
+			menuBC.insert(new Menu("fa fa-tasks fa-fw", "menu_list.jsf","","Menus","_parent"));
+			menuBC.insert(new Menu("fa fa-bars fa-fw", "subMenu_list.jsf","","SubMenus","_parent"));
 		}
 	}
 	
 	private void onLoadSubMenu(){
 		if (subMenuBC.findAll().isEmpty()) {
 			List<Menu> lstMenu = menuBC.findAll();
+			
 			Menu menu;
 			menu = lstMenu.get(0);
 			subMenuBC.insert(new SubMenu("teste.html","","SubMenu00","_parent",menu)); 
-			
-			menu = lstMenu.get(1);
-			subMenuBC.insert(new SubMenu("teste.html","","SubMenu01","_blank",menu)); 
+			subMenuBC.insert(new SubMenu("teste.html","","SubMenu01","_parent",menu)); 
 			
 			menu = lstMenu.get(2);
-			subMenuBC.insert(new SubMenu("teste.html","","SubMenu02","_blank",menu)); 
-			
-			menu = lstMenu.get(3);
-			subMenuBC.insert(new SubMenu("teste.html","","SubMenu03","_blank",menu)); 
-			
-			menu = lstMenu.get(4);
-			subMenuBC.insert(new SubMenu("teste.html","","SubMenu04","_blank",menu)); 
+			subMenuBC.insert(new SubMenu("teste.html","","SubMenu02","_parent",menu)); 
+			subMenuBC.insert(new SubMenu("teste.html","","SubMenu03","_parent",menu)); 
+			subMenuBC.insert(new SubMenu("teste.html","","SubMenu04","_parent",menu)); 
 		}
 	}
 	
@@ -179,8 +174,6 @@ public class InicializadorBC {
 			cia.setComp_responsavel("Root of Debian");
 			//cia.setCompanyEnds(companyEnds);
 			companyBC.insert(cia);
-			
-			
 		}
 	}
 	
@@ -212,9 +205,6 @@ public class InicializadorBC {
 			users.setUser_perfil(user_perfil);
 			
 			usersBC.insert(users);
-					
-					
-					
 		}
 	}
 	
@@ -227,7 +217,6 @@ public class InicializadorBC {
 			log.setLog_dados("SE VC VER ESTE CAMPO, QUER DIZER QUE O SISTEMA NÃO INSERIU NENHUMA OUTRA CLASSE NO INICIALIZADORBC");
 			log.setLog_data(new Date());
 			logBC.insert(log);
-			
 		}
 	}
 	

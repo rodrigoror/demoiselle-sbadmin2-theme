@@ -1,6 +1,8 @@
 package org.rlabs.teste02.business;
 
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import br.gov.frameworkdemoiselle.stereotype.BusinessController;
@@ -34,6 +36,10 @@ public class SubMenuBC extends DelegateCrud<SubMenu, Long, SubMenuDAO> {
 	@Inject
 	private Logger logger;
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public Boolean getActive() {
 		return this.getDelegate().getActiveList();
 	}
@@ -57,5 +63,14 @@ public class SubMenuBC extends DelegateCrud<SubMenu, Long, SubMenuDAO> {
 				EntidadeEnum.SUBMENU, 
 				bean.toString());
 		return bean;
+	}
+	
+	/**
+	 * Lista os submenus referentes a determinado menu
+	 * @param menu_id
+	 * @return
+	 */
+	public List<SubMenu> getSubMenu(Long menu_id) {
+		return this.getDelegate().getSubMenu(menu_id);
 	}
 }
