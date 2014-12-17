@@ -30,6 +30,8 @@ public class IconsUtil {
 		retorno.put("fa fa-bookmark fa-fw", "fa fa-bookmark fa-fw");
 		retorno.put("fa fa-tasks fa-fw", "fa fa-tasks fa-fw");
 		retorno.put("fa fa-bars fa-fw", "fa fa-bars fa-fw");
+		retorno.put("fa fa-cog  fa-fw", "fa fa-cog fa-fw");
+		retorno.put("fa fa-cogs fa-fw", "fa fa-cogs fa-fw");
 		
 		return retorno;
 	}
