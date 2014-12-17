@@ -10,7 +10,9 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import org.rlabs.teste02.business.MenuBC;
+import org.rlabs.teste02.business.SubMenuBC;
 import org.rlabs.teste02.domain.Menu;
+import org.rlabs.teste02.domain.SubMenu;
 
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.AbstractPageBean;
@@ -22,6 +24,8 @@ import br.gov.frameworkdemoiselle.template.AbstractPageBean;
 public class MainMB extends AbstractPageBean {
 
 	private static final long serialVersionUID = 1L;
+	
+	private String ERR = "ERR";
 
 	@Inject
 	private FacesContext facesContext;
@@ -29,8 +33,11 @@ public class MainMB extends AbstractPageBean {
 	@Inject
 	private MenuBC menuBC;
 	
+	@Inject
+	private SubMenuBC subMenuBC;
+	
 	public String getPageHeader(){
-		String retorno = "";
+		String retorno = ERR;
 		String currentPage = facesContext.getViewRoot().getViewId();
 		
 		currentPage = currentPage.substring(1);
@@ -38,7 +45,9 @@ public class MainMB extends AbstractPageBean {
 		currentPage = currentPage.substring(0, tamanho - 6);
 		
 		List<Menu> lstMenu = menuBC.findAll();
-		String linkMenu = "";
+		List<SubMenu> lstSMenu = subMenuBC.findAll();
+		String linkMenu = ERR;
+		String linkSMenu = ERR;
 		
 		for (Menu menu : lstMenu){
 			
@@ -50,6 +59,19 @@ public class MainMB extends AbstractPageBean {
 				retorno = menu.getMenu_nome();
 			}
 		}
+		if (retorno == ERR){
+			for (SubMenu smenu : lstSMenu){
+				
+				linkSMenu = smenu.getSmen_link();
+				int tam = linkSMenu.length();
+				
+				linkSMenu = linkSMenu.substring(0, tam - 4);
+				if (currentPage.equals(linkSMenu)){
+					retorno = smenu.getSmen_nome();
+				}
+			}
+		}
+		
 		
 		return retorno;
 	}

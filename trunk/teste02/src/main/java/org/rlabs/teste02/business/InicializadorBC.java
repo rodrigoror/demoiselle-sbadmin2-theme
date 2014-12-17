@@ -120,8 +120,8 @@ public class InicializadorBC {
 			menuBC.insert(new Menu("fa fa-archive fa-fw", "index.jsf?#","","Cadastros","_parent"));
 			menuBC.insert(new Menu("fa fa-envelope fa-fw", "index.jsf?#","","E-mail","_parent"));
 			menuBC.insert(new Menu("fa fa-bookmark fa-fw", "bookmark_list.jsf","","Bookmark","_parent"));
-			menuBC.insert(new Menu("fa fa-tasks fa-fw", "menu_list.jsf","","Menus","_parent"));
-			menuBC.insert(new Menu("fa fa-bars fa-fw", "subMenu_list.jsf","","SubMenus","_parent"));
+			menuBC.insert(new Menu("fa fa-cogs fa-fw", "index.jsf?#","","Configs","_parent"));
+			
 		}
 	}
 	
@@ -130,14 +130,15 @@ public class InicializadorBC {
 			List<Menu> lstMenu = menuBC.findAll();
 			
 			Menu menu;
-			menu = lstMenu.get(0);
-			subMenuBC.insert(new SubMenu("teste.html","","SubMenu00","_parent",menu)); 
-			subMenuBC.insert(new SubMenu("teste.html","","SubMenu01","_parent",menu)); 
 			
-			menu = lstMenu.get(2);
-			subMenuBC.insert(new SubMenu("teste.html","","SubMenu02","_parent",menu)); 
-			subMenuBC.insert(new SubMenu("teste.html","","SubMenu03","_parent",menu)); 
-			subMenuBC.insert(new SubMenu("teste.html","","SubMenu04","_parent",menu)); 
+			menu = lstMenu.get(4);
+			subMenuBC.insert(new SubMenu("users_list.jsf","","Usuários","_parent",menu)); 
+			subMenuBC.insert(new SubMenu("company_list.jsf","","Companys","_parent",menu)); 
+			subMenuBC.insert(new SubMenu("perfil_list.jsf","","Perfis","_parent",menu)); 
+			
+			menu = lstMenu.get(7);//configuração (Definitivo)
+			subMenuBC.insert(new SubMenu("menu_list.jsf","","Menus","_parent",menu));
+			subMenuBC.insert(new SubMenu("submenu_list.jsf","","SubMenus","_parent",menu));
 		}
 	}
 	
