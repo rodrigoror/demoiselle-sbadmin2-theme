@@ -187,7 +187,7 @@ public class InicializadorBC {
 			
 			Users users;
 			users = new Users();
-			users.setUser_login("rodrigoror@gmail.com");
+			users.setUser_login("contato@rlabs.com");
 			users.setUser_cpf("12345678909");
 			users.setUser_susep("01234");
 			users.setUser_senha("root#1745$ROOT");

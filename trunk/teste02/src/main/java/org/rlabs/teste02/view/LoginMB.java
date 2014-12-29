@@ -16,6 +16,7 @@ import br.gov.sp.sjc.logradouro.business.PerfilFuncionalidadeBC;
 import br.gov.sp.sjc.logradouro.business.UsuarioPerfilBC;
 import br.gov.sp.sjc.logradouro.exception.UsuarioNaoLogadoException;*/
 import org.rlabs.teste02.security.Credenciais;
+import org.slf4j.Logger;
 
 @ViewController
 public class LoginMB extends AbstractPageBean {
@@ -24,6 +25,8 @@ public class LoginMB extends AbstractPageBean {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	@Inject
+	private Logger logger;
 	
 	@Inject
 	private Credenciais credenciais;
@@ -57,11 +60,23 @@ public class LoginMB extends AbstractPageBean {
 	}
 	
 	public void login(){
-		securityContext.login();
+		try {
+			securityContext.login();
+		} catch (RuntimeException e) {
+			messageContext.add(e.getMessage(), SeverityType.ERROR, "");
+		}
 	}
 	
 	public void logout(){
-		securityContext.logout();
+		logger.info("logout()");
+		
+		if (securityContext.getUser().getId() != null) {
+			
+			logger.info("logout() securityContext.logout()");
+			securityContext.logout();
+		} else {
+			logger.info("{mensagem.credenciais.logout.erro}");
+		}
 	}
 	
 

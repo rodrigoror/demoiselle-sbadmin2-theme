@@ -46,10 +46,11 @@ public class CredenciaisMB extends AbstractPageBean {
 	private CustomException customException;
 
 	public void login() {
-		logger.info("login() securityContext.login()");
+		logger.info("login()");
 		try {
 			securityContext.login();
 		} catch (RuntimeException e) {
+			logger.info("login()-RuntimeException: "+e.getMessage());
 			messageContext.add(e.getMessage(), SeverityType.ERROR, "");
 		}
 	}
@@ -60,6 +61,7 @@ public class CredenciaisMB extends AbstractPageBean {
 			logger.info("logout() securityContext.logout()");
 			securityContext.logout();
 		} else {
+			logger.error("logout(): idUser:"+securityContext.getUser().getId());
 			customException.adicionarMensagem("{mensagem.credenciais.logout.erro}");
 		}
 	}
@@ -94,7 +96,6 @@ public class CredenciaisMB extends AbstractPageBean {
 	/**
 	 * Métodos Get's and Set's
 	 * @return
-	 * @uml.property  name="credenciais"
 	 */
 	public Credenciais getCredenciais() {
 		return credenciais;
@@ -102,7 +103,6 @@ public class CredenciaisMB extends AbstractPageBean {
 	
 	/**
 	 * @param credenciais
-	 * @uml.property  name="credenciais"
 	 */
 	public void setCredenciais(Credenciais credenciais) {
 		this.credenciais = credenciais;

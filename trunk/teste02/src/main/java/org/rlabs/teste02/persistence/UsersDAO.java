@@ -26,12 +26,12 @@ public class UsersDAO extends JPACrud<Users, Long> {
 	 */
 	@SuppressWarnings("unchecked")
 	public Users getByLogin(String login, Boolean somenteAtivos) {
-String qr = "SELECT u FROM Users u WHERE u.user_login = :pLogin";
+String qr = "SELECT u FROM Users u WHERE u.user_login = :pLogin ";
 		
 		List<Users> usuarios;
 		
 		if (somenteAtivos) {
-			qr += " AND u.user_ativo = :pAtivo";
+			qr += " AND u.user_ativo = :pAtivo ";
 			
 			usuarios = em.createQuery(qr)
 					.setParameter("pLogin", login.toLowerCase())
@@ -57,7 +57,7 @@ String qr = "SELECT u FROM Users u WHERE u.user_login = :pLogin";
 	 * @return List<Users>
 	 */
 	public List<Users> getAtivos() {
-		String qr = "SELECT u FROM Users u WHERE u.user_ativo = :pAtivo";
+		String qr = "SELECT u FROM Users u WHERE u.user_ativo = :pAtivo ";
 		
 		@SuppressWarnings("unchecked")
 		 List<Users> usuarios = em.createQuery(qr)
@@ -72,7 +72,7 @@ String qr = "SELECT u FROM Users u WHERE u.user_login = :pLogin";
 				+ "FROM Users u "
 				+ "WHERE u.user_login = :pLogin "
 				+ "AND u.user_senha = :pSenha "
-				+ "AND u.user_ativo = :pAtivo"
+				+ "AND u.user_ativo = :pAtivo "
 				+ "AND u.user_excluido = :pExcluido";
 		
 		@SuppressWarnings("unchecked")
@@ -126,6 +126,22 @@ String qr = "SELECT u FROM Users u WHERE u.user_login = :pLogin";
 		@SuppressWarnings("unchecked")
 		 List<Users> usuarios = em.createQuery(qr)
 				.setParameter("pPerfilCodigo", "ADMINISTRADOR")
+				.getResultList();
+		
+		return usuarios;
+	}
+
+	public List<Users> getByCompany(Long iDComp) {
+		
+		String qr = "SELECT u "
+				+ "FROM Users u "
+				+ "WHERE u.user_company.comp_id = :pIDCompany "
+				+ "AND u.user_excluido = :pExcluido";
+		
+		@SuppressWarnings("unchecked")
+		 List<Users> usuarios = em.createQuery(qr)
+				 .setParameter("pIDCompany", iDComp)
+				 .setParameter("pExcluido", false)
 				.getResultList();
 		
 		return usuarios;
