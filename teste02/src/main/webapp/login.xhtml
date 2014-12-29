@@ -40,19 +40,19 @@
                         <h:form role="form">
                             <fieldset>
                                 <div class="form-group">
-                                	<h:outputLabel value="E-mail: " for="email" styleClass="text-input"  />
-                                	<h:inputText for="email" id="email" styleClass="form-control" value="#{credentials.username}" 
+                                	<h:outputLabel value="E-mail: contato@rlabs.com" for="email" styleClass="text-input"  />
+                                	<h:inputText for="email" id="email" styleClass="form-control" value="#{credenciaisMB.credenciais.login}" 
                                   	  title="E-mail" placeholder="E-mail" />
                                	 	<p:message for="email" />
                                 </div>
                                 <div class="form-group">
-                                  	<h:outputLabel value="Senha: " for="password" styleClass="text-input"  />
-                                	<h:inputText id="password" styleClass="form-control" value="#{credentials.password}" title="Senha" />
+                                  	<h:outputLabel value="Senha: root#1745$ROOT" for="password" styleClass="text-input"  />
+                                	<p:password id="password" maxlength="20" styleClass="form-control" value="#{credenciaisMB.credenciais.senha}" title="Senha" />
                                 	<p:message for="password" />
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
                                 <p:commandButton styleClass="btn btn-lg btn-success btn-block" 
-                                value="Login" action="#{loginMB.login()}" ajax="false" />  
+                                value="Login" action="#{credenciaisMB.login}" ajax="false" />  
                             </fieldset>
                         </h:form>
                     </div>

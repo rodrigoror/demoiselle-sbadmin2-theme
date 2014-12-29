@@ -124,6 +124,9 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 	@Transactional
 	@Override
 	public void delete(Long id) {
+		//verifica se pode ser excluido
+		checkUsuarioPodeSerExcluido(id);
+		
 		//Auditoria:
 		Users usuario = this.load(id);
 		logBC.insert(AcaoEnum.EXCLUIU, 
@@ -145,7 +148,7 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 	@Transactional
 	public Users getByLogin(String login, String senha) {
 		Users usuario = null;
-		usuario = this.getDelegate().getByLogin(login, SenhaUtil.sha256(senha));
+		usuario = this.getDelegate().getByLogin(login,/* SenhaUtil.sha256(*/senha/*)*/);
 		return usuario;
 	}
 	
@@ -317,4 +320,31 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 		}
 		return retorno;
 	}
+	
+	/**
+	 * Verifica se o usuario pode ser excluido, resultando em BusinessException se nao puder
+	 * @param id
+	 */
+	private void checkUsuarioPodeSerExcluido(Long id) {
+		Users users1 = this.load(id);
+		Long IDComp = users1.getUser_company().getComp_id();
+		List<Users> lstUsers = this.getDelegate().getByCompany(IDComp);
+		if (lstUsers.size()>1){
+			//POde Deletar
+		}else{
+			throw new BusinessException("A empresa deve possuir ao menos 1 usuário");
+		}
+		/*List<Equipe> equipes;
+		// Verifica se nao esta como coordenador de equipe de alguma equipe
+		equipes = equipeDAO.findByCoordenadorEquipe(id);
+		if (!(equipes.isEmpty()))
+			throw new BusinessException(resourceBundle.getString("mensagem.registronaopodeserexcluido", "Usuário", "equipes"));
+		equipes.clear();
+		// Verifica se nao esta como coordenador gerencial de alguma equipe
+		equipes = equipeDAO.findByCoordenadorGerencial(id);
+		if (!(equipes.isEmpty()))
+			throw new BusinessException(resourceBundle.getString("mensagem.registronaopodeserexcluido", "Usuário", "equipes"));
+		*/
+	}
+	
 }
