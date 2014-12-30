@@ -51,7 +51,7 @@ public class UsersBC extends DelegateCrud<Users, Long, UsersDAO> {
 	public Users insert(Users bean) {
 		//Validacoes:
 		if (this.getDelegate().getByLogin(bean.getUser_login().toLowerCase(), false) != null) {
-			throw new BusinessException("Erro Existe");//throw new BusinessException(resourceBundle.getString("usuariobc.insert.erro.existe"));
+			throw new BusinessException("Erro: Login Já Existe");//throw new BusinessException(resourceBundle.getString("usuariobc.insert.erro.existe"));
 		}
 		checkSenhaObedecePolitica(bean.getUser_senha());
 		//Ajustes:

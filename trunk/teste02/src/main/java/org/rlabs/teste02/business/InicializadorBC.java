@@ -187,6 +187,9 @@ public class InicializadorBC {
 			
 			Users users;
 			users = new Users();
+			Company user_company = lstCompany.get(0);
+			Perfil user_perfil = lstPerfil.get(0);
+			
 			users.setUser_login("contato@rlabs.com");
 			users.setUser_cpf("12345678909");
 			users.setUser_susep("01234");
@@ -194,17 +197,25 @@ public class InicializadorBC {
 			users.setUser_ativo(true);
 			users.setUser_nome("Root of Debian RoD");
 			users.setUser_excluido(false);
-			
-			Company user_company = lstCompany.get(0);
 			users.setUser_company(user_company);
-			
 			users.setUser_dtUpdate(new Date());
 			users.setUser_ipUpdate("192.168.0.1");
 			users.setUser_loginUpdate("sistema@rlabs.com");
-			
-			Perfil user_perfil = lstPerfil.get(0);
 			users.setUser_perfil(user_perfil);
+			usersBC.insert(users);
 			
+			users.setUser_login("contato2@rlabs.com");
+			users.setUser_cpf("22738854826");
+			users.setUser_susep("01234");
+			users.setUser_senha("root#1745$ROOT");
+			users.setUser_ativo(true);
+			users.setUser_nome("Riot of Games");
+			users.setUser_excluido(false);
+			users.setUser_company(user_company);
+			users.setUser_dtUpdate(new Date());
+			users.setUser_ipUpdate("192.168.0.1");
+			users.setUser_loginUpdate("sistema@rlabs.com");
+			users.setUser_perfil(user_perfil);
 			usersBC.insert(users);
 		}
 	}
