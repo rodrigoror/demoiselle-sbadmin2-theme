@@ -206,7 +206,7 @@ public class InicializadorBC {
 			
 			users.setUser_login("contato2@rlabs.com");
 			users.setUser_cpf("22738854826");
-			users.setUser_susep("01234");
+			users.setUser_susep("56789");
 			users.setUser_senha("root#1745$ROOT");
 			users.setUser_ativo(true);
 			users.setUser_nome("Riot of Games");
