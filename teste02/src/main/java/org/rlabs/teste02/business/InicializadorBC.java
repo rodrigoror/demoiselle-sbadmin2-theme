@@ -156,6 +156,45 @@ public class InicializadorBC {
 			perfil.setPerf_loginUpdate("sistema@rlabs.com");
 			perfilBC.insert(perfil);
 			
+			perfil = new Perfil();
+			perfil.setPerf_ativo(true);
+			perfil.setPerf_codigo("ROOT-ATENDIMENTO");
+			perfil.setPerf_descricao("Root - Atendimento");
+			perfil.setPerf_excluido(false);
+			perfil.setPerf_dtUpdate(new Date());
+			perfil.setPerf_ipUpdate("192.168.0.1");//sistema
+			perfil.setPerf_loginUpdate("sistema@rlabs.com");
+			perfilBC.insert(perfil);
+			
+			perfil = new Perfil();
+			perfil.setPerf_ativo(true);
+			perfil.setPerf_codigo("DIRETORES");
+			perfil.setPerf_descricao("Diretores");
+			perfil.setPerf_excluido(false);
+			perfil.setPerf_dtUpdate(new Date());
+			perfil.setPerf_ipUpdate("192.168.0.1");//sistema
+			perfil.setPerf_loginUpdate("sistema@rlabs.com");
+			perfilBC.insert(perfil);
+			
+			perfil = new Perfil();
+			perfil.setPerf_ativo(true);
+			perfil.setPerf_codigo("GERENTES");
+			perfil.setPerf_descricao("Gerentes");
+			perfil.setPerf_excluido(false);
+			perfil.setPerf_dtUpdate(new Date());
+			perfil.setPerf_ipUpdate("192.168.0.1");//sistema
+			perfil.setPerf_loginUpdate("sistema@rlabs.com");
+			perfilBC.insert(perfil);
+			
+			perfil = new Perfil();
+			perfil.setPerf_ativo(true);
+			perfil.setPerf_codigo("CORRETORES");
+			perfil.setPerf_descricao("Corretores");
+			perfil.setPerf_excluido(false);
+			perfil.setPerf_dtUpdate(new Date());
+			perfil.setPerf_ipUpdate("192.168.0.1");//sistema
+			perfil.setPerf_loginUpdate("sistema@rlabs.com");
+			perfilBC.insert(perfil);
 		}
 	}
 	
@@ -190,7 +229,7 @@ public class InicializadorBC {
 			Company user_company = lstCompany.get(0);
 			Perfil user_perfil = lstPerfil.get(0);
 			
-			users.setUser_login("contato@rlabs.com");
+			/*users.setUser_login("contato@rlabs.com");
 			users.setUser_cpf("12345678909");
 			users.setUser_susep("01234");
 			users.setUser_senha("root#1745$ROOT");
@@ -216,7 +255,7 @@ public class InicializadorBC {
 			users.setUser_ipUpdate("192.168.0.1");
 			users.setUser_loginUpdate("sistema@rlabs.com");
 			users.setUser_perfil(user_perfil);
-			usersBC.insert(users);
+			usersBC.insert(users);*/
 		}
 	}
 	

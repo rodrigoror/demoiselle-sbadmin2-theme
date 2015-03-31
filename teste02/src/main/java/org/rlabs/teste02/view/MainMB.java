@@ -36,6 +36,10 @@ public class MainMB extends AbstractPageBean {
 	@Inject
 	private SubMenuBC subMenuBC;
 	
+	/**
+	 * Retorna o nome da tela clicado no menu
+	 * @return String
+	 */
 	public String getPageHeader(){
 		String retorno = ERR;
 		String currentPage = facesContext.getViewRoot().getViewId();
