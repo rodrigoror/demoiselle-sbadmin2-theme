@@ -225,11 +225,12 @@ public class InicializadorBC {
 			List<Perfil> lstPerfil = perfilBC.findAll();
 			
 			Users users;
-			users = new Users();
+			
 			Company user_company = lstCompany.get(0);
 			Perfil user_perfil = lstPerfil.get(0);
 			
-			/*users.setUser_login("contato@rlabs.com");
+			users = new Users();
+			users.setUser_login("contato@rlabs.com");
 			users.setUser_cpf("12345678909");
 			users.setUser_susep("01234");
 			users.setUser_senha("root#1745$ROOT");
@@ -243,6 +244,7 @@ public class InicializadorBC {
 			users.setUser_perfil(user_perfil);
 			usersBC.insert(users);
 			
+			users = new Users();
 			users.setUser_login("contato2@rlabs.com");
 			users.setUser_cpf("22738854826");
 			users.setUser_susep("56789");
@@ -255,7 +257,7 @@ public class InicializadorBC {
 			users.setUser_ipUpdate("192.168.0.1");
 			users.setUser_loginUpdate("sistema@rlabs.com");
 			users.setUser_perfil(user_perfil);
-			usersBC.insert(users);*/
+			usersBC.insert(users);
 		}
 	}
 	
