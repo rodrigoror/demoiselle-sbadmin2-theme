@@ -8,9 +8,11 @@ import java.util.List;
 
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.rlabs.teste02.business.MenuBC;
 import org.rlabs.teste02.business.SubMenuBC;
+import org.rlabs.teste02.config.Teste02Config;
 import org.rlabs.teste02.domain.Menu;
 import org.rlabs.teste02.domain.SubMenu;
 
@@ -77,6 +79,22 @@ public class MainMB extends AbstractPageBean {
 		}
 		
 		
+		return retorno;
+	}
+	@Inject
+	private Teste02Config sistemaConfig;
+	
+	public String getBase(){
+		FacesContext context = FacesContext.getCurrentInstance();  
+		  
+		HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();  
+		  
+		String urlAtual = request.getRequestURL().toString();  
+		
+		String retorno = urlAtual;
+		if (sistemaConfig.isModoDebugger()){
+			retorno = "http://localhost:8080/teste02/";
+		}
 		return retorno;
 	}
 	

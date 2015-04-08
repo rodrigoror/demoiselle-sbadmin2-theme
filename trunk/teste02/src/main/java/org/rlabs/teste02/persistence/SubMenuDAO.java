@@ -32,7 +32,6 @@ public class SubMenuDAO extends JPACrud<SubMenu, Long> {
 				.setParameter("pId", menu_id)
 				.getResultList();
 		
-		
 		return retorno;
 	}
 	

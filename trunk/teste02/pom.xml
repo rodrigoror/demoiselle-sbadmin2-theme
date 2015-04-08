@@ -54,6 +54,11 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+		    <groupId>com.ocpsoft</groupId>
+		    <artifactId>prettyfaces-jsf2</artifactId>
+		    <version>3.3.0</version>
+		</dependency>
 		<!-- <dependency>
 	        <groupId>br.gov.frameworkdemoiselle.component.audit</groupId>
 	        <artifactId>demoiselle-audit-auditors-persistence</artifactId>

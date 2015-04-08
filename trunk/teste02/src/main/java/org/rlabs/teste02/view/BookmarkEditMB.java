@@ -11,7 +11,8 @@ import org.rlabs.teste02.business.BookmarkBC;
 import org.rlabs.teste02.domain.Bookmark;
 
 @ViewController
-@PreviousView("/bookmark_list.xhtml")
+//@PreviousView("/bookmark_list.xhtml")
+@PreviousView("pretty:bookmark-list")
 public class BookmarkEditMB extends AbstractEditPageBean<Bookmark, Long> {
 
 	private static final long serialVersionUID = 1L;
