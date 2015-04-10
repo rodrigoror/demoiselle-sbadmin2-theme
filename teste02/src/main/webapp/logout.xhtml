@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+	<ui:define name="body">
+
+		<div align="center">
+
+			<f:view>
+
+				<div align="left" style="width: 600px;">
+					<p:messages id="msg" closable="true" globalOnly="true" />
+				</div>
+
+				<h:form id="form">
+
+					<p:toolbar style="width:600px;">
+						<p:toolbarGroup align="center">
+							<h:outputText id="tituloLogin" value="#{messages['logout.titulo']}" />
+						</p:toolbarGroup>
+					</p:toolbar>
+
+					<p:panel style="width:600px;">
+						<h:panelGrid columns="2">
+							<f:facet name="header">
+								<p>
+									<h:outputText value="#{messages['logout.confirmacao']}" />
+								</p>
+							</f:facet>
+							<p:commandButton id="botaoSim" value="#{messages['button.dialog.yes']}" action="#{logoutMB.logout()}" ajax="false" />
+							<p:commandButton id="botaoNao" value="#{messages['button.dialog.no']}" action="./index.xhtml" ajax="false" />
+						</h:panelGrid>
+					</p:panel>
+
+				</h:form>
+			</f:view>
+
+		</div>
+
+	</ui:define>
+</ui:composition>
