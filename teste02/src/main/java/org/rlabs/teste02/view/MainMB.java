@@ -15,6 +15,7 @@ import org.rlabs.teste02.business.SubMenuBC;
 import org.rlabs.teste02.config.Teste02Config;
 import org.rlabs.teste02.domain.Menu;
 import org.rlabs.teste02.domain.SubMenu;
+import org.slf4j.Logger;
 
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.AbstractPageBean;
@@ -84,17 +85,23 @@ public class MainMB extends AbstractPageBean {
 	@Inject
 	private Teste02Config sistemaConfig;
 	
+	@Inject
+	private Logger logger;
+	
 	public String getBase(){
 		FacesContext context = FacesContext.getCurrentInstance();  
 		  
 		HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();  
 		  
 		String urlAtual = request.getRequestURL().toString();  
-		
+		logger.debug("++++++++++++++ "+urlAtual+" +++++++++++++++++++++");
 		String retorno = urlAtual;
 		if (sistemaConfig.isModoDebugger()){
 			retorno = "http://localhost:8080/teste02/";
 		}
+		logger.debug("+++++Debug "+sistemaConfig.isModoDebugger()+" +++++++++++++++++++++");
+		logger.debug("++++++++++++++ "+urlAtual+" +++++++++++++++++++++");
+		
 		return retorno;
 	}
 	

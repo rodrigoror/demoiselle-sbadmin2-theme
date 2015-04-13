@@ -11,12 +11,9 @@ import br.gov.frameworkdemoiselle.security.SecurityContext;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.AbstractPageBean;
 import br.gov.frameworkdemoiselle.util.ResourceBundle;
-/*import br.gov.sp.sjc.logradouro.business.ConfiguracaoBC;
-import br.gov.sp.sjc.logradouro.business.PerfilFuncionalidadeBC;
-import br.gov.sp.sjc.logradouro.business.UsuarioPerfilBC;
-import br.gov.sp.sjc.logradouro.exception.UsuarioNaoLogadoException;*/
+import org.rlabs.teste02.exception.NaoLogadoException;
 import org.rlabs.teste02.security.Credenciais;
-import org.slf4j.Logger;
+import org.rlabs.teste02.util.LoggerUtil;
 
 @ViewController
 public class LoginMB extends AbstractPageBean {
@@ -25,8 +22,9 @@ public class LoginMB extends AbstractPageBean {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	@Inject
-	private Logger logger;
+	private LoggerUtil logger;
 	
 	@Inject
 	private Credenciais credenciais;
@@ -36,17 +34,6 @@ public class LoginMB extends AbstractPageBean {
 	
 	@Inject
 	private MessageContext messageContext;
-	
-	/*@Inject
-	private PerfilFuncionalidadeBC perfilFuncionalidadeBC;
-
-	@Inject
-	private UsuarioPerfilBC usuarioPerfilBC;
-	
-	@Inject
-	private ConfiguracaoBC configuracaoBC;*/
-	
-	
 	
 	@Inject
 	private ResourceBundle bundle;
@@ -63,6 +50,7 @@ public class LoginMB extends AbstractPageBean {
 		try {
 			securityContext.login();
 		} catch (RuntimeException e) {
+			logger.error("{mensagem.credenciais.login.erro} "+e.getMessage());
 			messageContext.add(e.getMessage(), SeverityType.ERROR, "");
 		}
 	}
@@ -75,7 +63,7 @@ public class LoginMB extends AbstractPageBean {
 			logger.info("logout() securityContext.logout()");
 			securityContext.logout();
 		} else {
-			logger.info("{mensagem.credenciais.logout.erro}");
+			logger.error("{mensagem.credenciais.logout.erro}");
 		}
 	}
 	
@@ -91,11 +79,11 @@ public class LoginMB extends AbstractPageBean {
 	}
 	
 	
-	/*@ExceptionHandler
-	public void tratador(UsuarioNaoLogadoException e){
+	@ExceptionHandler
+	public void tratador(NaoLogadoException e){
 		messageContext.add(bundle.getString("login.invalido"),SeverityType.ERROR,"");
 	}
-	*/
+	
 
 
 	/**
@@ -104,7 +92,8 @@ public class LoginMB extends AbstractPageBean {
 	 * @return
 	 */
 
-	public  boolean TemPermissao(String descricao){
+	public boolean TemPermissao(String descricao){
+		logger.info("TemPermissao() "+descricao);
 		return securityContext.hasRole(descricao); 
 		
 	}

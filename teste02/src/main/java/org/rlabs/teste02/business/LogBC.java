@@ -14,7 +14,8 @@ import org.rlabs.teste02.domain.Log;
 import org.rlabs.teste02.persistence.LogDAO;
 import org.rlabs.teste02.util.AcaoEnum;
 import org.rlabs.teste02.util.EntidadeEnum;
-import org.slf4j.Logger;
+import org.rlabs.teste02.util.LoggerUtil;
+
 
 /**
  * Classe para auxilio nas operacoes de auditoria
@@ -29,9 +30,9 @@ public class LogBC extends DelegateCrud<Log, Long, LogDAO> {
 	private SecurityContext securityContext;
 	
 	@Inject
-	private Logger logger;
+	private LoggerUtil logger;
 	
-	private static final String USUARIO_SISTEMA = "sistema";
+	private static final String USUARIO_SISTEMA = "Sistema";
 	
 	
 	/**
@@ -41,6 +42,7 @@ public class LogBC extends DelegateCrud<Log, Long, LogDAO> {
 	@Override
 	@Transactional
 	public Log insert(Log bean) {
+		logger.info("LogBC Insert");
 		bean.setLog_data(new Date());
 		return this.getDelegate().insert(bean);
 	}
@@ -54,6 +56,7 @@ public class LogBC extends DelegateCrud<Log, Long, LogDAO> {
 	 */
 	@Transactional
 	public void insert(AcaoEnum acao, EntidadeEnum entidade, String dados) {
+		logger.info("LogBC Insert");
 		Log log = new Log();
 		log.setLog_acao(acao);
 		log.setLog_entidade(entidade);
@@ -73,6 +76,7 @@ public class LogBC extends DelegateCrud<Log, Long, LogDAO> {
 	 */
 	@Transactional
 	public void insert(AcaoEnum acao, EntidadeEnum entidade, String loginUsuario, String dados) {
+		logger.info("LogBC Insert");
 		Log log = new Log();
 		log.setLog_acao(acao);
 		log.setLog_entidade(entidade);
@@ -87,6 +91,7 @@ public class LogBC extends DelegateCrud<Log, Long, LogDAO> {
 	@Deprecated
 	@Transactional
 	public void delete(Long id) {
+		logger.warn("delete @Deprecated "+USUARIO_SISTEMA);
 		this.getDelegate().delete(id);
 	}
 
@@ -95,6 +100,7 @@ public class LogBC extends DelegateCrud<Log, Long, LogDAO> {
 	@Deprecated
 	@Transactional
 	public Log update(Log bean) {
+		logger.warn("update @Deprecated"+USUARIO_SISTEMA);
 		return this.getDelegate().update(bean);
 	}
 	
@@ -110,11 +116,11 @@ public class LogBC extends DelegateCrud<Log, Long, LogDAO> {
 			if (user != null) {
 				login = (String)user.getAttribute("login");
 			} else {
-				logger.warn("Usuario nao logado. Retornando login como SISTEMA.");
+				logger.warn("Usuario nao logado. Retornando login como "+USUARIO_SISTEMA);
 				login = USUARIO_SISTEMA;
 			}
 		} catch (RuntimeException e) {
-			logger.warn("Erro ao capturar o usuario logado. Retornando login como SISTEMA.");
+			logger.warn("Erro ao capturar o usuario logado. Retornando login como "+USUARIO_SISTEMA);
 			login = USUARIO_SISTEMA;
 		}
 		return login;
