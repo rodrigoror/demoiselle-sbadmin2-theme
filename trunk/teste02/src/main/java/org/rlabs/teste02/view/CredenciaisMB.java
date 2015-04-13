@@ -5,7 +5,7 @@ import javax.inject.Inject;
 import org.rlabs.teste02.exception.CustomException;
 import org.rlabs.teste02.exception.Excecao;
 import org.rlabs.teste02.security.Credenciais;
-import org.slf4j.Logger;
+import org.rlabs.teste02.util.LoggerUtil;
 
 import br.gov.frameworkdemoiselle.exception.ExceptionHandler;
 import br.gov.frameworkdemoiselle.message.MessageContext;
@@ -26,7 +26,7 @@ public class CredenciaisMB extends AbstractPageBean {
 	private MessageContext messageContext;
 	
 	@Inject
-	private Logger logger;
+	private LoggerUtil logger;
 
 	@Inject
 	private SecurityContext securityContext;
@@ -50,7 +50,7 @@ public class CredenciaisMB extends AbstractPageBean {
 		try {
 			securityContext.login();
 		} catch (RuntimeException e) {
-			logger.info("login()-RuntimeException: "+e.getMessage());
+			logger.error("login()-RuntimeException: "+e.getMessage());
 			messageContext.add(e.getMessage(), SeverityType.ERROR, "");
 		}
 	}
@@ -70,7 +70,7 @@ public class CredenciaisMB extends AbstractPageBean {
 	public void tratador(CustomException exception) {
 		logger.info("tratador()");
 		for (Excecao excecao : exception.getExcecoes()) {
-			logger.info("excecao()"+excecao.getMensagem());
+			logger.error("Exception() "+excecao.getMensagem());
 			messageContext.add(excecao.getMensagem(), SeverityType.ERROR, excecao.getParametros());
 		}
 		exception.getExcecoes().clear();

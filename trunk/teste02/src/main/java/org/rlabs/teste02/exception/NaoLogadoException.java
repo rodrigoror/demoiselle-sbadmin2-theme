@@ -1,9 +1,7 @@
 package org.rlabs.teste02.exception;
 
 import javax.inject.Inject;
-
-import org.slf4j.Logger;
-
+import org.rlabs.teste02.util.LoggerUtil;
 import br.gov.frameworkdemoiselle.security.NotLoggedInException;
 
 public class NaoLogadoException extends NotLoggedInException{
@@ -11,7 +9,7 @@ public class NaoLogadoException extends NotLoggedInException{
 	private static final long serialVersionUID = 1L;
 	
 	@Inject
-	private Logger logger;
+	private LoggerUtil logger;
 	
 	public NaoLogadoException(String message) {
 		
