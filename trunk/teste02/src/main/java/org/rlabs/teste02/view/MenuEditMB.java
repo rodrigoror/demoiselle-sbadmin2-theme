@@ -7,12 +7,16 @@ import br.gov.frameworkdemoiselle.annotation.PreviousView;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.AbstractEditPageBean;
 import br.gov.frameworkdemoiselle.transaction.Transactional;
+
+import org.ocpsoft.rewrite.annotation.Join;
+import org.ocpsoft.rewrite.annotation.Parameter;
 import org.rlabs.teste02.business.MenuBC;
 import org.rlabs.teste02.domain.Menu;
 import org.rlabs.teste02.util.IconsUtil;
 
 @ViewController
-@PreviousView("./menu_list.jsf")
+@PreviousView("/menu/list")
+@Join(path="/menu/#{bean.menu_id}", to="/menu_edit.jsf")
 public class MenuEditMB extends AbstractEditPageBean<Menu, Long> {
 
 	private static final long serialVersionUID = 1L;

@@ -8,12 +8,15 @@ import br.gov.frameworkdemoiselle.annotation.PreviousView;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.AbstractListPageBean;
 import br.gov.frameworkdemoiselle.transaction.Transactional;
+
+import org.ocpsoft.rewrite.annotation.Join;
 import org.rlabs.teste02.business.MenuBC;
 import org.rlabs.teste02.domain.Menu;
 
 @ViewController
-@NextView("./menu_edit.jsf")
-@PreviousView("./menu_list.jsf")
+@NextView("pretty:/menu/#{bean.menu_id}")
+@PreviousView("pretty:/menu/list")
+@Join(path="/menu/list", to="/menu_list.jsf")
 public class MenuListMB extends AbstractListPageBean<Menu, Long> {
 
 	private static final long serialVersionUID = 1L;
