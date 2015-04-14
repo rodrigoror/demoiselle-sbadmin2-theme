@@ -35,15 +35,14 @@
 						
 				<p:column sortBy="#{bean.menu_classe}">
 					<f:facet name="header">#{messages['menu.label.menu_classe']}</f:facet>
-					<h:commandLink action="#{menuListMB.getNextView}" actionListener="#{menuListMB.clear}">
-						<h:outputText value="#{bean.menu_classe}" />
+					<h:link outcome="#{menuListMB.nextView}" value="#{bean.menu_classe}">
 						<f:param name="id" value="#{bean.menu_id}" />
-					</h:commandLink>
+					</h:link>
 				</p:column>
 						
 				<p:column sortBy="#{bean.menu_link}">
 					<f:facet name="header">#{messages['menu.label.menu_link']}</f:facet>
-					<h:commandLink action="#{menuListMB.getNextView}" actionListener="#{menuListMB.clear}">
+					<h:commandLink action="#{menuListMB.nextView}" actionListener="#{menuListMB.clear}">
 						<h:outputText value="#{bean.menu_link}" />
 						<f:param name="id" value="#{bean.menu_id}" />
 					</h:commandLink>
